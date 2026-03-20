@@ -4,7 +4,7 @@ from pathlib import Path
 
 try:
     import jsonschema
-except Exception as e:
+except Exception:
     print("Missing dependency: jsonschema. Please install it and re-run the test.")
     raise
 
@@ -12,14 +12,15 @@ ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_PATH = ROOT / "work-process" / "schemas" / "command_event.schema.json"
 FIXTURE_PATH = ROOT / "work-process" / "design" / "contract_fixtures" / "command_event_example.json"
 
+
 def load(path: Path):
     with path.open("r", encoding="utf-8") as f:
         return json.load(f)
 
+
 def main():
     schema = load(SCHEMA_PATH)
     fixture = load(FIXTURE_PATH)
-
 
     definitions = schema.get("definitions", {})
 
@@ -59,5 +60,6 @@ def main():
 
     sys.exit(1)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

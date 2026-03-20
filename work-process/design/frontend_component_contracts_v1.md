@@ -270,6 +270,20 @@ Rules:
 | guard.canon_warning_required | canon warning modal | blocking | Require explicit warning acknowledgment before canon update/delete can proceed. |
 | guard.canon_delete_confirmation_required | confirmation tray | blocking | Require second-step confirmation after warning acknowledgment for canon delete operations. |
 
+Note: Validation error responses MAY include a `field` property when the error is specific to a single input. Example:
+
+```json
+{
+  "status": "error",
+  "reason_code": "validation.missing_field",
+  "message": "Missing required field",
+  "remediation_hint": "Missing 'player_name'.",
+  "field": "player_name"
+}
+```
+
+Frontend components should prefer `field` when mapping server-side validation to inline inputs; `remediation_hint` should be surfaced in inline and toast contexts as guidance.
+
 ## 7) Accessibility Contract by Component
 
 1. CommandBar:

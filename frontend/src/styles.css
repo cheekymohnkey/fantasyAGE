@@ -48,3 +48,9 @@ body{
 .status-ok{background:linear-gradient(90deg,#32d583,#2bbf76)}
 .status-warning{background:linear-gradient(90deg,#ffb020,#ff8a00)}
 .status-error{background:linear-gradient(90deg,#ff5c7c,#ff2d55)}
+
+.input-error{outline:2px solid rgba(255,92,124,0.16);border-radius:6px;padding:6px}
+.field-error{color:#ff9bb3;margin-top:6px;font-size:13px}
+.toast{padding:8px;border-radius:8px;margin-bottom:8px}
+.toast-error{background:rgba(255, 92, 124, 0.06);border:1px solid rgba(255,92,124,0.12);color:#ffd6de}
+.toast-remediation{margin-top:6px;color:#ffd6de;font-size:13px}

@@ -165,3 +165,80 @@ Primary requirement mappings:
 - Traceability and explainability: NFR-002, NFR-006, FR-013.
 - Reliability and rollback safety: NFR-004, FR-016, FR-015.
 - Cost control and LLM boundaries: NFR-005.
+
+## 11) Foundational Design Heuristics (DRY, SOLID, and Cohesion)
+
+These heuristics are mandatory for new modules and refactors.
+
+DRY (Don't Repeat Yourself):
+- No duplicated business rules across orchestrator, resolver, and adapters.
+- Shared validation and reason-code mapping must be centralized in contract/policy modules.
+- If a rule appears in more than one place, introduce a single canonical function with tests.
+
+SOLID guidance in this architecture:
+- Single Responsibility: each module owns one reason to change (retrieval policy, resolution math, persistence, transport).
+- Open/Closed: add new command/action types via registries and handler composition, not switch/if ladders in one file.
+- Liskov Substitution: adapter interfaces must preserve behavior contracts (for example, persistence adapter implementations return equivalent error semantics).
+- Interface Segregation: keep contracts narrow (resolver inputs should not require transport context).
+- Dependency Inversion: domain logic depends on interfaces and typed contracts, not concrete Flask/SQLite details.
+
+Cohesion and coupling targets:
+- Keep side effects at boundaries; core resolver paths remain pure.
+- Avoid cyclic dependencies between orchestrator, resolver, and adapter modules.
+- Prefer composition over inheritance for action handlers and policy checks.
+
+## 12) Explicit Anti-Patterns to Block
+
+The following are release blockers until resolved:
+
+- God module growth: one file accumulating transport, policy, persistence, and domain logic.
+- Hidden state mutation: any path where LLM output directly or indirectly changes persisted state.
+- Copy-paste policy logic: repeated evidence thresholds or confirmation rules in multiple handlers.
+- Silent fallback behavior: swallowing errors and returning success-like responses.
+- Unstructured logging in mutation paths: missing correlation and context fields for audit.
+- Contract drift: endpoint payload behavior changes without schema and test updates.
+
+## 13) Architecture Fitness Functions (CI-Enforced Direction)
+
+Treat these as continuously checked architectural tests.
+
+Static fitness checks:
+- Contract schemas validate representative fixtures for command/result/error/event payloads.
+- Lint/type checks must pass for backend and frontend projects.
+- Import and layering checks should prevent domain modules importing transport-specific modules.
+
+Dynamic fitness checks:
+- Idempotency test: repeating same `idempotency_key` does not duplicate mutation.
+- Transaction test: forced failure in commit path leaves state unchanged.
+- Owner-scope test: reads/writes denied for mismatched `login_id`.
+- Retrieval policy test: state-changing command blocks on insufficient evidence.
+- Replay test: event rehydration yields deterministic state equivalence.
+
+Evolution guardrails:
+- New action type requires: contract update, resolver tests, integration tests, and observability fields.
+- New persistence field requires: migration, rollback note, and backward compatibility consideration.
+
+## 14) Stage Gates Across Delivery Pipeline
+
+Apply these checkpoints at every implementation stage.
+
+Design gate (before coding):
+- Requirement IDs linked.
+- Contract deltas listed.
+- Failure modes and rollback path specified.
+- SOLID/DRY impact explicitly reviewed.
+
+Build gate (during implementation):
+- Boundary checks in place (transport/orchestration/domain/persistence).
+- Structured errors and reason codes implemented.
+- Deterministic path covered by unit tests.
+
+PR gate (before merge):
+- Evidence of tests for happy path + failure path + idempotent retry.
+- Observability fields added/updated.
+- Docs and acceptance matrix updated if behavior changed.
+
+Release gate:
+- Migrations verified on clean and non-clean datasets.
+- Runbook deltas captured for new failure modes.
+- Frontend recovery states validated for newly introduced errors.

@@ -24,3 +24,13 @@ coverage/
 
 # Keep local source books out of git history
 source_material/*.pdf
+
+# Local runtime SQLite artifacts
+work-process/runtime/*.db
+work-process/runtime/*.db-*
+
+# Global SQLite artifacts (local/dev generated)
+*.db
+*.db-*
+*.sqlite
+*.sqlite3

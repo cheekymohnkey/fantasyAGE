@@ -38,4 +38,19 @@ python3 -m pip install pytest requests Flask Flask-Cors
 python3 -m pytest -q
 ```
 
+- Run backend lint and type checks:
+
+```bash
+ruff check backend tests
+mypy --config-file pyproject.toml backend
+```
+
+- Run frontend tests:
+
+```bash
+cd frontend
+npm install
+npm test -- --run
+```
+
 License: Add a `LICENSE` file if you want this repository to be licensed.

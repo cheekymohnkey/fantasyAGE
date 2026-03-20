@@ -47,7 +47,10 @@ Order for next session:
 - work-process/design/frontend_acceptance_matrix_v1.md
 - work-process/design/frontend_component_contracts_v1.md
 - work-process/design/frontend_backlog_v1.md
-5. implementation sequencing:
+5. engineering and architecture quality gates:
+- work-process/design/engineering_principles_v1.md
+- work-process/design/architecture_governance_checklist_v1.md
+6. implementation sequencing:
 - work-process/design/implementation_plan_v1.md
 - work-process/design/implementation_epic_roadmap_v1.md
 - work-process/design/sprint_board_v1.md
@@ -91,6 +94,7 @@ Definition of done for next session:
 - frontend_acceptance_matrix_v1.md,
 - sprint_board_v1.md test IDs.
 3. Keep story IDs and e2e IDs stable once implementation starts.
+4. For every design/implementation/PR cycle, run the architecture governance checklist (`work-process/design/architecture_governance_checklist_v1.md`) and capture any failed checks as explicit follow-up tasks.
 
 ## 9) Quick Resume Checklist
 
@@ -118,3 +122,56 @@ Keep this section updated as implementation progresses.
 
 Board import file:
 - work-process/design/sprint_board_import_v1.csv
+
+## 11) Testing & CI (new)
+
+This project requires tests and CI checks to be present on all changes. The following automated rules are enforced by convention and CI configuration:
+
+- **Backend tests:** A GitHub Actions workflow runs `pytest` with coverage on `push` and `pull_request` targeting `main`/`master`. Backend tests must pass before merging.
+- **PR checklist:** All PRs should include a brief test summary and confirm new/updated tests via the repository PR template.
+- **Coverage reporting:** Backend tests produce a coverage XML artifact. Teams should integrate Codecov or similar if desired; the CI will fail on test failures and is configured to expose coverage artifacts for additional checks.
+- **Local checks:** Developers should run `pytest -q` locally and ensure migrations and runtime seeds apply (see `work-process/scripts/migrate.py`).
+- **Frontend tests:** Add `test` scripts to `frontend/package.json` (use `vitest`/Jest) — the CI job for frontend will run tests if present; teams should add coverage tooling for frontend as they add tests.
+
+Where to find CI config:
+- Backend workflow: `.github/workflows/backend-tests.yml`
+- PR template: `.github/PULL_REQUEST_TEMPLATE.md`
+
+### Coverage thresholds
+
+We publish coverage to Codecov and enforce a starting baseline of **80%** coverage.
+
+- Config is in `codecov.yml` at the repository root; it sets a project and patch target of 80%.
+- To enable enforcement, connect the repository at https://codecov.io and (for private repos) add the `CODECOV_TOKEN` secret in the repository settings. For public repos the token is optional.
+- After enabling Codecov you can use the Codecov status checks on branches or configure branch protection to block merges that reduce coverage below the threshold.
+
+If you'd prefer to start with a lower threshold for specific packages or directories, update `codecov.yml` accordingly.
+
+Additions to these files are the recommended live enforcement; keep this section updated if CI configuration changes.
+
+### Pre-commit hooks (local checks)
+
+We provide a `.pre-commit-config.yaml` in the repo to run quick sanity checks and fast unit tests locally before pushing. Recommended local setup:
+
+1. Install `pre-commit` in your Python environment:
+
+```bash
+python -m pip install --upgrade pip
+pip install pre-commit
+```
+
+2. Install the git hooks in your repo:
+
+```bash
+pre-commit install
+```
+
+3. Run the full pre-commit suite once (optional but recommended):
+
+```bash
+pre-commit run --all-files
+```
+
+Notes:
+- The configured `pytest` hook runs on `push` (so CI-like checks run before pushes). It excludes E2E tests by default (`-k "not e2e"`) to keep local runs quick; edit `.pre-commit-config.yaml` if you want a different policy.
+- You can run `pytest` separately or adjust the hook to run on `commit` instead of `push` if you prefer immediate feedback.

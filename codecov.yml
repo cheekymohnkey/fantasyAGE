@@ -1,0 +1,18 @@
+coverage:
+  status:
+    project:
+      default:
+        target: 80%
+    patch:
+      default:
+        target: 80%
+
+# Optional behavior: control Codecov PR comments and layout
+comment:
+  layout: "reach, diff"
+  require_changes: false
+
+# Notes:
+# - To enforce this, enable Codecov for the repository at https://codecov.io and
+#   add a `CODECOV_TOKEN` secret if the repository is private. For public repos
+#   the token is optional.

@@ -1,0 +1,63 @@
+name: Frontend Tests
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+
+jobs:
+  frontend-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Detect test script
+        id: pkg
+        run: |
+          if [ -f frontend/package.json ]; then
+            has=$(node -e "const pkg=require('./frontend/package.json'); console.log(pkg.scripts && pkg.scripts.test ? 'true' : 'false')")
+          else
+            has=false
+          fi
+          echo "hasTest=$has" >> $GITHUB_OUTPUT
+
+      - name: Install frontend dependencies
+        if: steps.pkg.outputs.hasTest == 'true'
+        run: |
+          cd frontend
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Run frontend tests
+        if: steps.pkg.outputs.hasTest == 'true'
+        run: |
+          cd frontend
+          npm test --silent
+
+      - name: Upload frontend coverage artifact
+        if: steps.pkg.outputs.hasTest == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: |
+            frontend/coverage
+            frontend/coverage/cobertura-coverage.xml
+
+      - name: Upload frontend coverage to Codecov
+        if: steps.pkg.outputs.hasTest == 'true'
+        uses: codecov/codecov-action@v4
+        with:
+          files: frontend/coverage/cobertura-coverage.xml
+          fail_ci_if_error: false
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
