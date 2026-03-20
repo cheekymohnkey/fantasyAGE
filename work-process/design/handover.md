@@ -108,6 +108,12 @@ Progress updates (working notes):
 - **SB-1-01 (Define command/result/error/event schemas):** Completed — initial JSON Schema and example fixtures added on 2026-03-21. See `work-process/schemas/command_event.schema.json` and `work-process/design/contract_fixtures/command_event_example.json`.
 - **SB-1-02 (SQLite migration runner and base schema bootstrap):** Next up and in-progress (developer started schema/fixture work). Target: create migration runner and initial migrations, and add schema migration tests.
 
+- **SB-1-02 (SQLite migration runner and base schema bootstrap):** Completed — migration runner added (`work-process/scripts/migrate.py`) and initial migrations applied. Schema migration tests added (`tests/test_migrations.py`). Runtime `default_login_id` seed verified.
+
+- **SB-1-03 (Backend command endpoint + DB wiring):** Completed — minimal idempotent `POST /api/command` implemented in `backend/app.py`, reads `SESSION_DB` env var, records `command_receipts`, and returns canonical command/result fields.
+
+- **SB-1-04 (Frontend submit path + E2E):** Completed — frontend uses `VITE_BACKEND_URL` or relative `/api/command` and Vite dev proxy configured; end-to-end test `E2E-I1-001` added (`tests/test_e2e_i1_001.py`).
+
 Keep this section updated as implementation progresses.
 
 Board import file:
