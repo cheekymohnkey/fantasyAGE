@@ -12,26 +12,37 @@ export default function App() {
       payload: { noop: true }
     }
 
-    const res = await fetch('http://127.0.0.1:8000/api/command', {
+    const backendBase = (import.meta as any).env?.VITE_BACKEND_URL || ''
+    const url = backendBase ? `${backendBase.replace(/\/$/, '')}/api/command` : '/api/command'
+
+    const res = await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
 
+    const resClone = res.clone()
     let json = null
+    let rawText = null
     try {
       json = await res.json()
     } catch (e) {
-      setResponse(`Failed to parse JSON response: ${e}`)
+      try {
+        rawText = await resClone.text()
+      } catch (e2) {
+        rawText = `<failed to read response body: ${e2}>`
+      }
+      setResponse(`Non-JSON response (status=${res.status}):\n${rawText}`)
+      setStatusLevel(res.ok ? 'ok' : 'error')
       return
     }
 
     // Normalize display fields according to command/result contract
-    const status = json.status || (res.status === 200 ? 'ok' : 'error')
-    const action = json.action_id || json.action || payload.action_id
-    const idempotency = json.idempotency_key || payload.idempotency_key
-    const dataField = json.data || json.action_result || null
-    const event = json.event || null
+    const status = json?.status || (res.status === 200 ? 'ok' : 'error')
+    const action = json?.action_id || json?.action || payload.action_id
+    const idempotency = json?.idempotency_key || payload.idempotency_key
+    const dataField = json?.data || json?.action_result || null
+    const event = json?.event || null
 
     setResponse(JSON.stringify({ status, action, idempotency, data: dataField, event }, null, 2))
     setStatusLevel(status)

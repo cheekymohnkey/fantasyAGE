@@ -8,7 +8,8 @@ from datetime import datetime
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
-DB_PATH = os.path.join('work-process', 'runtime', 'session.db')
+DB_PATH = os.environ.get('SESSION_DB', os.path.join('work-process', 'runtime', 'session.db'))
+DEFAULT_LOGIN_ID = 'default'
 
 # Logging setup
 LOG_DIR = os.path.join(os.getcwd(), 'logs')
@@ -33,6 +34,103 @@ def get_conn():
     conn = sqlite3.connect(DB_PATH)
     conn.execute('PRAGMA foreign_keys = ON;')
     return conn
+
+
+def _list_migration_files(migrations_dir):
+    try:
+        files = [f for f in os.listdir(migrations_dir) if f.endswith('.sql')]
+    except Exception:
+        return []
+    files.sort()
+    return files
+
+
+def _ensure_schema_migrations(conn):
+    conn.execute("""CREATE TABLE IF NOT EXISTS schema_migrations (
+        version TEXT PRIMARY KEY,
+        applied_at TEXT NOT NULL
+    );""")
+
+
+def _applied_versions(conn):
+    cur = conn.execute("SELECT version FROM schema_migrations")
+    return {row[0] for row in cur.fetchall()}
+
+
+def _apply_migration(conn, migrations_dir, filename):
+    path = os.path.join(migrations_dir, filename)
+    with open(path, 'r', encoding='utf-8') as fh:
+        sql = fh.read()
+
+    cur = conn.cursor()
+    cur.executescript(sql)
+    version = filename
+    applied_at = datetime.utcnow().isoformat() + 'Z'
+    cur.execute("INSERT INTO schema_migrations (version, applied_at) VALUES (?, ?)", (version, applied_at))
+
+
+def run_migrations(db_path=DB_PATH, migrations_dir=os.path.join('work-process', 'db', 'migrations')):
+    if not os.path.isdir(migrations_dir):
+        logger.info('Migrations directory not found: %s', migrations_dir)
+        return
+
+    files = _list_migration_files(migrations_dir)
+    if not files:
+        logger.info('No migration files found in %s', migrations_dir)
+        return
+
+    os.makedirs(os.path.dirname(db_path), exist_ok=True)
+    conn = sqlite3.connect(db_path)
+    conn.execute('PRAGMA foreign_keys = ON;')
+    try:
+        _ensure_schema_migrations(conn)
+        applied = _applied_versions(conn)
+
+        for f in files:
+            if f in applied:
+                logger.info('Skipping already applied: %s', f)
+                continue
+
+            logger.info('Applying migration: %s', f)
+            try:
+                conn.execute('BEGIN')
+                _apply_migration(conn, migrations_dir, f)
+                conn.commit()
+                logger.info('Applied migration: %s', f)
+            except Exception:
+                conn.rollback()
+                logger.exception('Failed applying migration: %s', f)
+                raise
+
+    finally:
+        conn.close()
+
+
+# Ensure migrations are applied on backend startup so DB is ready for requests
+try:
+    run_migrations()
+except Exception:
+    logger.exception('Migration runner failed during startup')
+
+
+# Load runtime config values (like default_login_id) after migrations
+try:
+    conn = get_conn()
+    try:
+        cur = conn.cursor()
+        cur.execute("SELECT config_value FROM runtime_config WHERE config_key='default_login_id'")
+        row = cur.fetchone()
+        if row and row[0]:
+            DEFAULT_LOGIN_ID = row[0]
+            logger.info('Loaded default_login_id=%s from runtime_config', DEFAULT_LOGIN_ID)
+        else:
+            logger.info('Using fallback default_login_id=%s', DEFAULT_LOGIN_ID)
+    except Exception:
+        logger.exception('Failed to load runtime_config; using defaults')
+    finally:
+        conn.close()
+except Exception:
+    logger.exception('Unable to open DB to read runtime_config')
 
 
 @app.post('/api/command')
@@ -84,7 +182,18 @@ def command():
     finally:
         conn.close()
 
-    return jsonify({'status': 'ok', 'action_id': action_id, 'idempotency_key': idempotency_key})
+    # Return canonical command/result contract fields for frontend normalization:
+    response = {
+        'status': 'ok',
+        'action_id': action_id,
+        'action': action_id,
+        'idempotency_key': idempotency_key,
+        'idempotency': idempotency_key,
+        'action_result': {},
+        'action_result_json': '{}',
+        'event': None,
+    }
+    return jsonify(response)
 
 
 if __name__ == '__main__':
