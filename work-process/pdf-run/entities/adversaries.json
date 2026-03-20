@@ -1,0 +1,2186 @@
+[
+  {
+    "id": "adversary.ad_versaries",
+    "type": "adversary",
+    "name": "Ad versaries",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.ad_versary_threat",
+    "type": "adversary",
+    "name": "Ad versary Threat",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.agile",
+    "type": "adversary",
+    "name": "Agile",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.air_elemental",
+    "type": "adversary",
+    "name": "Air Elemental",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.aquatic",
+    "type": "adversary",
+    "name": "Aquatic",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.assassin",
+    "type": "adversary",
+    "name": "Assassin",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.band_it",
+    "type": "adversary",
+    "name": "Band it",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.bats",
+    "type": "adversary",
+    "name": "Bats",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.bear",
+    "type": "adversary",
+    "name": "Bear",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.beefing_up",
+    "type": "adversary",
+    "name": "Beefing Up",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.beggar",
+    "type": "adversary",
+    "name": "Beggar",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.big",
+    "type": "adversary",
+    "name": "Big",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.bison",
+    "type": "adversary",
+    "name": "Bison",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.blend_ing",
+    "type": "adversary",
+    "name": "Blend ing",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.boar",
+    "type": "adversary",
+    "name": "Boar",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.boneless_one",
+    "type": "adversary",
+    "name": "Boneless One",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.boneless_ones",
+    "type": "adversary",
+    "name": "Boneless Ones",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.borrowing",
+    "type": "adversary",
+    "name": "Borrowing",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.burrower",
+    "type": "adversary",
+    "name": "Burrower",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.burrowing",
+    "type": "adversary",
+    "name": "Burrowing",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.cat",
+    "type": "adversary",
+    "name": "Cat",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.clockwork",
+    "type": "adversary",
+    "name": "Clockwork",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.creatures",
+    "type": "adversary",
+    "name": "Creatures",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.crime_boss",
+    "type": "adversary",
+    "name": "Crime Boss",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.cultist",
+    "type": "adversary",
+    "name": "Cultist",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.customizing",
+    "type": "adversary",
+    "name": "Customizing",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.dark_sight",
+    "type": "adversary",
+    "name": "Dark Sight",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.deepd_read",
+    "type": "adversary",
+    "name": "Deepd read",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.dog",
+    "type": "adversary",
+    "name": "Dog",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.dra_gon",
+    "type": "adversary",
+    "name": "Dra gon",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.dwarf_guard_captain",
+    "type": "adversary",
+    "name": "Dwarf Guard Captain",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.eag_le",
+    "type": "adversary",
+    "name": "Eag le",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.elemental_resistance",
+    "type": "adversary",
+    "name": "Elemental Resistance",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.elementals",
+    "type": "adversary",
+    "name": "Elementals",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.elite",
+    "type": "adversary",
+    "name": "Elite",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.emissary",
+    "type": "adversary",
+    "name": "Emissary",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.epic",
+    "type": "adversary",
+    "name": "Epic",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.example",
+    "type": "adversary",
+    "name": "Example",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.fa_vored_stunts",
+    "type": "adversary",
+    "name": "Fa vored Stunts",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.ghoul",
+    "type": "adversary",
+    "name": "Ghoul",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.giant",
+    "type": "adversary",
+    "name": "Giant",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.giant_spid_er",
+    "type": "adversary",
+    "name": "Giant Spid er",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.giant_weapons",
+    "type": "adversary",
+    "name": "Giant Weapons",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.gnarl_walker",
+    "type": "adversary",
+    "name": "Gnarl walker",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.griffon",
+    "type": "adversary",
+    "name": "Griffon",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.guttersnipe",
+    "type": "adversary",
+    "name": "Guttersnipe",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.ha_wk",
+    "type": "adversary",
+    "name": "Ha wk",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.horse",
+    "type": "adversary",
+    "name": "Horse",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.incorporeal_form",
+    "type": "adversary",
+    "name": "Incorporeal Form",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.incorporeal_resistance",
+    "type": "adversary",
+    "name": "Incorporeal Resistance",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.knifehound",
+    "type": "adversary",
+    "name": "Knifehound",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.ma_gic_resistance",
+    "type": "adversary",
+    "name": "Ma gic Resistance",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.manticore",
+    "type": "adversary",
+    "name": "Manticore",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.many_head_ed",
+    "type": "adversary",
+    "name": "Many-Head ed",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.med_usa",
+    "type": "adversary",
+    "name": "Med usa",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.mighty",
+    "type": "adversary",
+    "name": "Mighty",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.ogre",
+    "type": "adversary",
+    "name": "Ogre",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.other_qualities",
+    "type": "adversary",
+    "name": "Other Qualities",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.piercing",
+    "type": "adversary",
+    "name": "Piercing",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.rat",
+    "type": "adversary",
+    "name": "Rat",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.regenerate",
+    "type": "adversary",
+    "name": "Regenerate",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.selkie",
+    "type": "adversary",
+    "name": "Selkie",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.serpentfolk_w_arrior",
+    "type": "adversary",
+    "name": "Serpentfolk W arrior",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.shadow",
+    "type": "adversary",
+    "name": "Shadow",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.shark",
+    "type": "adversary",
+    "name": "Shark",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.small",
+    "type": "adversary",
+    "name": "Small",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.snake",
+    "type": "adversary",
+    "name": "Snake",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.sol_die_r",
+    "type": "adversary",
+    "name": "Sol die r",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.special_qualities",
+    "type": "adversary",
+    "name": "Special Qualities",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.spectral_attack",
+    "type": "adversary",
+    "name": "Spectral Attack",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.spectre",
+    "type": "adversary",
+    "name": "Spectre",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.t_ough_hid_e",
+    "type": "adversary",
+    "name": "T ough Hid e",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.t_ribal_w_arrior",
+    "type": "adversary",
+    "name": "T ribal W arrior",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.tiger",
+    "type": "adversary",
+    "name": "Tiger",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.vicious_combatant",
+    "type": "adversary",
+    "name": "Vicious Combatant",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.vulnerability",
+    "type": "adversary",
+    "name": "Vulnerability",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.w_alking_corpses",
+    "type": "adversary",
+    "name": "W alking Corpses",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.weapon_attack_roll_damage",
+    "type": "adversary",
+    "name": "WEAPON ATTACK ROLL DAMAGE",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.war_lock",
+    "type": "adversary",
+    "name": "War lock",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.weightless",
+    "type": "adversary",
+    "name": "Weightless",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.weird_mortals",
+    "type": "adversary",
+    "name": "Weird Mortals",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.winged",
+    "type": "adversary",
+    "name": "Winged",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.wolf",
+    "type": "adversary",
+    "name": "Wolf",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  },
+  {
+    "id": "adversary.zeroes",
+    "type": "adversary",
+    "name": "Zeroes",
+    "category": "monster",
+    "stats": {
+      "accuracy": null,
+      "communication": null,
+      "constitution": null,
+      "dexterity": null,
+      "fighting": null,
+      "intelligence": null,
+      "perception": null,
+      "strength": null,
+      "willpower": null,
+      "health": null,
+      "defense": null,
+      "speed": null
+    },
+    "attacks": [],
+    "special_rules": [],
+    "threat_notes": "",
+    "tags": [
+      "monster"
+    ]
+  }
+]

@@ -1,0 +1,121 @@
+{
+  "chunks": {
+    "count": 1090,
+    "issue_counts": {},
+    "findings": {}
+  },
+  "entities": [
+    {
+      "entity": "adversaries",
+      "count": 84,
+      "issue_counts": {
+        "missing_core_fields": 0,
+        "duplicate_ids": 0,
+        "duplicate_names": 0
+      },
+      "findings": {
+        "missing_core_fields": [],
+        "duplicate_ids": [],
+        "duplicate_names": []
+      }
+    },
+    {
+      "entity": "ancestries",
+      "count": 9,
+      "issue_counts": {
+        "missing_core_fields": 0,
+        "duplicate_ids": 0,
+        "duplicate_names": 0
+      },
+      "findings": {
+        "missing_core_fields": [],
+        "duplicate_ids": [],
+        "duplicate_names": []
+      }
+    },
+    {
+      "entity": "arcana",
+      "count": 19,
+      "issue_counts": {
+        "missing_core_fields": 0,
+        "duplicate_ids": 0,
+        "duplicate_names": 0
+      },
+      "findings": {
+        "missing_core_fields": [],
+        "duplicate_ids": [],
+        "duplicate_names": []
+      }
+    },
+    {
+      "entity": "classes",
+      "count": 4,
+      "issue_counts": {
+        "missing_core_fields": 0,
+        "duplicate_ids": 0,
+        "duplicate_names": 0
+      },
+      "findings": {
+        "missing_core_fields": [],
+        "duplicate_ids": [],
+        "duplicate_names": []
+      }
+    },
+    {
+      "entity": "conditions",
+      "count": 6,
+      "issue_counts": {
+        "missing_core_fields": 0,
+        "duplicate_ids": 0,
+        "duplicate_names": 0
+      },
+      "findings": {
+        "missing_core_fields": [],
+        "duplicate_ids": [],
+        "duplicate_names": []
+      }
+    },
+    {
+      "entity": "spells",
+      "count": 152,
+      "issue_counts": {
+        "missing_core_fields": 0,
+        "duplicate_ids": 0,
+        "duplicate_names": 0
+      },
+      "findings": {
+        "missing_core_fields": [],
+        "duplicate_ids": [],
+        "duplicate_names": []
+      }
+    },
+    {
+      "entity": "stunts",
+      "count": 49,
+      "issue_counts": {
+        "missing_core_fields": 0,
+        "duplicate_ids": 0,
+        "duplicate_names": 0
+      },
+      "findings": {
+        "missing_core_fields": [],
+        "duplicate_ids": [],
+        "duplicate_names": []
+      }
+    },
+    {
+      "entity": "talents",
+      "count": 56,
+      "issue_counts": {
+        "missing_core_fields": 0,
+        "duplicate_ids": 0,
+        "duplicate_names": 0
+      },
+      "findings": {
+        "missing_core_fields": [],
+        "duplicate_ids": [],
+        "duplicate_names": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "total": 5,
+  "passed": 5,
+  "pass_rate": 1.0,
+  "results": [
+    {
+      "id": "q001",
+      "query": "How do ability tests work?",
+      "pass": true,
+      "tag_hit": true,
+      "term_hit": true,
+      "top_result_ids": [
+        "ch02.ability_tests.004",
+        "ch08.extended_tasks_where_failure_has_consequences.011",
+        "ch02.ability_focuses.156",
+        "ch02.cooperation.025",
+        "ch08.how_much_time_does_the_test_take.005"
+      ]
+    },
+    {
+      "id": "q002",
+      "query": "What triggers stunt points?",
+      "pass": true,
+      "tag_hit": true,
+      "term_hit": true,
+      "top_result_ids": [
+        "ch05.stunt_points.088",
+        "ch02.the_stunt_die_and_stunt_points.010",
+        "ch05.spending_stunt_points.089",
+        "ch06.override_other_rules.010",
+        "ch08.example.096"
+      ]
+    },
+    {
+      "id": "q003",
+      "query": "What happens at 0 Health?",
+      "pass": true,
+      "tag_hit": true,
+      "term_hit": true,
+      "top_result_ids": [
+        "ch02.example.061",
+        "ch02.dying.074",
+        "ch02.at_0_health.085",
+        "ch07.game_moderator.060",
+        "ch11.threat_minor_mazarine_vol.107"
+      ]
+    },
+    {
+      "id": "q004",
+      "query": "What are the classes?",
+      "pass": true,
+      "tag_hit": true,
+      "term_hit": true,
+      "top_result_ids": [
+        "ch01.step_5_classes.049",
+        "ch09.threat_minor_npcs_and_classes.025",
+        "ch03.thievery_classes_rogue.040",
+        "ch03.chirurgy_classes_any.021",
+        "ch03.observation_classes_rogue.036"
+      ]
+    },
+    {
+      "id": "q005",
+      "query": "List fire arcana spells",
+      "pass": true,
+      "tag_hit": true,
+      "term_hit": true,
+      "top_result_ids": [
+        "ch03.wood_arcana.066",
+        "ch04.arcana_spell_talents.049",
+        "ch05.fire_arcana.049",
+        "ch05.magic_learning_new_spells.000",
+        "ch05.fire_arcana.050"
+      ]
+    }
+  ]
+}

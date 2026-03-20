@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FantasyAgeEntity",
+  "type": "object",
+  "required": ["id", "type", "name"],
+  "properties": {
+    "id": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": [
+        "rule",
+        "ancestry",
+        "class",
+        "talent",
+        "arcana",
+        "spell",
+        "stunt",
+        "condition",
+        "adversary"
+      ]
+    },
+    "name": { "type": "string" },
+    "description": { "type": ["string", "null"] },
+    "notes": { "type": "array", "items": { "type": "string" } }
+  }
+}

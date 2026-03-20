@@ -1,0 +1,639 @@
+[
+  {
+    "id": "stunt.in_the_end_she_spends",
+    "type": "stunt",
+    "name": "In the end she spends",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "on the Impress basic social stunt targeting the person she convinced to let her into the meeting",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.exemplify",
+    "type": "stunt",
+    "name": "Exemplify",
+    "category": "unknown",
+    "cost": 2,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You show your allies how it's done. Pick one ally who witnessed",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.embold_en",
+    "type": "stunt",
+    "name": "Embold en",
+    "category": "unknown",
+    "cost": 3,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your presence enhances a comrade's will to survive. One ally",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.the_good_word",
+    "type": "stunt",
+    "name": "The Good Word",
+    "category": "unknown",
+    "cost": 3,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Social",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.dominate_foe",
+    "type": "stunt",
+    "name": "Dominate Foe",
+    "category": "unknown",
+    "cost": 4,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You compel an enemy to feel intense fear, confusion, or distrac-",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.follow_the_p_attern",
+    "type": "stunt",
+    "name": "Follow the P attern",
+    "category": "unknown",
+    "cost": 4,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Explor ation or Social",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.boon_comp_anion",
+    "type": "stunt",
+    "name": "Boon Comp anion",
+    "category": "unknown",
+    "cost": 5,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You focus your wise counsel and intuitive abilities on a single ally.",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.create_opportunity",
+    "type": "stunt",
+    "name": "Create Opportunity",
+    "category": "unknown",
+    "cost": 5,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your attack opens up your enemy to an additional strike from an",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.you_can_use_a_basic_social_stunt_for",
+    "type": "stunt",
+    "name": "You can use a basic social stunt for",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "less than usual. This applies to a single stunt normally worth 2 SP or more, whether",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.examine",
+    "type": "stunt",
+    "name": "Examine",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Investigations",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.encoura_ge",
+    "type": "stunt",
+    "name": "Encoura ge",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your presence spurs others to excellence. You can divide SP",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.resurgence",
+    "type": "stunt",
+    "name": "Resurgence",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Select an ally within sight. That ally temporarily gains 3 bonus",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.and_another_thing",
+    "type": "stunt",
+    "name": "And Another Thing",
+    "category": "unknown",
+    "cost": 2,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Explor ation or Social",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.rouse",
+    "type": "stunt",
+    "name": "Rouse",
+    "category": "unknown",
+    "cost": 5,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your actions raise the spirits of a fallen ally. Select one ally at 0",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.you_can_use_a_basic_spell_stunt_for",
+    "type": "stunt",
+    "name": "You can use a basic spell stunt for",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "less than usual. This applies to a single stunt normally worth 2 SP or more, whether",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.arcane_ad_vanta_ge",
+    "type": "stunt",
+    "name": "Arcane Ad vanta ge",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Spell or Arcane Blast",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.sa_gacity",
+    "type": "stunt",
+    "name": "Sa gacity",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your actions reflect your mystic discipline and secret knowl -",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.mystic_armor",
+    "type": "stunt",
+    "name": "Mystic Armor",
+    "category": "unknown",
+    "cost": 2,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You generate an aura of power around you that grants an",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.battle_ma_gic",
+    "type": "stunt",
+    "name": "Battle Ma gic",
+    "category": "unknown",
+    "cost": 2,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Spell",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.complex_arcana",
+    "type": "stunt",
+    "name": "Complex Arcana",
+    "category": "unknown",
+    "cost": 3,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Spell",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.omen",
+    "type": "stunt",
+    "name": "Omen",
+    "category": "unknown",
+    "cost": 3,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Visions or subtle signs provide a mystic insight relevant to",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.horrific_ma_gic",
+    "type": "stunt",
+    "name": "Horrific Ma gic",
+    "category": "unknown",
+    "cost": 4,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Spell",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.ma_ge_s_a_we",
+    "type": "stunt",
+    "name": "Ma ge's A we",
+    "category": "unknown",
+    "cost": 4,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your glorious or ominous power marks you as not to be trifled",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.mystic_insight",
+    "type": "stunt",
+    "name": "Mystic Insight",
+    "category": "unknown",
+    "cost": 5,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your action triggers a moment of inspiration, allowing you to",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.penetrating_ma_gic",
+    "type": "stunt",
+    "name": "Penetrating Ma gic",
+    "category": "unknown",
+    "cost": 5,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Dama ging Spell or Arcane Blast",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.you_can_use_a_basic_exploration_stunt_for",
+    "type": "stunt",
+    "name": "You can use a basic exploration stunt for",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "less than usual.",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.you_can_use_a_basic_combat_stunt_for",
+    "type": "stunt",
+    "name": "You can use a basic combat stunt for",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "less than usual.",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.misd_irect",
+    "type": "stunt",
+    "name": "Misd irect",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Dexterity-Based Test",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.spring",
+    "type": "stunt",
+    "name": "Spring",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You position yourself to react with agility. You gain a bonus",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.impro_ved_disarm",
+    "type": "stunt",
+    "name": "Impro ved Disarm",
+    "category": "unknown",
+    "cost": 2,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Make opposed attack rolls with your enemy. If you win you",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.snatch",
+    "type": "stunt",
+    "name": "Snatch",
+    "category": "unknown",
+    "cost": 2,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You come away from your action having lifted an object of your",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.evad_e",
+    "type": "stunt",
+    "name": "Evad e",
+    "category": "unknown",
+    "cost": 2,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You slip past your foes. Until your next turn, you gain +2 to",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.flourish",
+    "type": "stunt",
+    "name": "Flourish",
+    "category": "unknown",
+    "cost": 3,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You impress others with your grace-or confuse them with",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.red_irect_blow",
+    "type": "stunt",
+    "name": "Red irect Blow",
+    "category": "unknown",
+    "cost": 3,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Melee",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.reed_in_the_wind",
+    "type": "stunt",
+    "name": "Reed in the Wind",
+    "category": "unknown",
+    "cost": 3,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You step lightly and are well prepared to deal with incoming",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.escape",
+    "type": "stunt",
+    "name": "Escape",
+    "category": "unknown",
+    "cost": 4,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "They who live and run away\u2026well, in any event, you may",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.perforate",
+    "type": "stunt",
+    "name": "Perforate",
+    "category": "unknown",
+    "cost": 4,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Make an additional attack as a free action. If this attack hits,",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.cruel_strike",
+    "type": "stunt",
+    "name": "Cruel Strike",
+    "category": "unknown",
+    "cost": 5,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your blow inflicts an awful, demoralizing injury. You leave",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.get_a_wa_y",
+    "type": "stunt",
+    "name": "Get A wa y",
+    "category": "unknown",
+    "cost": 5,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You set yourself up to exercise the better part of valor. You can",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.stead_y_hand",
+    "type": "stunt",
+    "name": "Stead y Hand",
+    "category": "unknown",
+    "cost": 5,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your triumph is just the beginning of a cycle of calm, graceful",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.block",
+    "type": "stunt",
+    "name": "Block",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You intercept oncoming attacks with your shield, weapon, or",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.counter",
+    "type": "stunt",
+    "name": "Counter",
+    "category": "unknown",
+    "cost": 1,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You're ready to counter your enemy's tricks. Until your next",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.protect",
+    "type": "stunt",
+    "name": "Protect",
+    "category": "unknown",
+    "cost": 2,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You position yourself to intercept attacks targeting your allies (an",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.threaten",
+    "type": "stunt",
+    "name": "Threaten",
+    "category": "unknown",
+    "cost": 2,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Choose an enemy who can see or hear you. Make an opposed",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.unbalance",
+    "type": "stunt",
+    "name": "Unbalance",
+    "category": "unknown",
+    "cost": 3,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your attack disrupts your opponent's balance and momentum.",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.fa_vored_foe",
+    "type": "stunt",
+    "name": "Fa vored Foe",
+    "category": "unknown",
+    "cost": 4,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You've learned something of the enemy's tactics. You gain a +2",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.dual_strike",
+    "type": "stunt",
+    "name": "Dual Strike",
+    "category": "unknown",
+    "cost": 4,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your attack's momentum carries through to strike another",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.storm_of_strikes",
+    "type": "stunt",
+    "name": "Storm of Strikes",
+    "category": "unknown",
+    "cost": 5,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "You unleash swift blows in every direction where a foe can be",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  },
+  {
+    "id": "stunt.wound_ing_blow",
+    "type": "stunt",
+    "name": "Wound ing Blow",
+    "category": "unknown",
+    "cost": 5,
+    "trigger": "successful test or attack with doubles generating stunt points",
+    "effect": "Your precise yet devastating blow inflicts the Blinded, Deafened,",
+    "restrictions": [],
+    "tags": [
+      "stunt"
+    ]
+  }
+]

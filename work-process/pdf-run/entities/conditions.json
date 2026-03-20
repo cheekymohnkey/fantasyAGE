@@ -1,0 +1,74 @@
+[
+  {
+    "id": "condition.fatigued",
+    "type": "condition",
+    "name": "Fatigued",
+    "effect": "",
+    "duration": null,
+    "removal": null,
+    "tags": [
+      "condition",
+      "combat"
+    ]
+  },
+  {
+    "id": "condition.stunned",
+    "type": "condition",
+    "name": "Stunned",
+    "effect": "",
+    "duration": null,
+    "removal": null,
+    "tags": [
+      "condition",
+      "combat"
+    ]
+  },
+  {
+    "id": "condition.defenseless",
+    "type": "condition",
+    "name": "Defenseless",
+    "effect": "",
+    "duration": null,
+    "removal": null,
+    "tags": [
+      "condition",
+      "combat"
+    ]
+  },
+  {
+    "id": "condition.prone",
+    "type": "condition",
+    "name": "Prone",
+    "effect": "",
+    "duration": null,
+    "removal": null,
+    "tags": [
+      "condition",
+      "combat"
+    ]
+  },
+  {
+    "id": "condition.dying",
+    "type": "condition",
+    "name": "Dying",
+    "effect": "",
+    "duration": null,
+    "removal": null,
+    "tags": [
+      "condition",
+      "combat"
+    ]
+  },
+  {
+    "id": "condition.unconscious",
+    "type": "condition",
+    "name": "Unconscious",
+    "effect": "",
+    "duration": null,
+    "removal": null,
+    "tags": [
+      "condition",
+      "combat"
+    ]
+  }
+]

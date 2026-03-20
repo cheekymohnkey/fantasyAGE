@@ -1,0 +1,63 @@
+story_id,title,sprint,epic,priority,points,dependencies,test_ids,frontend_testable,status,notes
+SB-1-01,Define command/result/error/event schemas,S1,EP-01,P0,5,,CT-001;CT-002,no,backlog,Version contract baselines
+SB-1-02,SQLite migration runner and base schema bootstrap,S1,EP-01,P0,8,SB-1-01,DB-001;DB-002,no,backlog,Initial migration framework
+SB-1-03,Runtime config bootstrap with default_login_id,S1,EP-01,P0,3,SB-1-02,CFG-001,no,backlog,Pre-auth owner context seed
+SB-1-04,Frontend Login Context Banner and command bar no-op submit,S1,EP-01|EP-02,P0,5,SB-1-01;SB-1-03,FE-001;FE-002,yes,backlog,First visible context flow
+SB-1-05,Persist no-op command event and display summary in Session Home,S1,EP-01,P0,5,SB-1-02;SB-1-04,E2E-I1-001,yes,backlog,First end-to-end vertical slice
+SB-1-06,Validation error mapping and recovery UX,S1,EP-01,P0,3,SB-1-01;SB-1-04,FE-ERR-001,yes,backlog,Preserve input and context
+SB-2-01,Implement campaign create/list/open/archive commands,S2,EP-02,P0,8,S1 complete,API-CAMP-001,no,backlog,Campaign lifecycle API
+SB-2-02,Implement session create/list/open commands,S2,EP-02,P0,5,SB-2-01,API-SESS-001,no,backlog,Session lifecycle API
+SB-2-03,Owner and campaign-session mismatch guards,S2,EP-02,P0,5,SB-2-01;SB-2-02,POL-CTX-001;POL-OWN-001,no,backlog,Context isolation enforcement
+SB-2-04,Frontend Campaign and Session Selector with recovery,S2,EP-02,P0,5,SB-2-01;SB-2-02,FE-CONTEXT-001,yes,backlog,Context switching UX
+SB-2-05,Context-scoped list filtering and Session Home refresh,S2,EP-02,P0,3,SB-2-03;SB-2-04,FE-CONTEXT-002,yes,backlog,Bounded read views
+SB-2-06,Telemetry for context switch and mismatch blocks,S2,EP-02,P1,2,SB-2-04,TELE-CTX-001,yes,backlog,Operational visibility
+SB-3-01,Implement entity create/read/list/update/delete handlers,S3,EP-03,P0,8,S2 complete,API-CRUD-001,no,backlog,Runtime entity CRUD core
+SB-3-02,Soft-delete and restore semantics,S3,EP-03,P0,5,SB-3-01,API-CRUD-002,no,backlog,Safe deletion baseline
+SB-3-03,Canon warning and delete double-confirm backend enforcement,S3,EP-03,P0,5,SB-3-01,POL-CANON-001;POL-CANON-002,no,backlog,Canon guardrails
+SB-3-04,Frontend Entity Management console with filters,S3,EP-03,P0,5,SB-3-01;SB-3-02,FE-CRUD-001,yes,backlog,CRUD management UI
+SB-3-05,Canon warning modal and confirmation chaining UX,S3,EP-03,P0,5,SB-3-03;SB-3-04,FE-CANON-001,yes,backlog,Update/delete warning journey
+SB-3-06,Audit and telemetry coverage for CRUD/canon actions,S3,EP-03,P1,3,SB-3-03;SB-3-05,TELE-CRUD-001,yes,backlog,Traceability evidence
+SB-4-01,Implement exploration.test deterministic resolver and handler,S4,EP-04,P0,8,S3 complete,RES-EXP-001,no,backlog,Exploration mechanics core
+SB-4-02,Connect clue and lead updates to exploration outcomes,S4,EP-04,P0,5,SB-4-01,RES-EXP-002,no,backlog,Investigation progression link
+SB-4-03,Retrieval evidence packaging and formula trace output,S4,EP-04,P0,5,SB-4-01,RET-EXP-001,no,backlog,Explainability payloads
+SB-4-04,Frontend Exploration widget with result card integration,S4,EP-04,P0,5,SB-4-01;SB-4-03,FE-EXP-001,yes,backlog,Core exploration UI slice
+SB-4-05,Clue board inline updates and citation drill-down,S4,EP-04,P0,3,SB-4-02;SB-4-04,FE-EXP-002,yes,backlog,In-flow evidence visibility
+SB-4-06,UX timing benchmark and telemetry verification,S4,EP-04,P1,2,SB-4-04,PERF-EXP-001;TELE-EXP-001,yes,backlog,UR timing validation
+SB-5-01,Implement combat.attack handler and deterministic output,S5,EP-05,P0,8,S4 complete,API-CMB-001;RES-CMB-001,no,backlog,Combat core outcome path
+SB-5-02,Implement stunt legality and illegal-stunt reason paths,S5,EP-05,P0,5,SB-5-01,RES-CMB-002;POL-CMB-001,no,backlog,Stunt validation engine
+SB-5-03,Implement condition apply/tick/clear command support,S5,EP-05,P0,5,SB-5-01,API-CMB-002;RES-CND-001,no,backlog,Condition lifecycle operations
+SB-5-04,Frontend Combat Console with initiative and active turn,S5,EP-05,P0,5,SB-5-01,FE-CMB-001,yes,backlog,Turn-centric combat UI
+SB-5-05,Frontend stunt selector illegal recovery and condition chips,S5,EP-05,P0,5,SB-5-02;SB-5-03;SB-5-04,FE-CMB-002,yes,backlog,Combat interaction completeness
+SB-5-06,Impactful combat confirmation tray and telemetry,S5,EP-05,P1,3,SB-5-01;SB-5-04,FE-CMB-003;TELE-CMB-001,yes,backlog,Mutation gate UX
+SB-6-01,Implement progression.validate with prerequisite diagnostics,S6,EP-06,P0,5,S5 complete,API-PRG-001;RES-PRG-001,no,backlog,Progression guard checks
+SB-6-02,Implement progression.apply and derived stat recompute,S6,EP-06,P0,8,SB-6-01,API-PRG-002;RES-PRG-002,no,backlog,Progression mutation engine
+SB-6-03,Implement quest transitions and reveal readiness rules,S6,EP-06,P0,5,S5 complete,API-QST-001;RES-QST-001,no,backlog,Quest lifecycle logic
+SB-6-04,Frontend Progression Workspace validation and diff preview,S6,EP-06,P0,5,SB-6-01;SB-6-02,FE-PRG-001,yes,backlog,Progression UX flow
+SB-6-05,Frontend Quest tracker lifecycle controls,S6,EP-06,P0,5,SB-6-03,FE-QST-001,yes,backlog,Quest management UI
+SB-6-06,Confirmation gating and telemetry for progression/quest,S6,EP-06,P1,3,SB-6-02;SB-6-05,FE-PRG-002;TELE-QST-001,yes,backlog,Impactful-change observability
+SB-7-01,Implement rules.query retrieval pipeline with thresholds,S7,EP-07,P0,8,S6 complete,API-RUL-001;RET-001,no,backlog,Grounded Q and A backend
+SB-7-02,Implement uncertainty and block/warn response envelopes,S7,EP-07,P0,5,SB-7-01,POL-RUL-001,no,backlog,Weak-evidence policy behavior
+SB-7-03,Implement citation packaging and conflict metadata,S7,EP-07,P0,5,SB-7-01,RET-002,no,backlog,Evidence transparency payload
+SB-7-04,Frontend Rules Assistant cards citations and drawer,S7,EP-07,P0,5,SB-7-01;SB-7-03,FE-RUL-001,yes,backlog,Assistant core UI
+SB-7-05,Frontend uncertainty banner and no-mutation messaging,S7,EP-07,P0,3,SB-7-02;SB-7-04,FE-RUL-002,yes,backlog,Uncertainty UX guardrail
+SB-7-06,Telemetry and UX analytics hooks for query outcomes,S7,EP-07,P1,2,SB-7-04,TELE-RUL-001,yes,backlog,Insights and tuning
+SB-8-01,Replay equivalence suite for seeded runs,S8,EP-08,P0,8,S7 complete,REL-RPL-001;REL-RPL-002,no,backlog,Deterministic replay assurance
+SB-8-02,Backup restore and integrity check automation,S8,EP-08,P0,5,S7 complete,OPS-BKP-001;OPS-BKP-002,no,backlog,Operational resilience
+SB-8-03,Fault injection for persistence conflicts and retries,S8,EP-08,P0,5,SB-8-01,REL-FTI-001,no,backlog,Failure-path confidence
+SB-8-04,Frontend Audit and Replay view with correlation drill-down,S8,EP-08,P1,5,SB-8-01,FE-AUD-001,yes,backlog,Operational UI visibility
+SB-8-05,Frontend conflict recovery UX and retry guidance,S8,EP-08,P1,3,SB-8-03;SB-8-04,FE-AUD-002,yes,backlog,Safe retry UX
+SB-8-06,Performance and accessibility final regression gate,S8,EP-08,P1,3,SB-8-04;SB-8-05,PERF-RC-001;A11Y-RC-001,yes,backlog,Release quality gate
+GATE-I1,Iteration 1 mandatory e2e gate,S1,EP-01,P0,0,SB-1-01;SB-1-02;SB-1-03;SB-1-04;SB-1-05,E2E-I1-001,yes,backlog,Command roundtrip with default login context
+GATE-I2A,Iteration 2 mandatory e2e gate A,S2,EP-02,P0,0,SB-2-01;SB-2-02;SB-2-03;SB-2-04,E2E-I2-001,yes,backlog,Create and open session flow
+GATE-I2B,Iteration 2 mandatory e2e gate B,S2,EP-02,P0,0,SB-2-03;SB-2-04,E2E-I2-002,yes,backlog,Context mismatch blocked with recovery
+GATE-I3A,Iteration 3 mandatory e2e gate A,S3,EP-03,P0,0,SB-3-01;SB-3-02;SB-3-04,E2E-I3-001,yes,backlog,Runtime entity CRUD happy path
+GATE-I3B,Iteration 3 mandatory e2e gate B,S3,EP-03,P0,0,SB-3-03;SB-3-05,E2E-I3-002,yes,backlog,Canon delete safeguard path
+GATE-I4,Iteration 4 mandatory e2e gate,S4,EP-04,P0,0,SB-4-01;SB-4-02;SB-4-03;SB-4-04;SB-4-05,E2E-I4-001,yes,backlog,Exploration test with clue update
+GATE-I5A,Iteration 5 mandatory e2e gate A,S5,EP-05,P0,0,SB-5-01;SB-5-02;SB-5-03;SB-5-04;SB-5-05;SB-5-06,E2E-I5-001,yes,backlog,Combat happy path
+GATE-I5B,Iteration 5 mandatory e2e gate B,S5,EP-05,P0,0,SB-5-02;SB-5-05,E2E-I5-002,yes,backlog,Illegal stunt recovery
+GATE-I6A,Iteration 6 mandatory e2e gate A,S6,EP-06,P0,0,SB-6-01;SB-6-02;SB-6-04;SB-6-06,E2E-I6-001,yes,backlog,Progression guarded apply
+GATE-I6B,Iteration 6 mandatory e2e gate B,S6,EP-06,P0,0,SB-6-03;SB-6-05;SB-6-06,E2E-I6-002,yes,backlog,Quest lifecycle guarded transition
+GATE-I7A,Iteration 7 mandatory e2e gate A,S7,EP-07,P0,0,SB-7-01;SB-7-03;SB-7-04,E2E-I7-001,yes,backlog,Grounded query with citations
+GATE-I7B,Iteration 7 mandatory e2e gate B,S7,EP-07,P0,0,SB-7-01;SB-7-02;SB-7-04;SB-7-05,E2E-I7-002,yes,backlog,Weak evidence no-mutation behavior
+GATE-I8A,Iteration 8 mandatory e2e gate A,S8,EP-08,P0,0,SB-8-01;SB-8-04,E2E-I8-001,yes,backlog,Replay equivalence
+GATE-I8B,Iteration 8 mandatory e2e gate B,S8,EP-08,P0,0,SB-8-03;SB-8-04;SB-8-05,E2E-I8-002,yes,backlog,Persistence conflict recovery UX

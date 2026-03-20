@@ -1,0 +1,237 @@
+[
+  {
+    "id": "class.envoy",
+    "type": "class",
+    "name": "Envoy",
+    "description": "## Page 33",
+    "core_features": [],
+    "starting_hp_rule": null,
+    "starting_focuses": [],
+    "starting_talents": [],
+    "level_progression": [
+      {
+        "level": 4,
+        "features": [
+          "Doubletalk"
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          "Stunning Rep artee"
+        ]
+      },
+      {
+        "level": 11,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 16,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 20,
+        "features": [
+          "Epic Envoy"
+        ]
+      },
+      {
+        "level": 1,
+        "features": [
+          "Arcane Blast"
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 8,
+        "features": [
+          "Range Bonus"
+        ]
+      },
+      {
+        "level": 11,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 16,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 20,
+        "features": [
+          "Epic Ma ge"
+        ]
+      },
+      {
+        "level": 1,
+        "features": [
+          "Pinpoint Attack"
+        ]
+      }
+    ],
+    "class_stunts": [],
+    "related_entities": [],
+    "notes": [
+      "## Page 33\nSpecialization\nYou may pick one specialization allowed by your class (see c h APter 3: c h Ar Acter o Ptions) and gain the Novice degree\nof its specialization talent. For this specialization, you do not need to meet any requirements listed other than allowed class.\nSpecializations help you customize your character and give them a theme. The specializations available to Envoys are:\nArcane Disciple, Aristocrat, Bard, Champion, Crime Lord, Diplomat, Heritage (Divine, Fey, or Infernal), Knight,\nMariner/Pirate, Marked, Mystic Navigator, Spy, Skald.\nStarting T alents\nYou become a Novice in two of the following talents:\nAnimal Training, Carousing, Command, Contacts, Inspire, Intrigue, Linguistics, Lore, Oratory, Performance.\nEven-Numbered levels\nAt levels 2, 4, 6, 8, 10, 12, 14, 16, 18, and 20 you gain the following:\nAbilities\nYou gain one ability advancement, which you must spend on a primary ability.\nAd vancements\nYou gain one stunt advancement and one talent advance ment. At levels 6, 12, and 18, your stunt advancement\ncan be to select a class stunt from another class (see Class\nStunts in c hAPter 6: s tunts).\nFocus\nYou gain one ability focus, chosen from your primary abilities.\nOd d-Numbered levels\nAt levels 3, 5, 7, 9, 11, 13, 15, 17, and 19 you gain the following:\nAbilities\nYou gain one ability advancement, which you must spend on a secondary ability.\nAd vancements\nYou gain one specialization talent advancement.\nFocus\nYou gain one ability focus, chosen from your secondary abilities.\nlevels 4, 8, and 12 New Focus\nYou learn a new focus of your choice.\nlevel 4 Doubletalk\nYou are an expert in manipulating the direction of social interactions to your favor. Once during a social encounter,\nyou can attempt to direct the flow of events to your favor.\nThis allows you to perform a basic social stunt for 2 SP less than usual, to a minimum cost of 0. You may choose to do\nthis after making a check that generates SP, or when taking any other action. Unlike most reductions of stunt costs, if you\nlower the cost to 0 or less, you can perform the stunt even if you do not generate stunt points. You cannot use this ability\nduring combat or exploration encounters, as the events are too chaotic to be subject to your subtle manipulations.\nlevel 6 Ad vancement\nYou gain one Defense advancement (+1 Defense).\nDama ge Bonus\nYou may add your weapon focus (if you have one) when inflicting damage with a melee or ranged attack.\nlevel 8 Stunning Rep artee\nYou can daze or distract opponents with carefully chosen and timed words that affect targets capable of understanding\nyou. "
+    ]
+  },
+  {
+    "id": "class.mage",
+    "type": "class",
+    "name": "Mage",
+    "description": "Mage class entry; OCR block unresolved",
+    "core_features": [],
+    "starting_hp_rule": null,
+    "starting_focuses": [],
+    "starting_talents": [],
+    "level_progression": [],
+    "class_stunts": [],
+    "related_entities": [],
+    "notes": [
+      "t entitle them to their privileges. Some, usually aristocrats consider even thinking about money vulgar, but others\nmake fortunes through shrewd business dealings.\nBack ground Descriptions\nEach background is open to interpretation depending on a character's history and experiences, so you will need to\ncustomize the background with details that make it unique to your character. An apprentice might have studied under\na kindly wizard in the middle of a cosmopolitan city, or they might have suffered through a difficult apprenticeship under\na warlock with dark inclinations while living in a tower in the middle of a swamp. Both are apprentices, both learned\nimportant lessons that define their character, but the details are quite different.\nApprentice Upper i ntelliGence (ArcAne l ore) or i ntelliGence (r ese Arch)\nYou've been trained by a spellcaster and are on your way to becoming a powerful mage. Your apprenticeship wasn't easy,\nbut you came out the other side with valuable knowledge and experiences that set you apart from those not able or willing\nto delve into the mystic arts.\nArtist lower i ntelliGence (c ulturAl l ore) or i ntelliGence (e v Alu Ation)\nBeauty drives you. It's really all that matters. Whether that beauty takes the shape of a painting, sonnet, sculpture, or\nsomething else entirely is immaterial, that it's beautiful and, most importantly, you made it, does. You've either appren -\nticed with another artist, in a studio with other would-be artists, or you have exceptional natural talent. Regardless,\nyou likely specialize in a particular form of art. Now you just need to figure out how to make a living at it.\nCriminal Outsid er c ommunicAtion (DecePtion) or Dexterity (l ock Pickin G)\nYou make your living on the streets. More accurately, you make your living off ot"
+    ]
+  },
+  {
+    "id": "class.rogue",
+    "type": "class",
+    "name": "Rogue",
+    "description": "## Page 37",
+    "core_features": [],
+    "starting_hp_rule": null,
+    "starting_focuses": [],
+    "starting_talents": [],
+    "level_progression": [
+      {
+        "level": 4,
+        "features": [
+          "Select one of the following abilities:"
+        ]
+      },
+      {
+        "level": 6,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 7,
+        "features": [
+          "Stunning Attack"
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          "lethality"
+        ]
+      },
+      {
+        "level": 11,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 12,
+        "features": [
+          "Slippery"
+        ]
+      },
+      {
+        "level": 16,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 20,
+        "features": [
+          "Epic Rogue"
+        ]
+      },
+      {
+        "level": 1,
+        "features": [
+          "Specialization"
+        ]
+      }
+    ],
+    "class_stunts": [],
+    "related_entities": [],
+    "notes": [
+      "## Page 37\nEven-Numbered levels\nAt levels 2, 4, 6, 8, 10, 12, 14, 16, 18, and 20 you gain the following:\nAbilities\nYou gain one ability advancement, which you must spend on a primary ability.\nAd vancements\nYou gain one stunt advancement and one talent advance ment. At levels 6, 12, and 18, your stunt advancement\ncan be to select a class stunt from another class (see Class\nStunts in c hAPter 6: s tunts).\nFocus\nYou gain one ability focus, selected from your primary abilities.\nOd d-Numbered levels\nAt levels 3, 5, 7, 9, 11, 13, 15, 17, and 19 you gain the following:\nAbilities\nYou gain one ability advancement, which you must spend on a secondary ability.\nAd vancements\nYou gain one specialization talent advancement.\nFocus\nYou gain one ability focus, selected from your secondary abilities.\nlevel 4 Select one of the following abilities:\nOption 1: T ake Aim\nWhen you take the Aim minor action, you gain +2 on the attack roll instead of the normal +1.\nOption 2: Vital Blow\nWhen you take the Aim minor action, you can choose not to gain a +1 bonus to the attack roll. If you do this and the\nattack hits your opponent, their Armor Rating is halved (round down) against the damage of your attack. If you\nuse Vital Blow with the Pierce Armor stunt, your damage becomes penetrating (thus ignoring AR altogether).\nlevel 6 Ad vancement\nYou gain one Defense advancement (+1 Defense).\nDama ge Bonus\nYou may add your weapon focus (if you have one) when inflicting damage with a melee or ranged attack.\nlevel 7 Stunning Attack\nYou can daze opponents with sharp blows to vulner able areas. To make a stunning attack, you must use the\nAim minor action and then hit with a melee or a ranged attack. (This attack can generate stunt points as normal.) If\nsuccessful, you inflict no damage, but your opponent must make a successful TN 15 Constitution (Stamina) test or gain\nthe Stunned condition (see c hAPter 2). (The TN for this check increases by 1 for every three levels you gain above\n7th, i.e., TN 16 at 10 th, TN 17 at 13 th, TN 18 at 16 th, and TN 19 at 19th level.) A Stunned target can attempt the test again\nat the start of their turn, and, if successful, they can act normally once more. Otherwise, the only thing a Stunned\ncharacter can do on their turn is take a single minor action.\nlevel 10 lethality\nYou use your wits to hit enemies where it hurts. You can add your Intelligence to your damage when making attacks.\nlevel 11 Ad vancement\nYou gain one Defense advancement (+1 Defense).\nFocus Bonus\nYour focuses now provide a +3 bonus instead of +2.\nlevel 12 Slippery\nYou are hard to pin down in comba"
+    ]
+  },
+  {
+    "id": "class.warrior",
+    "type": "class",
+    "name": "Warrior",
+    "description": "## Page 39",
+    "core_features": [],
+    "starting_hp_rule": null,
+    "starting_focuses": [],
+    "starting_talents": [],
+    "level_progression": [
+      {
+        "level": 6,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 10,
+        "features": [
+          "Expert Strike"
+        ]
+      },
+      {
+        "level": 11,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 15,
+        "features": [
+          "Quick Strike"
+        ]
+      },
+      {
+        "level": 16,
+        "features": [
+          "Ad vancement"
+        ]
+      },
+      {
+        "level": 20,
+        "features": [
+          "Epic W arrior"
+        ]
+      }
+    ],
+    "class_stunts": [],
+    "related_entities": [],
+    "notes": [
+      "## Page 39\nAbilities\nYou gain one ability advancement, which you must spend on a primary ability.\nAd vancements\nYou gain one stunt advancement and one talent advance ment. At levels 6, 12, and 18, your stunt advancement\ncan be to select a class stunt from another class (see Class\nStunts in c hAPter 6: s tunts).\nFocus\nYou gain one ability focus, selected from your primary abilities.\nOd d-Numbered levels\nAt levels 3, 5, 7, 9, 11, 13, 15, 17, and 19 you gain the following:\nAbilities\nYou gain one ability advancement, which you must spend on a secondary ability.\nAd vancements\nYou gain one specialization talent advancement.\nFocus\nYou gain one ability focus, selected from your secondary abilities.\nlevels 4, 8, and 12 Impro ved Armor Rating\nYour Armor Rating increases by 1. (If you have no other\nArmor Rating, add this bonus to 0 to determine your new AR.\nNew Weapon Group\nYou learn a new weapon group of your choice.\nlevel 6 Ad vancement\nYou gain one Defense advancement.\nDama ge Bonus\nYou may add your weapon focus (if you have one) when inflicting damage with a melee or ranged attack.\nlevel 10 Expert Strike\nOnce per round you may inflict an additional 1d6 damage with a successful melee or ranged attack. This cannot be an\nattack granted by a stunt, such as Lightning Attack.\nlevel 11 Ad vancement\nYou gain one Defense advancement (+1 Defense).\nFocus Bonus\nYour focuses now provide a +3 bonus instead of +2.\nlevel 15 Quick Strike\nIn any round in which you do not use Expert Strike, you can choose instead to make a melee attack vs. an adjacent\nopponent as a minor action. You do not gain stunt points for this action\nlevel 16 Ad vancement\nYou gain one Defense advancement (+1 Defense).\nStunt Die to Dama ge\nYou may add the value of the Stunt Die of your attack test when inflicting damage against a creature with a melee or\nranged attack.\nlevel 20 Epic W arrior\nPick one type of stunt (combat, exploration, or social). You gain a +1 stunt point bonus when generating stunt points\nof that type.\nClass Concepts\nFantasy AGE classes are meant to provide broad archetypes for different fantasy adventure heroes. As their specialization lists\nshow, each class encompasses a lot of possibilities. Consider the following examples:\ne nvoy: Characters primarily described as \"charming\" or \"cunning,\" including real-world explorers like Marco Polo,\nBungaree, and Zheng He. Envoys from folklore and fiction include crafty-minded Odysseus, upright magistrate Judge Dee, Merry\nMan Alan-a-Dale, Glen Cook's Garrett P.I., and Tamora Pierce's\nAlianne of Pirate's Swoop.\nm AGe: Characters primarily defined by "
+    ]
+  }
+]

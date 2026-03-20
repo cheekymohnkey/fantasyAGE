@@ -1,0 +1,122 @@
+{
+  "document": {
+    "title": "Fantasy AGE 2nd Edition (OCR cleaned)",
+    "source_file": "work-process/raw/fantasy_age_2e_pdf_text.md"
+  },
+  "chapters": [
+    {
+      "number": 1,
+      "title": "Character Creation",
+      "start_offset": 50099,
+      "end_offset": 160395
+    },
+    {
+      "number": 2,
+      "title": "Basic Rules",
+      "start_offset": 160395,
+      "end_offset": 289933
+    },
+    {
+      "number": 3,
+      "title": "Character Options",
+      "start_offset": 289933,
+      "end_offset": 411989
+    },
+    {
+      "number": 4,
+      "title": "Equipment",
+      "start_offset": 411989,
+      "end_offset": 477380
+    },
+    {
+      "number": 5,
+      "title": "Magic",
+      "start_offset": 477380,
+      "end_offset": 630370
+    },
+    {
+      "number": 6,
+      "title": "Stunts",
+      "start_offset": 630370,
+      "end_offset": 675603
+    },
+    {
+      "number": 7,
+      "title": "The Game Master",
+      "start_offset": 675603,
+      "end_offset": 768029
+    },
+    {
+      "number": 8,
+      "title": "Mastering the Rules",
+      "start_offset": 768029,
+      "end_offset": 863232
+    },
+    {
+      "number": 9,
+      "title": "Adversaries",
+      "start_offset": 863232,
+      "end_offset": 981099
+    },
+    {
+      "number": 10,
+      "title": "Rewards",
+      "start_offset": 981099,
+      "end_offset": 1056408
+    },
+    {
+      "number": 11,
+      "title": "Breakwater Bay",
+      "start_offset": 1056408,
+      "end_offset": 1296134
+    }
+  ],
+  "core_mechanics": {
+    "ability_test_formula": "Test result = 3d6 + Ability",
+    "target_number_note": "Target Number of 10",
+    "health_note": "Health is a measure of your character's fitness and wellbeing.",
+    "stunt_note": "Roll doubles on 3d6 to pull off unexpected moves"
+  },
+  "character_options": {
+    "ancestries": [
+      "draak",
+      "dwarf",
+      "elf",
+      "gnome",
+      "goblin",
+      "halfling",
+      "human",
+      "orc",
+      "wildfolk"
+    ],
+    "classes": [
+      "Envoy",
+      "Mage",
+      "Rogue",
+      "Warrior"
+    ]
+  },
+  "encounters": {
+    "summary_text": "s at the end of each session. Rules for experience points can be found in c h APter\n10: r e WAr Ds.\nAs the scenes where story action takes place, encounters are the building blocks of an adventure. There are three basic\ntypes of encounters in Fantasy AGE:\n\u2022 Action e ncounters: These are classic action scenes where characters defy immediate physical dangers. They might\nbattle foes, try to escape a collapsing building, or chase a fleeing cultist through a crowded street-o",
+    "keywords": [
+      "action encounters",
+      "exploration encounters",
+      "social encounters"
+    ],
+    "snippets": {
+      "action": "lled an\nattack roll and is used to try to hit an opponent. This section shows you how to make attacks and inflict damage-and it\ntells you what it takes to defeat an opponent.\nMo vement\nIn combat and other round-by-round action encounters, your\nSpeed rating and the actions you take determine how far you can move. Even though a round is 15 seconds long, characters\nare assumed to move at a pace that allows them to remain wary of danger.\n\u2022 A Charge major ac",
+      "exploration": "r when taking any other action. Unlike most reductions of stunt costs, if you\nlower the cost to 0 or less, you can perform the stunt even if you do not generate stunt points. You cannot use this ability\nduring combat or exploration encounters, as the events are too chaotic to be subject to your subtle manipulations.\nlevel 6 Ad vancement\nYou gain one Defense advancement (+1 Defense).\nDama ge Bonus\nYou may add your weapon focus (if you have one) when inflictin",
+      "social": "to pull off special maneuvers or\nearn extra benefits above and beyond simple success. Stunt points are often used in combat encounters to keep fights dynamic and fun, but you can also use stunt points in exploration and social encounters. Check out c h APter 6: s tunts for more information on\nthose options.\nAbility (Focus) Format\nIn Fantasy AGE we usually note the required ability and appropriate focus for each test, as follows:\nAbility (Focus)\nFor exam"
+    }
+  },
+  "optional_systems_detected": [
+    "Peril",
+    "Daring",
+    "Fortune",
+    "Stunts",
+    "Arcana",
+    "Health",
+    "Magic Points",
+    "Ability Tests"
+  ]
+}

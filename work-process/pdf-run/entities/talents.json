@@ -1,0 +1,1570 @@
+[
+  {
+    "id": "talent.stacking_t_alent_benefits",
+    "type": "talent",
+    "name": "Stacking T alent Benefits",
+    "description": "Multiple talents my provide overlapping benefits. If this is the case, here's how they interact, with the proviso that the GM\ncan disallow anything they believe will produce an overly powerful combination.\nAction-Based Benefits\nIf two talents say you must take",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The benefit gained when you become a novice."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "The benefit gained when you become an expert."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "The benefit gained when you become a master."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.action_based_benefits",
+    "type": "talent",
+    "name": "Action-Based Benefits",
+    "description": "If two talents say you must take a special minor or major action, these are generally separate actions, and their bene -\nfits do not stack with each other. For instance, if you have a talent that allows you to use a minor action to attack, and\none which allows",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The benefit gained when you become a novice."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "The benefit gained when you become an expert."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "The benefit gained when you become a master."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.dama_ge_bonuses",
+    "type": "talent",
+    "name": "Dama ge Bonuses",
+    "description": "These stack with each other unless the GM rules otherwise.\nReRolls\nIf multiple talents allow you to reroll the same test, each additional talent adds a +1 bonus to the reroll. You cannot reroll\nthe exact same test more than once.\nStunt Cost Red uctions\nStunt c",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The benefit gained when you become a novice."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "The benefit gained when you become an expert."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "The benefit gained when you become a master."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.rerolls",
+    "type": "talent",
+    "name": "ReRolls",
+    "description": "If multiple talents allow you to reroll the same test, each additional talent adds a +1 bonus to the reroll. You cannot reroll\nthe exact same test more than once.\nStunt Cost Red uctions\nStunt cost reductions stack. If they reduce a stunt's cost to 0 (negative ",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The benefit gained when you become a novice."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "The benefit gained when you become an expert."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "The benefit gained when you become a master."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.stunt_cost_red_uctions",
+    "type": "talent",
+    "name": "Stunt Cost Red uctions",
+    "description": "Stunt cost reductions stack. If they reduce a stunt's cost to 0 (negative costs are impossible) you may only use the stunt\nonce on each occasion that you use stunt points (whether from rolling doubles, using a Stunt Attack, harnessing a Relation -\nship, or fro",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The benefit gained when you become a novice."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "The benefit gained when you become an expert."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "The benefit gained when you become a master."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.stunt_die_bonuses",
+    "type": "talent",
+    "name": "Stunt Die Bonuses",
+    "description": "Stunt Die bonuses do not stack.\nTest Bonuses\nThese stack with each other unless the GM rules otherwise.\nT alent Entry Format\nA catalog of the talents available follows. They use the following format:\nT alent Name\nAncestries: The ancestries that can take this t",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The benefit gained when you become a novice."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "The benefit gained when you become an expert."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "The benefit gained when you become a master."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.test_bonuses",
+    "type": "talent",
+    "name": "Test Bonuses",
+    "description": "These stack with each other unless the GM rules otherwise.\nT alent Entry Format\nA catalog of the talents available follows. They use the following format:\nT alent Name\nAncestries: The ancestries that can take this talent are listed here. This is a rare require",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The benefit gained when you become a novice."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "The benefit gained when you become an expert."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "The benefit gained when you become a master."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.t_alent_entry_format",
+    "type": "talent",
+    "name": "T alent Entry Format",
+    "description": "A catalog of the talents available follows. They use the following format:\nT alent Name\nAncestries: The ancestries that can take this talent are listed here. This is a rare requirement, and if no ancestry\nentry appears, members of any ancestry may take the tal",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The benefit gained when you become a novice."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "The benefit gained when you become an expert."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "The benefit gained when you become a master."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.t_alent_name",
+    "type": "talent",
+    "name": "T alent Name",
+    "description": "Ancestries: The ancestries that can take this talent are listed here. This is a rare requirement, and if no ancestry\nentry appears, members of any ancestry may take the talent.\nc lAsses: Classes that can take this talent are listed here.\nr equirements: After L",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The benefit gained when you become a novice."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "The benefit gained when you become an expert."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "The benefit gained when you become a master."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.mind_y_our_t_alents",
+    "type": "talent",
+    "name": "Mind Y our T alents",
+    "description": "Keeping track of a talent's advantages is the responsibility of you, the player. The Game Master has other things to concentrate on,\nand over time your character's abilities will probably become too complex for the GM to memorize or quickly reference alongside",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You know the basics of dealing with animals. With a week of training, you can teach an animal to follow a simple"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You are at home in a laboratory. You can make fire vials and ice vials."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Your alchemical knowledge is vast. You can make acid vials and lighting vials."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.draak_secrets",
+    "type": "talent",
+    "name": "Draak Secrets",
+    "description": "Ancestries: Draak c lA sses: Any\nYour ties to dragonkind are stronger and deeper than those of typical draak.\nn ovice: Your draconic power grows. Select one of the following benefits from the Draak table in c hAPter 1: armored,\nmagical resistance, or the ances",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Your draconic power grows. Select one of the following benefits from the Draak table in c hAPter 1: armored,"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You grow a pair of wings, which you can fold away and protect when not in use. Though you cannot fly, you gain a +2"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Your wings strengthen to grant you the ability to soar through the clouds. You can fly at half your Speed."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.dwarven_secrets",
+    "type": "talent",
+    "name": "Dwarven Secrets",
+    "description": "Ancestries: Dwarf c lA sses: Any\nYou live for the stone-hearted ways of the dwarves.\nn ovice: Subterranean and sunless realms tell you their secrets readily. You may use Intelligence (Engineering) tests to deter-\nmine your direction indoors and underground, in",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Subterranean and sunless realms tell you their secrets readily. You may use Intelligence (Engineering) tests to deter-"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "When besieged, a true dwarf takes up the axe. When using a weapon from the Axes group, you gain +1 SP when -"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You partake of the endurance of stones against foul magic-or you call upon secret teachings to counter sorcery"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.el_ven_secrets",
+    "type": "talent",
+    "name": "El ven Secrets",
+    "description": "Ancestries: Elf c lA sses: Any\nYou have attuned your soul to the elven way.\nn ovice: The keen vision and grace of your people guides your hands. When using the Aim action in conjunction with\na weapon that requires Accuracy-based attack rolls, you gain an addit",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The keen vision and grace of your people guides your hands. When using the Aim action in conjunction with"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You tread too lightly to disturb a leaf, or to sink into snow or mud. You can touch an object without disturbing a"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You cultivate a circle of calm awareness. Without looking for them, you might discover tracks and hidden objects"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.gnome_secrets",
+    "type": "talent",
+    "name": "Gnome Secrets",
+    "description": "Ancestries: Gnome c lA sses: Any\nYou have a true gnomish heart, which sees the patterns common to earthworks, mechanisms, and magic.\nn ovice: The secrets of things are visible to you through toolmarks and design. Whenever you use Intelligence (Evaluation),\nDex",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The secrets of things are visible to you through toolmarks and design. Whenever you use Intelligence (Evaluation),"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "It's a dangerous thing to trick a natural trickster. Once per encounter, if you notice someone attempting to deceive"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Burrows and other underground sites are not dead environments, but reflect a slower, deeper expression of"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.goblin_secrets",
+    "type": "talent",
+    "name": "Goblin Secrets",
+    "description": "Ancestries: Goblin c lA sses: Any\nYou have learned tricks and tips from the generations of goblins that came before.\nn ovice: You have learned that in combat, caution is often the secret to survival. You know that when you cannot kill a foe\noutright you may be",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You have learned that in combat, caution is often the secret to survival. You know that when you cannot kill a foe"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You can use your small size and ability with the blade to confound a foe, making it easier for allies to hit them. When"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Your goblin fighting skills are unsurpassed. When you hit a target while using a Light Blade, you can choose to"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.halfling_secrets",
+    "type": "talent",
+    "name": "Halfling Secrets",
+    "description": "Ancestries: Halfling c lA sses: Any\nYour people may be smaller than others, but halflings have a subtle strength you know how to harness.\nn ovice: You're good at getting out from under foot. Against any creature at least double your size, you gain a +1 bonus t",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You're good at getting out from under foot. Against any creature at least double your size, you gain a +1 bonus to"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Bigger folk are easier to hit, too. Gain a +1 bonus to"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "The bigger they are \u2026 the more imperative it is to get away. You gain the Rogue stunt Misdirect, regardless of class,"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.human_secrets",
+    "type": "talent",
+    "name": "Human Secrets",
+    "description": "Ancestries: Human c lA sses: Any\nSteeped in the legends and pride of humanity, you have further developed your ancestral abilities.\nn ovice: When things are turning against you, you always seem to be able to turn them around to your benefit. When an attack\naga",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "When things are turning against you, you always seem to be able to turn them around to your benefit. When an attack"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "If a spell that affects you does extra damage to you with the Mighty Spell or Lethal Spell stunt, you gain 1 SP. This"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "When an attack against you uses the Knock Prone, Pierce Armor, or Lightning Attack stunt, you gain 1 SP. This"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.inspire",
+    "type": "talent",
+    "name": "Inspire",
+    "description": "Ancestries: Any c lA sses: Any r equirements: Envoy or Communication 3\nYou drive others to do great deeds. You may be an expert speaker or leader, but this talent is often about being an exem-\nplar and source of trust, dependability, and stability as much as i",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You inspire calm and courage in your friends and allies. As long as you are conscious and they are within sight"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "With you around, things don't seem as bad. Once per encounter, you can spend two minor actions to offer words of"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You can inspire greatness in others. As long as you are conscious and they are within sight of you, any ally gener-"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.orc_secrets",
+    "type": "talent",
+    "name": "Orc Secrets",
+    "description": "Ancestries: Orc c lA sses: Any\nOn gray, broken ground, or in the red-stained precincts of battle, the ways of the orcs are the ways of fierce survivors.\nn ovice: Against foes, fire, and other dangers, you stand bloody but unbowed. Add 5 Health to your total.\ne",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Against foes, fire, and other dangers, you stand bloody but unbowed. Add 5 Health to your total."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You're inured to long marches and the privations your people regularly experience. You ignore one instance of"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Following the ways of your clan or a personal vision, you build up a tolerance to a particular threat. Choose one"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.spears_weapon_group",
+    "type": "talent",
+    "name": "Spears weapon group",
+    "description": "Pole weapons can be cumbersome, but not in your hands.\nYou can fight in this style with a two-handed spear, or any weapon of the Polearms weapon group.\nn ovice: You can use the length of your weapon to advantage.\nYou treat enemies up to 4 yards away as if they",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You can use the length of your weapon to advantage."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Once prepared, you are hard to move. You gain the benefits of the Stand Firm action (see Minor Actions in c h APter"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You get the most of your pole weapon's design features. This equates to a +2 to initiative when using pole"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.wild_folk_secrets",
+    "type": "talent",
+    "name": "Wild folk Secrets",
+    "description": "Ancestries: Wildfolk c lA sses: Any\nSteeped in the traditions of your fellow wildfolk, you have strengthened ancestral bonds with your animal kin.\nn ovice: Your enhanced animal senses serve you well. You gain a +1 bonus to tests using two Perception focuses of",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Your enhanced animal senses serve you well. You gain a +1 bonus to tests using two Perception focuses of your choice."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You are naturally attuned to animals that share your nature. No creature you share a bestial species family with"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You can express your bestial nature fully. You may use an Activate action to take the shape of a creature that"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.arcane_disciple",
+    "type": "talent",
+    "name": "Arcane Disciple",
+    "description": "While Mages have access to magical powers through their class, others may gain mystical talents as well. Sometimes\ncalled \"arcane dabblers\" or \"hedge witches,\" arcane disci ples are less devoted to the pure study of magic than Mages,\ncombining what they know w",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You gain one Novice spell from any arcana. You also gain magic points equal to your 5 + Willpower + 1d6."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You gain one Novice spell from any arcana in addi tion to the one you got with the Novice degree. You may"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You gain one Expert spell of any arcana. Alterna tively, you may take two more Novice spells from any arcana."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.arcane_scholar",
+    "type": "talent",
+    "name": "Arcane Scholar",
+    "description": "While all Mages have a certain working knowledge of arcana, some choose to go deeper into the study of magic: delving into\nancient texts and the works of renowned scholars, collecting knowledge and lore like others do gold, and valuing it at least\nas much. You",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You have a wide knowledge of magic theory and practice. If you fail an Intelligence (Arcane Lore) test you can"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You can cast the identify enchantment spell for 0 MP as a major action instead of 1 minute. Also, you can automati -"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You can automatically determine if an item is enchanted or cursed simply by examining it as a major action."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.aristocrat",
+    "type": "talent",
+    "name": "Aristocrat",
+    "description": "Regardless of your current social status, you are acknowledged as having a heritage that stretches back to the lords and ladies\nof some well-known land. You may have no lands or retainers, but you know the names, behaviors, and ancient agreements\nthat once bol",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You know the essence of noble leadership. Choose one of the following Communication focuses: Bargaining,"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Authority demands weaponry and wealth. When you hit a target which you are capable of communicating with,"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You have an aura of command that leads others to obey you. When you use the Impress basic social stunt, your"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.aspect_w_arrior",
+    "type": "talent",
+    "name": "Aspect W arrior",
+    "description": "Aspect Warriors channel deities of hunting, ferocity, and raw physical prowess. These are gods of rough honor, close to nature,\nand often have animal symbols. As one of them, you touch the fighting spirit of your chosen deity, emulating their might and\nadoptin",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Pick a divine aspect that inspires you. This aspect is associated with an animal that you consider sacred. Exam -"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You learn to channel your divine aspect more fully."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Your chosen deity empowers and protects you."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.assassin",
+    "type": "talent",
+    "name": "Assassin",
+    "description": "Quiet and cunning Rogues may master the art of death. Assassins are never the obvious threat. They leave the blustering and\nthe battle cries to Warriors, while they sneak up from behind to plant a knife in the back. While many assassins are profes -\nsional kil",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You can assess a nearby opponent and spot weak nesses that can be exploited in combat. With an Activate action"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You know how to exploit your target's weaknesses."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Even the quickest of targets cannot escape you. You can make Pinpoint Attacks against all opponents, no matter"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.bard",
+    "type": "talent",
+    "name": "Bard",
+    "description": "For some people, the life of a performer is the life of a herald, historian, and keeper of cultural secrets, to be preserved for\nfuture generations and used in the here and now, so the tales of ancient heroes drive the audience to greatness-and stories\nof thei",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You drive others to perform heroically. Once per encounter you can take a major action and with a successful"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Bards often remember stories and tales that provide useful insights. This allows you to use the Extra Information"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Tales of brave companions inspire your friends, and stories of horrific death give your enemies pause. As a major"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.berserker",
+    "type": "talent",
+    "name": "Berserker",
+    "description": "All Warriors fight, but some feel the call to battle singing in their blood during a crimson haze of pure aggression. These\nberserkers may revel in the glory of combat, or hope their unique talents ultimately serve the cause of peace. Berserkers\nusually belong",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You can drive yourself into a killing frenzy. Once per encounter, you may use the Activate action to become"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Your rage becomes more potent. While Berserk you gain the same bonuses and penalties as described in"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Your fury is unstoppable! If your Health drops to 0 while Berserk, you do not take a Defeat Condition until you"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.champion",
+    "type": "talent",
+    "name": "Champion",
+    "description": "There are many tough and capable Warriors, but those who can truly inspire their allies and intimidate their enemies are\nfew. As a champion you don't just fight, you are a palpable presence on the battlefield. Comrades in arms look to you for\nstrength and cour",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Your battle roar intimidates your opponents. When you take the Charge action, you can shout a war cry that gives"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You can lead your allies in an inspired defense. First, you must use the Activate action to enter Rally Mode. When"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Your presence on the battlefield cannot be ignored. When in Rally Mode your Expert effects"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.crime_lord",
+    "type": "talent",
+    "name": "Crime lord",
+    "description": "Crime lords are the soldiers and bosses of the various crim inal cabals and syndicates found in most campaign settings.\nCrime lords are enforcers, counselors, and aspiring leaders leaning on social leverage but entirely willing to get their\nhands dirty. Some a",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Your brutal style of command is only matched by your ability to hide threats and directives in innocuous words."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You are exceptional at taking advantage of oppor tunities to push others to their limits through threats and"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You cultivate an aura of intelligent menace. You and a number of allies equal to your Communication rating"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.diplomat",
+    "type": "talent",
+    "name": "Diplomat",
+    "description": "Sometimes, fighting isn't the answer. Other times, fighting was the answer, but now you need someone to negotiate\nterms and treaties. In both cases, the diplomat shines. You are part negotiator, part courtier, and sometimes a bit of a\nspy. Diplomats often come",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You are adept enough at social graces to win friends and avoid embarrassment. Choose two focuses from among"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You are excellent at operating within established rules and customs to achieve your aims. When performing"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You can use your skills to delay or perhaps even prevent violence. Once per encounter, when combat is immi-"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.duelist",
+    "type": "talent",
+    "name": "Duelist",
+    "description": "Heavily armed and armored Warriors may dominate the battlefield, but duelists rule the streets and alleys of cities.\nIn such conditions the quick blades and wits of duelists count for more than raw strength. They eschew cumbersome\nshields and fight with a weap",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You favor a more sophisticated form of fighting."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You defend yourself like an artist of the blade. Once per round, you may use a minor action to perform a Duel-"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You learn how to riposte attacks, and to interrupt a strike with one of your own. You may devote your major"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.accuracy_based_melee_weapons",
+    "type": "talent",
+    "name": "Accuracy-based melee weapons",
+    "description": "You excel in the art of fencing.\nn ovice: You favor a more sophisticated form of fighting.\nWhile using an Accuracy-based melee weapon for which you possess a Fighting Style talent, you inflict +2 damage.\ne xPert: You defend yourself like an artist of the blade",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You favor a more sophisticated form of fighting."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You defend yourself like an artist of the blade. Once per round, you may use a minor action to perform a Duel-"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You learn how to riposte attacks, and to interrupt a strike with one of your own. You may devote your major"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.elementalist",
+    "type": "talent",
+    "name": "Elementalist",
+    "description": "One of the foundations of the arcane arts is the understanding of the balance between the elements-the primal forces of the\nworld. While most Mages work with the different elements as tools, some possess (or are drawn to forge) a deep connection\nwith one or mo",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You not only gain a +1 bonus to casting rolls for spells from your favored arcana, but benefit from a +2 bonus to"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Your knowledge of your element is deep. When casting spells of your favored arcana, their cost in magic"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You understand the ties between elemental forces."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.wood_arcana",
+    "type": "talent",
+    "name": "Wood Arcana",
+    "description": "You have a talent for elemental magic. Choose one of the following spell talents to be your favored arcana:\n86 Chapter 3: Character Options\n## Page 89\nAir Arcana, Cold Arcana, Earth Arcana, Fire Arcana, Lightning Arcana, Shadow Arcana,\nWater Arcana, or Wood Ar",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You not only gain a +1 bonus to casting rolls for spells from your favored arcana, but benefit from a +2 bonus to"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Your knowledge of your element is deep. When casting spells of your favored arcana, their cost in magic"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You understand the ties between elemental forces."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.gladiator",
+    "type": "talent",
+    "name": "Gladiator",
+    "description": "You may not have been born in the arena, but some might say you were reborn there, transforming from your former life\ninto a famed warrior-of sorts. Learning to fight in numerous contests of arms for sport and reward, you are adept at\nboth taking lives and thr",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You're good at dispatching and disabling foes. As a free action you can either deliver a coup de grace or cause"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Fighting with flair, your words and movements confound your enemy. If you use the Taunt stunt successfully"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You're a bloody-handed entertainer. You may use basic social stunts as combat stunts, and when you do so,"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.guard_ian",
+    "type": "talent",
+    "name": "Guard ian",
+    "description": "Guardians are trained to defend others. Experienced guardians often have numerous scars, indicating where they took a blade,\narrow, or mystic bolt for their sworn charges. Some guardians protect others as a religious calling, while others are essentially\nhighl",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The basic act of guardianship is to throw yourself in harm's way. Use an Activate minor action to select one ally"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "If you succeed at using the Novice ability, you may use a minor action to make a melee attack against the enemy"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "If you succeed at a counterattack using the Expert ability (which in turn requires using the Novice ability), your"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.or_weapon_and_shield_style",
+    "type": "talent",
+    "name": "or Weapon and Shield Style",
+    "description": "You know how to protect others.\nn ovice: The basic act of guardianship is to throw yourself in harm's way. Use an Activate minor action to select one ally\nwithin 4 yards. Once per round, when that ally is hit by an attack, you may make an opposed test of your ",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "The basic act of guardianship is to throw yourself in harm's way. Use an Activate minor action to select one ally"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "If you succeed at using the Novice ability, you may use a minor action to make a melee attack against the enemy"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "If you succeed at a counterattack using the Expert ability (which in turn requires using the Novice ability), your"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.divine_herita_ge",
+    "type": "talent",
+    "name": "Divine Herita ge",
+    "description": "Glistening shards of divinity or angelic power linger within you. Your ancestor may have been a legendary herald\nof the church or a fallen angel, or a god may have found brief passion with your mortal parent. You may instead be\na favored champion of some divin",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You can call forth the light within you. Thus, you may use the Fire Arcana spell arcane lantern without a casting"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Not even blades and arrows can stay you from your divine purpose. You gain access to the following stunt:"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You can channel your inner light to an intensity that can either empower life or burn your enemies. By using an"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.fey_herita_ge",
+    "type": "talent",
+    "name": "Fey Herita ge",
+    "description": "Your cousins are the springtime brook and the sun-dappled thicket, and some untamed element of the wild surges in your\nblood. You might have been one of the children snatched by fairies, the offspring of your mother's dalliance with a dryad,\nor born within a s",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You have the blessings of the secret powers that rule green places. Unless summoned or enhanced with"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "As your ties to the Faerie realms hidden in the wilds deepen, whispers in the deep green bless you with a single"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Your fundamental connection to the Faerie wild can slip you away from danger. If there is any plant life or live"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.infernal_herita_ge",
+    "type": "talent",
+    "name": "Infernal Herita ge",
+    "description": "Simmering bits of demonic heritage flow through you, by birth or circumstance. You may have ancestors who escaped\nhellish realms or struck bargains with demons, been exposed to artifacts of supernatural evil, or were once possessed by a\nbeing from the lower re",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You become resistant to heat, fire, and flame, able to reach into boiling water or touch hot metal without injuring"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "The presence of infernal supernatural forces sings to your blood and bones. When you encounter supernat -"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Depending on whether your heritage evokes lethal cold or hellfire, you can imbue your melee attacks and touch"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.hol_y_w_arrior",
+    "type": "talent",
+    "name": "Hol y W arrior",
+    "description": "You raise steel and shed blood for a holy cause-or at least a zealous one. Your bloody-handed faith has been answered\nwith certain blessings. In some campaigns, gods openly grant Holy Warriors their status in a blaze of supernatural\npower. In others, the sourc",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Your fury at enemies of the faith (or cold desire to bring them \"final mercy,\" perhaps) helps your blows"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Your faith chains you to the true path, against deception and temptation. You gain a +1 bonus to Willpower"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "For you, bloodshed is a sacrament. Once per round you can choose to make an attack that hits an adjacent (within"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.hunter",
+    "type": "talent",
+    "name": "Hunter",
+    "description": "Members of the Hunter specialization master the art of stalking their quarry. They learn how to relentlessly track their\nprey and quickly bring them down. Most hunters specialize in a particular type of creature, but their abilities are appli -\ncable to stalki",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You know how to stalk your prey and strike true."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You know how to ambush your prey. If you succeed at a Perception (Tracking) test to follow a target, or a Dexterity"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You have the persistence and accuracy of a predator."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.knight",
+    "type": "talent",
+    "name": "Knight",
+    "description": "An armored, mounted knight is one of the greatest forces on the battlefield. Learning knightly fighting methods requires\nrigorous training as a squire. Knighthood is generally seen as an honorable vocation, even if not all knights manage\nto live up to that ide",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Your enemies need to get out of your way or be crushed, impaled, or both. When you hit an enemy from atop a mount"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Your lance hits with the strength of an ogre. When performing a mounted Charge action, add 1d6 to your weap-"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Your foes tremble at the thought of you crashing into them astride your steed. Add +1 to your Defense while"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.ma_ge_hunter",
+    "type": "talent",
+    "name": "Ma ge Hunter",
+    "description": "There is darkness in magic, and someone must protect the world from evil spells and sorcerers. You have learned how\nto fight spellcasters, steeling your spirit against their powers.\nYou may have consecrated your weapons against magic, or you may know how to st",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Your Accuracy-based ranged attack rolls count as magical, for the purposes of damaging creatures resistant to"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Your bonus to tests to resist spells and horror increases to +3. Furthermore, you can attack spells"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You can drain Mages and other magic-using crea tures (defined as any creature with magic points) of power."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.mariner_and_pirate",
+    "type": "talent",
+    "name": "Mariner and Pirate",
+    "description": "You know the ways of the sea. This specialization is unlike others, because the dividing line between mariner and pirate\nis a permeable one. A mariner is an able member of the crew of any vessel, from trading vessels to warships, ready for\ndanger but used to f",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Years at sea make sailing second nature."
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "A life in the riggings makes you an agile shipboard combatant. On ship's ladders or rigging, you can"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Together, you and your crew can over come the sea's perils. You may use a minor action to grant an"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.marked",
+    "type": "talent",
+    "name": "Marked",
+    "description": "You have tattoos, scars, or other body modifications which have been enchanted to provide exceptional abilities. Many\nmarked find work as monster-hunters and bodyguards, their arcane protections making them ideal candidates to face\nthreats others avoid.\nMarked",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Gain one Mark from the following list:"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Gain another Mark."
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Gain another Mark. Furthermore, your body is now infused with mystic energies, granting you a natural Armor"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.miracle_worker",
+    "type": "talent",
+    "name": "Miracle Worker",
+    "description": "While magic can indeed work wonders, the mysteries of life and death ultimately lie in the hands of the gods themselves. Still,\nsome Mages become so skilled in the arts of medicine, herbalism, and healing that they become known as true miracle workers\nwhen it ",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Your magic teems with a life energy you've become sensitive to. When you cast Healing Arcana spells, targets"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You can expel distortions of life within life. When you cast the Healing Touch spell, you can spend an extra 5 MP to"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You learn the apex of the healing arts. You can cast a more powerful version of the Revival spell for 25 MP on any"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.mystic_na_vigator",
+    "type": "talent",
+    "name": "Mystic Na vigator",
+    "description": "A mystic navigator learns to guide ships to the Wyrd Tides and the dangerous Deep. Even when they're not helping a vessel\nsail between worlds, they guide it with supernatural skill. Their powers also grant them unparalleled control of any vessel they\nboard, ma",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You know the Deep, and you can find your way under the most difficult conditions. First, only mystic navi -"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You can find your way even in alien waters. When rolling Intelligence (Navigation) tests to find your way at sea"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You always have some sense where familiar ports lie."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.necromancer",
+    "type": "talent",
+    "name": "Necromancer",
+    "description": "You are particularly skilled with magic relating to death, the dying, and the undead. This ability is rooted in the Death\nArcana, but it pushes the Mage's mastery beyond that potent and terrifying arcana. Their reputation for sinister\npractices is not entirely",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You can nudge the fallen back to life or commit them to eternity. By using a minor action to touch a target with 0"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Your necromantic abilities are unparalleled. Each time you spend magic points to gain an additional effect with a"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Death sustains you, but in you, even death may die."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.razor",
+    "type": "talent",
+    "name": "Razor",
+    "description": "Street toughs, sailors, and many other sneaky fighters favor the dagger and knife, but none pursue the art of the short\nblade the way the razor does. Up close or ranged, you devote yourself to proficiency with the knife. You may have a partic-\nular style of da",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "In your hands, daggers, knives, and other small, bladed weapons are far more dangerous than their size and"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Attacks with short blades are incredibly fast-and you know how to counter them as well as use them. You"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Every outstretched limb is a target, and every heavyfooted step is an opportunity to strike. Once per round,"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.sharpshooter",
+    "type": "talent",
+    "name": "Sharpshooter",
+    "description": "Sharpshooters are crack shots who can take down enemies at a distance. Other than their extraordi -\nnary skill with missile weapons, most sharpshooters have little in common. They might be soldiers bound\nto an army, mercenaries for hire, or wanderers in search",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Your ranged attacks hit with enough precision, force, and ferocity to drive your targets back. When you hit"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Patience is a sharpshooter's friend. If you take the"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You can find the vulnerable spot on any opponent."
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.skald",
+    "type": "talent",
+    "name": "Skald",
+    "description": "Skalds are battlefield poets who sing and write about heroes and war-those of ancient times, and those before them-\nduring the heat of battle. They fulfil a dual role, urging heroes on to greatness, then immortalizing their deeds in verse.\nThese chronicles can",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You spout improvised and memorized poetry that guide your friends and intimidate your foes. When using the"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Your knowledge of great battles gives you tactical wisdom that supplements your fighting ability. Once per"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "Your lore-backed verses can wound your enemies' spirits as powerfully as a blade might cut their bodies. As a"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.spy",
+    "type": "talent",
+    "name": "Spy",
+    "description": "Your espionage skills go beyond that of a mere informer or a courtier with pretensions of importance. In fact, seeming\nimportant is exactly what you want to avoid as someone trained to pluck valuable secrets from those who know them.\nSome spies are formally tr",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You are adept at assuming identities, imperson ating others, and telling bald-faced lies. You may reroll failed"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You are trained to gather information quickly and accurately without being discovered. You can perform"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You are incredibly hard to capture and keep imprisoned. If you are captured while Helpless, you may still take"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.spy_t_alent",
+    "type": "talent",
+    "name": "Spy T alent",
+    "description": "Class: Envoy or Rogue r equirements: Perception, 2, Communication 2, and either\nIntrigue (Novice) or Observation (Novice)\nYou steal secrets, and lies are your art.\nn ovice: You are adept at assuming identities, imperson ating others, and telling bald-faced lie",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "You are adept at assuming identities, imperson ating others, and telling bald-faced lies. You may reroll failed"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "You are trained to gather information quickly and accurately without being discovered. You can perform"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You are incredibly hard to capture and keep imprisoned. If you are captured while Helpless, you may still take"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  },
+  {
+    "id": "talent.sword_ma_ge",
+    "type": "talent",
+    "name": "Sword Ma ge",
+    "description": "While few Mages have the time to divert from their studies to take up arms, you are among those who understand the magic\nof swordsmanship alongside the power of a well-placed spell.\nIndeed, you find the two arts quite complimentary, as a blade never exhausts i",
+    "degrees": [
+      {
+        "degree": "Novice",
+        "effects": [
+          "Pick a type of one-handed melee weapon, such as a battleaxe or long sword. You are now considered trained in"
+        ]
+      },
+      {
+        "degree": "Expert",
+        "effects": [
+          "Magic flows through your blade. You can add your"
+        ]
+      },
+      {
+        "degree": "Master",
+        "effects": [
+          "You train to fight with both sword and spell. When wielding your arcane weapon, a successful attack roll allows"
+        ]
+      }
+    ],
+    "prerequisites": [],
+    "related_rules": []
+  }
+]

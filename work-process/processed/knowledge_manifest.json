@@ -1,0 +1,22 @@
+{
+  "source_cleaned": "work-process/processed/rules_cleaned.md",
+  "source_structured": "work-process/processed/rules_structured.json",
+  "chunks": {
+    "path": "work-process/chunks/rules_chunks_structured.jsonl",
+    "count": 1090
+  },
+  "entities": {
+    "ancestries": 9,
+    "classes": 4,
+    "talents": 56,
+    "arcana": 19,
+    "spells": 152,
+    "stunts": 49,
+    "conditions": 6,
+    "adversaries": 84
+  },
+  "notes": [
+    "Extraction is deterministic and regex-based.",
+    "OCR noise still requires manual QA for legal gameplay automation."
+  ]
+}

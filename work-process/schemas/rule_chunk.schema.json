@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FantasyAgeRuleChunk",
+  "type": "object",
+  "required": [
+    "id",
+    "source_book",
+    "chapter_no",
+    "chapter_title",
+    "section_title",
+    "rule_type",
+    "entity_type",
+    "audience",
+    "tags",
+    "text"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "source_book": { "type": "string" },
+    "chapter_no": { "type": "integer" },
+    "chapter_title": { "type": "string" },
+    "section_title": { "type": "string" },
+    "subsection_title": { "type": ["string", "null"] },
+    "page_start": { "type": ["integer", "null"] },
+    "page_end": { "type": ["integer", "null"] },
+    "rule_type": {
+      "type": "string",
+      "enum": [
+        "mechanic",
+        "entity_definition",
+        "advancement_rule",
+        "combat_rule",
+        "spell_rule",
+        "stunt_rule",
+        "equipment_rule",
+        "gm_guidance",
+        "setting_lore",
+        "example_of_play",
+        "glossary",
+        "table"
+      ]
+    },
+    "entity_type": { "type": "string" },
+    "audience": { "type": "string", "enum": ["player", "gm", "shared"] },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "text": { "type": "string" },
+    "cross_refs": { "type": "array", "items": { "type": "string" } }
+  }
+}

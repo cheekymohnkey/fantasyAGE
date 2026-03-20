@@ -1,0 +1,10 @@
+{
+  "total_pages": 290,
+  "pages_with_text": 289,
+  "pages_without_text": 1,
+  "avg_chars_per_text_page": 4549.24,
+  "quality": "good",
+  "recommendations": [
+    "If quality is mixed/poor, install OCR tools (tesseract + poppler) and rerun with OCR pipeline."
+  ]
+}

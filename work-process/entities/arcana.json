@@ -1,0 +1,297 @@
+[
+  {
+    "id": "arcana.air",
+    "type": "arcana",
+    "name": "Air Arcana",
+    "description": "",
+    "spells": [
+      "spell.air.air_bubble",
+      "spell.air.protective_wind_s",
+      "spell.air.voices_on_the_wind",
+      "spell.air.wind_net",
+      "spell.air.w_all_of_mist",
+      "spell.air.wind_blast",
+      "spell.air.whirl_wind",
+      "spell.air.wind_s_of_flight"
+    ]
+  },
+  {
+    "id": "arcana.beast",
+    "type": "arcana",
+    "name": "Beast Arcana",
+    "description": "",
+    "spells": [
+      "spell.beast.beast_senses",
+      "spell.beast.beast_speech",
+      "spell.beast.beast_summoning",
+      "spell.beast.power_of_the_wild",
+      "spell.beast.charm_beasts",
+      "spell.beast.lesser_beast_form",
+      "spell.beast.curse_of_the_beast",
+      "spell.beast.greater_beast_form"
+    ]
+  },
+  {
+    "id": "arcana.cold",
+    "type": "arcana",
+    "name": "Cold Arcana",
+    "description": "",
+    "spells": [
+      "spell.cold.icy_grip",
+      "spell.cold.ice_knives",
+      "spell.cold.ice_sheet",
+      "spell.cold.winter_s_w_alk",
+      "spell.cold.immunity_to_cold",
+      "spell.cold.frost_we_apons",
+      "spell.cold.winter_blast",
+      "spell.cold.blizzard_burst"
+    ]
+  },
+  {
+    "id": "arcana.death",
+    "type": "arcana",
+    "name": "Death Arcana",
+    "description": "",
+    "spells": [
+      "spell.death.dra_w_upon_death",
+      "spell.death.ghost_strike",
+      "spell.death.speak_with_the_dead",
+      "spell.death.w_ard_off_the_dead",
+      "spell.death.animate_dead",
+      "spell.death.pestilence",
+      "spell.death.death_curse",
+      "spell.death.steal_life"
+    ]
+  },
+  {
+    "id": "arcana.divination",
+    "type": "arcana",
+    "name": "Divination Arcana",
+    "description": "",
+    "spells": [
+      "spell.divination.blood_mark",
+      "spell.divination.divine_speech",
+      "spell.divination.forewarning",
+      "spell.divination.sentinel",
+      "spell.divination.ill_omens",
+      "spell.divination.scrying",
+      "spell.divination.good_omens",
+      "spell.divination.unveil"
+    ]
+  },
+  {
+    "id": "arcana.earth",
+    "type": "arcana",
+    "name": "Earth Arcana",
+    "description": "",
+    "spells": [
+      "spell.earth.earth_p_assa_ge",
+      "spell.earth.rock_blast",
+      "spell.earth.stone_cloak",
+      "spell.earth.stone_porter",
+      "spell.earth.earth_speed",
+      "spell.earth.shape_earth",
+      "spell.earth.earthquake",
+      "spell.earth.qua_gmire"
+    ]
+  },
+  {
+    "id": "arcana.enchantment",
+    "type": "arcana",
+    "name": "Enchantment Arcana",
+    "description": "",
+    "spells": [
+      "spell.enchantment.enchant_armor",
+      "spell.enchantment.enchant_weapon",
+      "spell.enchantment.id_entify_enchantment",
+      "spell.enchantment.spell_gl_yph",
+      "spell.enchantment.suspend_enchantment",
+      "spell.enchantment.imbue_item",
+      "spell.enchantment.drain_enchantment",
+      "spell.enchantment.empower_item"
+    ]
+  },
+  {
+    "id": "arcana.fate",
+    "type": "arcana",
+    "name": "Fate Arcana",
+    "description": "",
+    "spells": [
+      "spell.fate.agent_of_fate",
+      "spell.fate.fate_s_gamble",
+      "spell.fate.hand_s_of_fate",
+      "spell.fate.puppets_of_fate",
+      "spell.fate.manipulate_fate",
+      "spell.fate.strings_of_fate",
+      "spell.fate.chosen_of_fate",
+      "spell.fate.fate_s_fa_vored"
+    ]
+  },
+  {
+    "id": "arcana.fire",
+    "type": "arcana",
+    "name": "Fire Arcana",
+    "description": "",
+    "spells": [
+      "spell.fire.arcane_lantern",
+      "spell.fire.flame_blast",
+      "spell.fire.flaming_weapon",
+      "spell.fire.shape_fire",
+      "spell.fire.burning_shield",
+      "spell.fire.immunity_to_fire",
+      "spell.fire.firestorm",
+      "spell.fire.w_all_of_fire"
+    ]
+  },
+  {
+    "id": "arcana.healing",
+    "type": "arcana",
+    "name": "Healing Arcana",
+    "description": "",
+    "spells": [
+      "spell.healing.balm",
+      "spell.healing.cure",
+      "spell.healing.healing_t_ouch",
+      "spell.healing.revival",
+      "spell.healing.healing_aura",
+      "spell.healing.regenerate",
+      "spell.healing.rejuvenate_bod_y",
+      "spell.healing.restoration"
+    ]
+  },
+  {
+    "id": "arcana.heroic",
+    "type": "arcana",
+    "name": "Heroic Arcana",
+    "description": "",
+    "spells": [
+      "spell.heroic.hero_s_armor",
+      "spell.heroic.hero_s_coura_ge",
+      "spell.heroic.hero_s_inspiration",
+      "spell.heroic.hero_s_might",
+      "spell.heroic.hero_s_aegis",
+      "spell.heroic.hero_s_speed",
+      "spell.heroic.chosen_champion",
+      "spell.heroic.hero_s_spirit"
+    ]
+  },
+  {
+    "id": "arcana.illusion",
+    "type": "arcana",
+    "name": "Illusion Arcana",
+    "description": "",
+    "spells": [
+      "spell.illusion.disorient",
+      "spell.illusion.displacement",
+      "spell.illusion.figment",
+      "spell.illusion.illusory_guise",
+      "spell.illusion.illusory_scene",
+      "spell.illusion.invisibility",
+      "spell.illusion.hallucination",
+      "spell.illusion.phantasm"
+    ]
+  },
+  {
+    "id": "arcana.mind",
+    "type": "arcana",
+    "name": "Mind Arcana",
+    "description": "",
+    "spells": [
+      "spell.mind.emp_athy",
+      "spell.mind.mind_contact",
+      "spell.mind.mind_shield",
+      "spell.mind.sense_mind_s",
+      "spell.mind.mind_read_ing",
+      "spell.mind.mind_attack",
+      "spell.mind.mind_probe",
+      "spell.mind.mind_domination"
+    ]
+  },
+  {
+    "id": "arcana.minor",
+    "type": "arcana",
+    "name": "Minor Arcana",
+    "description": "",
+    "spells": []
+  },
+  {
+    "id": "arcana.power",
+    "type": "arcana",
+    "name": "Power Arcana",
+    "description": "",
+    "spells": [
+      "spell.power.arcane_a_wareness",
+      "spell.power.dra_w_power",
+      "spell.power.false_aura",
+      "spell.power.spell_shield",
+      "spell.power.arcane_abatement",
+      "spell.power.counter_spell",
+      "spell.power.arcane_circle",
+      "spell.power.arcane_void"
+    ]
+  },
+  {
+    "id": "arcana.protection",
+    "type": "arcana",
+    "name": "Protection Arcana",
+    "description": "",
+    "spells": [
+      "spell.protection.arcane_shield",
+      "spell.protection.arcane_tent",
+      "spell.protection.ma_ge_lock",
+      "spell.protection.spell_w_ard",
+      "spell.protection.creature_w_ard",
+      "spell.protection.missile_shield",
+      "spell.protection.arcane_barrier",
+      "spell.protection.arcane_w_ard"
+    ]
+  },
+  {
+    "id": "arcana.shadow",
+    "type": "arcana",
+    "name": "Shadow Arcana",
+    "description": "",
+    "spells": [
+      "spell.shadow.dark_sight",
+      "spell.shadow.shadow_da_gger",
+      "spell.shadow.shadow_s_embrace",
+      "spell.shadow.shadow_s_hood",
+      "spell.shadow.shadow_tend_rils",
+      "spell.shadow.veil_of_darkness",
+      "spell.shadow.shadow_form",
+      "spell.shadow.shadow_slip"
+    ]
+  },
+  {
+    "id": "arcana.wood",
+    "type": "arcana",
+    "name": "Wood Arcana",
+    "description": "",
+    "spells": [
+      "spell.wood.forest_blend",
+      "spell.wood.regrowth",
+      "spell.wood.wood_speech",
+      "spell.wood.wood_walk",
+      "spell.wood.dryad_s_door",
+      "spell.wood.ensnaring_roots",
+      "spell.wood.a_waken_t_ree",
+      "spell.wood.t_ree_form"
+    ]
+  },
+  {
+    "id": "arcana.lightning",
+    "type": "arcana",
+    "name": "lightning Arcana",
+    "description": "",
+    "spells": [
+      "spell.lightning.jolt",
+      "spell.lightning.lightning_flash",
+      "spell.lightning.shock_blast",
+      "spell.lightning.thund_er_blast",
+      "spell.lightning.lightning_bolt",
+      "spell.lightning.shocking_shield",
+      "spell.lightning.chain_lightning",
+      "spell.lightning.lightning_storm"
+    ]
+  }
+]

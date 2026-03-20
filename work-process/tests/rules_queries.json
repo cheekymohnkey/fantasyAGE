@@ -1,0 +1,32 @@
+[
+  {
+    "id": "q001",
+    "query": "How do ability tests work?",
+    "expected_tags_any": ["mechanic", "basic_rules"],
+    "expected_terms_any": ["3d6", "ability", "test result"]
+  },
+  {
+    "id": "q002",
+    "query": "What triggers stunt points?",
+    "expected_tags_any": ["stunt_rule"],
+    "expected_terms_any": ["doubles", "stunt points"]
+  },
+  {
+    "id": "q003",
+    "query": "What happens at 0 Health?",
+    "expected_tags_any": ["combat_rule"],
+    "expected_terms_any": ["0 Health", "Defeat", "Death"]
+  },
+  {
+    "id": "q004",
+    "query": "What are the classes?",
+    "expected_tags_any": ["character_creation"],
+    "expected_terms_any": ["Envoy", "Mage", "Rogue", "Warrior"]
+  },
+  {
+    "id": "q005",
+    "query": "List fire arcana spells",
+    "expected_tags_any": ["spell_rule"],
+    "expected_terms_any": ["Fire Arcana"]
+  }
+]
