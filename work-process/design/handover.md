@@ -118,6 +118,8 @@ Progress updates (working notes):
 
 - **SB-1-04 (Frontend submit path + E2E):** Completed — frontend uses `VITE_BACKEND_URL` or relative `/api/command` and Vite dev proxy configured; end-to-end test `E2E-I1-001` added (`tests/test_e2e_i1_001.py`).
 
+- **SB-1-06 (Validation error mapping and recovery UX):** Completed — implemented structured validation error metadata (`field`), backend now returns `field` on validation errors (e.g., missing `player_name`), frontend surfaces inline field highlights and remediation toasts, and added focused frontend tests. Frontend coverage increased above the 80% baseline (approx. 84.5% after tests). See changes in `backend/errors.py`, `backend/contracts.py`, `backend/app.py`, `frontend/src/App.tsx`, `frontend/src/App.test.tsx`, and `frontend/src/Main.test.tsx`. Commit: 0f2be2d.
+
 Keep this section updated as implementation progresses.
 
 Board import file:

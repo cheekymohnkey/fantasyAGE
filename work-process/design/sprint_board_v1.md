@@ -47,10 +47,10 @@ Stories:
 - Deliverables: end-to-end diagnostic command path
 - Test IDs: E2E-I1-001
 
-6. SB-1-06 Validation error mapping and recovery UX (3)
-- Dependencies: SB-1-01, SB-1-04
-- Deliverables: standardized validation surface
-- Test IDs: FE-ERR-001
+6. SB-1-06 Validation error mapping and recovery UX (3) — Completed
+	- Dependencies: SB-1-01, SB-1-04
+	- Deliverables: standardized validation surface (inline highlights + toast)
+	- Test IDs: FE-ERR-001
 
 Sprint total: 29 points
 
