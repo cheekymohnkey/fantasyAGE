@@ -21,3 +21,6 @@ Thumbs.db
 .coverage
 coverage/
 *.egg-info/
+
+# Keep local source books out of git history
+source_material/*.pdf
