@@ -1,0 +1,67 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://fantasyage.local/schemas/command_event.schema.json",
+  "title": "Command and Event Schemas",
+  "type": "object",
+  "definitions": {
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F-]{36}$"
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "Command": {
+      "type": "object",
+      "required": ["id","type","payload","metadata"],
+      "properties": {
+        "id": {"$ref": "#/definitions/uuid"},
+        "type": {"type":"string"},
+        "payload": {"type":"object"},
+        "metadata": {
+          "type":"object",
+          "required":["login_id","campaign_id","session_id"],
+          "properties":{
+            "login_id": {"type":"string"},
+            "campaign_id": {"type":"string"},
+            "session_id": {"type":"string"},
+            "source": {"type":"string"},
+            "created_at": {"$ref":"#/definitions/timestamp"}
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Result": {
+      "type":"object",
+      "properties":{
+        "status":{"type":"string","enum":["ok","partial","warning"]},
+        "data":{"type":"object"}
+      },
+      "additionalProperties": false
+    },
+    "Error": {
+      "type":"object",
+      "required":["code","message"],
+      "properties":{
+        "code":{"type":"string"},
+        "message":{"type":"string"},
+        "details":{"type":"object"}
+      },
+      "additionalProperties": false
+    },
+    "Event": {
+      "type":"object",
+      "required":["id","type","command_id","occurred_at","payload"],
+      "properties":{
+        "id":{"$ref":"#/definitions/uuid"},
+        "type":{"type":"string"},
+        "command_id":{"$ref":"#/definitions/uuid"},
+        "occurred_at":{"$ref":"#/definitions/timestamp"},
+        "payload":{"type":"object"}
+      },
+      "additionalProperties": false
+    }
+  }
+}

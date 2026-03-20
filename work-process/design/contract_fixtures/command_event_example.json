@@ -1,0 +1,26 @@
+{
+  "example_command": {
+    "id": "123e4567-e89b-12d3-a456-426614174000",
+    "type": "no_op",
+    "payload": {},
+    "metadata": {
+      "login_id": "user_1",
+      "campaign_id": "camp_1",
+      "session_id": "sess_1",
+      "source": "frontend",
+      "created_at": "2026-03-21T12:00:00Z"
+    }
+  },
+  "example_event": {
+    "id": "223e4567-e89b-12d3-a456-426614174001",
+    "type": "command_persisted",
+    "command_id": "123e4567-e89b-12d3-a456-426614174000",
+    "occurred_at": "2026-03-21T12:00:00Z",
+    "payload": {
+      "result": {
+        "status": "ok",
+        "data": {}
+      }
+    }
+  }
+}

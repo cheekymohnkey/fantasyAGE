@@ -101,5 +101,14 @@ Definition of done for next session:
 5. Add and run `E2E-I1-001`.
 6. Record progress against Sprint 1 stories.
 
+## 10) Current Implementation Status
+
+Progress updates (working notes):
+
+- **SB-1-01 (Define command/result/error/event schemas):** Completed — initial JSON Schema and example fixtures added on 2026-03-21. See `work-process/schemas/command_event.schema.json` and `work-process/design/contract_fixtures/command_event_example.json`.
+- **SB-1-02 (SQLite migration runner and base schema bootstrap):** Next up and in-progress (developer started schema/fixture work). Target: create migration runner and initial migrations, and add schema migration tests.
+
+Keep this section updated as implementation progresses.
+
 Board import file:
 - work-process/design/sprint_board_import_v1.csv
