@@ -260,9 +260,6 @@ def handle_app_error(err: AppError):
     return jsonify(err.to_dict()), err.status_code
 
 
-from werkzeug.exceptions import HTTPException
-
-
 @app.errorhandler(Exception)
 def handle_unexpected_error(err: Exception):
     if isinstance(err, HTTPException):
