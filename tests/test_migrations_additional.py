@@ -18,7 +18,7 @@ def test_failing_migration_rolls_back_and_records_previous(tmp_path):
 
     db_path = tmp_path / "db" / "test.sqlite"
 
-    with pytest.raises(Exception):
+    with pytest.raises(sqlite3.Error):
         run_migrations(str(db_path), str(migrations_dir))
 
     conn = sqlite3.connect(str(db_path))

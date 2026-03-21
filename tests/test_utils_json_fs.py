@@ -1,4 +1,4 @@
-import os
+import json
 
 import pytest
 
@@ -14,7 +14,7 @@ def test_safe_dumps_and_loads():
 
 
 def test_safe_loads_invalid_raises():
-    with pytest.raises(Exception):
+    with pytest.raises(json.JSONDecodeError):
         jsonutils.safe_loads("not-json")
 
 

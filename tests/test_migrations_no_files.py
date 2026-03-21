@@ -1,5 +1,3 @@
-import os
-
 from backend.migrations import run_migrations
 
 
