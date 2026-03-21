@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import sqlite3
@@ -5,6 +6,7 @@ from collections.abc import Callable
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from werkzeug.exceptions import HTTPException
 
 from .command_service import (
     build_fallback_context,
@@ -203,6 +205,55 @@ def list_sessions():
             pass
 
 
+@app.get("/api/sessions/<session_id>/events")
+def session_events(session_id: str):
+    try:
+        from .db import connect as _connect
+
+        login_id = request.headers.get("X-Login-Id") or runtime.default_login_id
+        conn = _connect(runtime.db_path)
+        cur = conn.cursor()
+        cur.execute(
+            (
+                "SELECT idempotency_key, action_id, action_result_json, correlation_id, created_at "
+                "FROM command_receipts WHERE login_id=? AND session_id=? ORDER BY created_at DESC"
+            ),
+            (login_id, session_id),
+        )
+        rows = cur.fetchall()
+        events = []
+        for r in rows:
+            try:
+                action_result = json.loads(r[2]) if r[2] else {}
+            except Exception:
+                action_result = {}
+            events.append(
+                {
+                    "idempotency_key": r[0],
+                    "action_id": r[1],
+                    "action_result": action_result,
+                    "correlation_id": r[3],
+                    "created_at": r[4],
+                }
+            )
+        return jsonify({"status": "ok", "events": events})
+    except Exception:
+        logger.exception("Failed to list session events for %s", session_id)
+        payload = {
+            "status": "error",
+            "reason_code": "internal.unable_list_session_events",
+            "message": "Unable to list session events",
+            "remediation_hint": "Check backend logs",
+        }
+        return jsonify(payload), 500
+    finally:
+        try:
+            if "conn" in locals() and conn:
+                conn.close()
+        except Exception:
+            pass
+
+
 @app.errorhandler(AppError)
 def handle_app_error(err: AppError):
     logger.warning("event=app_error reason_code=%s message=%s", err.reason_code, err.message)
@@ -211,6 +262,16 @@ def handle_app_error(err: AppError):
 
 @app.errorhandler(Exception)
 def handle_unexpected_error(err: Exception):
+    if isinstance(err, HTTPException):
+        logger.warning("event=http_error code=%s description=%s", err.code, err.description)
+        payload = {
+            "status": "error",
+            "reason_code": "client.http_error",
+            "message": err.description,
+            "remediation_hint": "Check request URL and method.",
+        }
+        return jsonify(payload), err.code
+
     logger.exception("event=unexpected_error")
     payload = {
         "status": "error",

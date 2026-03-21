@@ -34,3 +34,7 @@ work-process/runtime/*.db-*
 *.db-*
 *.sqlite
 *.sqlite3
+
+# Local runtime process IDs
+run/*.pid
+

@@ -46,6 +46,7 @@ Stories:
 - Dependencies: SB-1-02, SB-1-04
 - Deliverables: end-to-end diagnostic command path
 - Test IDs: E2E-I1-001
+ - Task breakdown: work-process/design/sb-1-05-tasks.md
 
 6. SB-1-06 Validation error mapping and recovery UX (3) — Completed
 	- Dependencies: SB-1-01, SB-1-04

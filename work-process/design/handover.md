@@ -110,14 +110,10 @@ Definition of done for next session:
 
 Current selection for the next session work (picked by the team):
 
-- **SB-1-02 — SQLite migration runner and base schema bootstrap**: In Progress
-	- Reason: foundational persistence is required for command receipts, runtime seeds, and tests. Completing this enables the remainder of Sprint 1 stories and the E2E roundtrip.
+- **SB-2-01 — Implement campaign.create/list/open/archive commands**: In progress
+	- Reason: required Sprint 2 story to enable multi-campaign and owner-scoped session context flows.
 	- Owner: backend team
-	- Target: Ensure migrations run idempotently, record applied versions, and seed `runtime_config` with `default_login_id`.
-
-Status notes:
-- Migration runner exists and initial migrations are present; this task focuses on finalizing migration tests, ensuring idempotence, and verifying runtime seeding during bootstrap.
-
+	- Target: add Campaign command handlers and API end-to-end coverage for command and session context.
 
 
 ## 12) Shared Utilities

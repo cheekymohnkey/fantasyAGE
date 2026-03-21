@@ -55,6 +55,16 @@ def test_e2e_i1_001_command_roundtrip():
             j = resp.get_json()
             assert j.get("status") == "ok"
 
+            # verify session events endpoint returns the persisted receipt
+            events_resp = client.get(f"/api/sessions/{payload['metadata']['session_id']}/events", headers={"X-Login-Id": payload['metadata']['login_id']})
+            assert events_resp.status_code == 200
+            ej = events_resp.get_json()
+            assert ej.get("status") == "ok"
+            evs = ej.get("events") or []
+            # find our idempotency key
+            found = any(e.get("idempotency_key") == payload["idempotency_key"] for e in evs)
+            assert found, f"Persisted event not found in session events: {evs}"
+
         # verify DB
         conn = sqlite3.connect(db_path)
         cur = conn.cursor()

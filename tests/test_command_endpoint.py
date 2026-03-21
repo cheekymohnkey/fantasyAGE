@@ -99,6 +99,41 @@ def test_owner_scope_mismatch_returns_403(tmp_path):
     data = resp.get_json()
     assert data.get("reason_code") == "precondition.owner_scope_mismatch"
 
+def test_session_events_persists_after_command(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path)
+
+    payload = {
+        "action_id": "NO_OP_TEST",
+        "idempotency_key": "events-key-1",
+        "metadata": {"login_id": "default", "campaign_id": "camp-1", "session_id": "default"},
+    }
+    command_resp = client.post("/api/command", json=payload)
+    assert command_resp.status_code == 200
+    assert command_resp.get_json().get("status") == "ok"
+
+    events_resp = client.get("/api/sessions/default/events", headers={"X-Login-Id": "default"})
+    assert events_resp.status_code == 200
+    events = events_resp.get_json().get("events", [])
+    assert any(ev.get("idempotency_key") == "events-key-1" for ev in events)
+
+
+def test_session_events_enforces_owner_scope(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path)
+
+    payload = {
+        "action_id": "NO_OP_TEST",
+        "idempotency_key": "events-key-2",
+        "metadata": {"login_id": "default", "campaign_id": "camp-1", "session_id": "default"},
+    }
+    command_resp = client.post("/api/command", json=payload)
+    assert command_resp.status_code == 200
+
+    events_resp = client.get("/api/sessions/default/events", headers={"X-Login-Id": "other"})
+    assert events_resp.status_code == 200
+    events = events_resp.get_json().get("events", [])
+    assert not any(ev.get("idempotency_key") == "events-key-2" for ev in events)
 
 def test_invalid_payload_returns_reason_code(tmp_path):
     db_path = _setup_temp_db(tmp_path)
