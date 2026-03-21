@@ -119,17 +119,25 @@ def test_legacy_empty_receipt_is_upgraded_on_replay(tmp_path):
     cur = conn.cursor()
     created_at = "2026-03-21T00:00:00Z"
     cur.execute(
-        "INSERT OR IGNORE INTO campaigns (login_id, campaign_id, name, status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+        (
+            "INSERT OR IGNORE INTO campaigns (login_id, campaign_id, name, status, "
+            "created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)"
+        ),
         ("default", "default", "Default Campaign", "active", created_at, created_at),
     )
     cur.execute(
-        "INSERT OR IGNORE INTO sessions (login_id, campaign_id, session_id, state_version, scene_mode, payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        (
+            "INSERT OR IGNORE INTO sessions (login_id, campaign_id, session_id, "
+            "state_version, scene_mode, payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        ),
         ("default", "default", "default", 0, "default", "{}", created_at),
     )
     cur.execute(
-        """INSERT INTO command_receipts
-        (login_id, campaign_id, session_id, idempotency_key, action_id, action_result_json, correlation_id, created_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+        (
+            "INSERT INTO command_receipts (login_id, campaign_id, session_id, "
+            "idempotency_key, action_id, action_result_json, correlation_id, created_at) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+        ),
         ("default", "default", "default", "test-noop-1", "NO_OP", "{}", "", created_at),
     )
     conn.commit()

@@ -1,7 +1,7 @@
 import logging
 import os
-from .db import connect
 
+from .db import connect
 from .timeutils import utc_now_z
 
 logger = logging.getLogger("backend")

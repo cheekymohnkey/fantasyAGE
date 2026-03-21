@@ -2,11 +2,10 @@ import json
 from dataclasses import asdict
 from typing import Any, cast
 
-from .timeutils import utc_now_z
-
 from .contracts import CommandContext, ParsedCommand
 from .db import connect, transaction
 from .errors import AppError, OwnerScopeError, PersistenceError, PreconditionError
+from .timeutils import utc_now_z
 
 
 def _utc_now() -> str:
@@ -54,7 +53,12 @@ def enforce_owner_scope(header_login_id: str | None, command: ParsedCommand) -> 
         )
 
 
-def _ensure_owner_scoped_session(conn, command: ParsedCommand, created_at: str, implicit_session_create: bool) -> None:
+def _ensure_owner_scoped_session(
+    conn,
+    command: ParsedCommand,
+    created_at: str,
+    implicit_session_create: bool,
+) -> None:
     cur = conn.cursor()
     cur.execute(
         "SELECT login_id, campaign_id FROM sessions WHERE session_id=?",
@@ -84,11 +88,14 @@ def _ensure_owner_scoped_session(conn, command: ParsedCommand, created_at: str, 
             )
 
         if not implicit_session_create:
-            # Strict mode: do not implicitly create sessions; require client to select/create session
+            # Strict mode: do not implicitly create sessions; require explicit selection
             raise PreconditionError(
                 message="session_id does not exist",
                 reason_code="precondition.campaign_session_mismatch",
-                remediation_hint="Select or create the session for the active campaign before retrying.",
+                remediation_hint=(
+                    "Select or create the session for the active campaign "
+                    "before retrying."
+                ),
             )
 
         # Implicit create path (idempotent)
@@ -140,7 +147,11 @@ def _is_canonical_response(payload: dict[str, Any]) -> bool:
     return required.issubset(set(payload.keys()))
 
 
-def handle_command(db_path: str, command: ParsedCommand, implicit_session_create: bool = True) -> dict:
+def handle_command(
+    db_path: str,
+    command: ParsedCommand,
+    implicit_session_create: bool = True,
+) -> dict:
     created_at = _utc_now()
 
     try:
@@ -168,9 +179,12 @@ def handle_command(db_path: str, command: ParsedCommand, implicit_session_create
                     response = _response_payload(command)
                     response_json = json.dumps(response, separators=(",", ":"))
                     cur.execute(
-                        """UPDATE command_receipts
-                        SET action_id=?, action_result_json=?, correlation_id=?
-                        WHERE login_id=? AND campaign_id=? AND session_id=? AND idempotency_key=?""",
+                        (
+                            """UPDATE command_receipts
+                            SET action_id=?, action_result_json=?, correlation_id=?
+                            WHERE login_id=? AND campaign_id=? AND
+                            session_id=? AND idempotency_key=?"""
+                        ),
                         (
                             command.action_id,
                             response_json,

@@ -1,10 +1,10 @@
 import pytest
 
 from backend.contracts import (
-    parse_command_payload,
-    _require_non_empty_string,
     CommandContext,
     ParsedCommand,
+    _require_non_empty_string,
+    parse_command_payload,
 )
 from backend.errors import ValidationError
 
@@ -36,11 +36,17 @@ def test_parse_command_payload_empty_action_or_idempotency_raises():
 def test_parse_command_payload_invalid_payload_and_metadata_types():
     fallback = CommandContext("d", "c", "s", "")
     with pytest.raises(ValidationError) as e1:
-        parse_command_payload({"action_id": "A", "idempotency_key": "k", "payload": "no"}, fallback)
+        parse_command_payload(
+            {"action_id": "A", "idempotency_key": "k", "payload": "no"},
+            fallback,
+        )
     assert e1.value.field == "payload"
 
     with pytest.raises(ValidationError) as e2:
-        parse_command_payload({"action_id": "A", "idempotency_key": "k", "metadata": "no"}, fallback)
+        parse_command_payload(
+            {"action_id": "A", "idempotency_key": "k", "metadata": "no"},
+            fallback,
+        )
     assert e2.value.field == "metadata"
 
 

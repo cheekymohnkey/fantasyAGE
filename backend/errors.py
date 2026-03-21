@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from typing import Optional
 
 
 @dataclass
@@ -8,7 +7,7 @@ class AppError(Exception):
     message: str
     status_code: int
     remediation_hint: str = ""
-    field: Optional[str] = None
+    field: str | None = None
 
     def to_dict(self) -> dict:
         payload = {
@@ -24,7 +23,7 @@ class AppError(Exception):
 
 
 class ValidationError(AppError):
-    def __init__(self, message: str, remediation_hint: str = "", field: Optional[str] = None):
+    def __init__(self, message: str, remediation_hint: str = "", field: str | None = None):
         super().__init__(
             reason_code="validation.invalid_payload",
             message=message,
@@ -41,8 +40,13 @@ class OwnerScopeError(AppError):
             reason_code="precondition.owner_scope_mismatch",
             message=message,
             status_code=403,
-            remediation_hint=remediation_hint
-            or "Use a consistent login_id across headers, metadata, and persisted session scope.",
+            remediation_hint=(
+                remediation_hint
+                or (
+                    "Use a consistent login_id across headers, metadata, "
+                    "and persisted session scope."
+                )
+            ),
         )
 
 
@@ -52,16 +56,26 @@ class PersistenceError(AppError):
             reason_code="persistence.transaction_failed",
             message=message,
             status_code=500,
-            remediation_hint=remediation_hint
-            or "Retry the request and check backend logs for transaction failures.",
+            remediation_hint=(
+                remediation_hint
+                or "Retry the request and check backend logs for transaction failures."
+            ),
         )
 
 
 class PreconditionError(AppError):
-    def __init__(self, message: str, reason_code: str = "precondition.campaign_session_mismatch", remediation_hint: str = ""):
+    def __init__(
+        self,
+        message: str,
+        reason_code: str = "precondition.campaign_session_mismatch",
+        remediation_hint: str = "",
+    ):
         super().__init__(
             reason_code=reason_code,
             message=message,
             status_code=412,
-            remediation_hint=remediation_hint or "Select or create a valid campaign/session before retrying.",
+            remediation_hint=(
+                remediation_hint
+                or "Select or create a valid campaign/session before retrying."
+            ),
         )

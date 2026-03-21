@@ -1,5 +1,7 @@
 import logging
 import os
+import sqlite3
+from collections.abc import Callable
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -61,10 +63,10 @@ def _bootstrap() -> None:
     )
 
     # Seed the default session so strict mode has a selectable session in early testing
+    # Optional typed DB connect helper (imported if available)
+    _db_connect: Callable[[str], sqlite3.Connection] | None = None
     try:
-        from .command_service import (
-            connect as _db_connect,
-        )
+        from .db import connect as _db_connect
     except Exception:
         _db_connect = None
     try:
@@ -77,15 +79,41 @@ def _bootstrap() -> None:
             cur = conn.cursor()
             created_at = _utc_now()
             cur.execute(
-                "INSERT OR IGNORE INTO campaigns (login_id, campaign_id, name, status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
-                (runtime.default_login_id, runtime.default_campaign_id, 'Default Campaign', 'active', created_at, created_at),
+                (
+                    "INSERT OR IGNORE INTO campaigns (login_id, campaign_id, name, status, "
+                    "created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)"
+                ),
+                (
+                    runtime.default_login_id,
+                    runtime.default_campaign_id,
+                    "Default Campaign",
+                    "active",
+                    created_at,
+                    created_at,
+                ),
             )
             cur.execute(
-                "INSERT OR IGNORE INTO sessions (login_id, campaign_id, session_id, state_version, scene_mode, payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                (runtime.default_login_id, runtime.default_campaign_id, runtime.default_session_id, 0, 'default', '{}', created_at),
+                (
+                    "INSERT OR IGNORE INTO sessions (login_id, campaign_id, "
+                    "session_id, state_version, scene_mode, "
+                    "payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                ),
+                (
+                    runtime.default_login_id,
+                    runtime.default_campaign_id,
+                    runtime.default_session_id,
+                    0,
+                    "default",
+                    "{}",
+                    created_at,
+                ),
             )
             conn.commit()
-            logger.info("Seeded default session campaign=%s session=%s", runtime.default_campaign_id, runtime.default_session_id)
+            logger.info(
+                "Seeded default session campaign=%s session=%s",
+                runtime.default_campaign_id,
+                runtime.default_session_id,
+            )
         finally:
             if conn:
                 conn.close()
@@ -146,7 +174,10 @@ def list_sessions():
         conn = _connect(runtime.db_path)
         cur = conn.cursor()
         cur.execute(
-            "SELECT session_id, campaign_id, login_id, updated_at FROM sessions WHERE login_id=? ORDER BY updated_at DESC",
+            (
+                "SELECT session_id, campaign_id, login_id, updated_at "
+                "FROM sessions WHERE login_id=? ORDER BY updated_at DESC"
+            ),
             (runtime.default_login_id,),
         )
         rows = cur.fetchall()
