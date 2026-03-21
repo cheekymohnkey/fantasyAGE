@@ -1,4 +1,5 @@
 import json
+import sqlite3
 from dataclasses import asdict
 from typing import Any, cast
 
@@ -207,25 +208,47 @@ def handle_command(
 
             response = _response_payload(command)
             response_json = json.dumps(response, separators=(",", ":"))
-
-            cur.execute(
-                """INSERT INTO command_receipts
-                (login_id, campaign_id, session_id, idempotency_key, action_id,
-                action_result_json, correlation_id, created_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-                (
-                    command.context.login_id,
-                    command.context.campaign_id,
-                    command.context.session_id,
-                    command.idempotency_key,
-                    command.action_id,
-                    response_json,
-                    command.context.correlation_id,
-                    created_at,
-                ),
-            )
+            try:
+                cur.execute(
+                    """INSERT INTO command_receipts
+                    (login_id, campaign_id, session_id, idempotency_key, action_id,
+                    action_result_json, correlation_id, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        command.context.login_id,
+                        command.context.campaign_id,
+                        command.context.session_id,
+                        command.idempotency_key,
+                        command.action_id,
+                        response_json,
+                        command.context.correlation_id,
+                        created_at,
+                    ),
+                )
+            except sqlite3.IntegrityError as ie:
+                # Likely a missing referenced session/campaign (FK failure).
+                raise PreconditionError(
+                    message=(
+                        "Referenced campaign or session does not exist; "
+                        "unable to persist command receipt"
+                    ),
+                    reason_code="precondition.campaign_session_mismatch",
+                    remediation_hint=(
+                        "Ensure the session and campaign exist for the provided metadata, "
+                        "or enable implicit session creation in runtime config."
+                    ),
+                ) from ie
             return response
     except AppError:
         raise
+    except NameError as ne:
+        # Convert unexpected NameError into a clearer persistence error so logs surface
+        # the missing symbol and a hint for maintainers to inspect imports.
+        raise PersistenceError(
+            message=(
+                f"Internal name error while persisting command receipt: {ne}. "
+                "Check backend imports and symbol availability."
+            )
+        ) from ne
     except Exception as exc:
         raise PersistenceError(message=f"Failed to persist command receipt: {exc}") from exc

@@ -1,11 +1,12 @@
+import json
 import logging
 import os
 import sqlite3
-import json
 from collections.abc import Callable
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from werkzeug.exceptions import HTTPException
 
 from .command_service import (
     build_fallback_context,
@@ -17,7 +18,6 @@ from .config import load_runtime_config
 from .contracts import parse_command_payload
 from .errors import AppError, ValidationError
 from .migrations import run_migrations
-from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
