@@ -56,3 +56,11 @@ def test_list_sessions_db_error(monkeypatch, tmp_path):
     assert rv.status_code == 500
     payload = rv.get_json()
     assert payload["reason_code"] == "internal.unable_list_sessions"
+
+
+def test_session_events_empty_id_returns_404():
+    client = appmod.app.test_client()
+    rv = client.get("/api/sessions//events")
+    assert rv.status_code == 404
+    payload = rv.get_json()
+    assert payload["reason_code"] == "client.http_error"

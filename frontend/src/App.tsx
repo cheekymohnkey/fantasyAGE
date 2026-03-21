@@ -114,18 +114,34 @@ export default function App() {
   }
 
   async function fetchEvents(sessionId: string, loginId?: string) {
+    const trimmedSessionId = sessionId?.trim()
+    if (!trimmedSessionId) {
+      setResponse('Cannot refresh events: session id is empty')
+      setStatusLevel('error')
+      setEvents([])
+      return
+    }
+
     const backendBase = (import.meta as any).env?.VITE_BACKEND_URL || ''
     const base = backendBase ? `${backendBase.replace(/\/$/, '')}` : ''
-    const url = `${base}/api/sessions/${encodeURIComponent(sessionId)}/events`
+    const url = `${base}/api/sessions/${encodeURIComponent(trimmedSessionId)}/events`
     const headers: Record<string,string> = { 'Content-Type': 'application/json' }
     if (loginId) headers['X-Login-Id'] = loginId
     try {
       const res = await fetch(url, { headers })
-      if (!res.ok) return
+      if (!res.ok) {
+        const err = await res.text().catch(() => 'failed to read body')
+        setResponse(`Failed to fetch events (status=${res.status}): ${err}`)
+        setStatusLevel('error')
+        return
+      }
       const j = await res.json()
       setEvents(j?.events || [])
+      setResponse(JSON.stringify({ status: 'ok', sessionId: trimmedSessionId, events: j.events }, null, 2))
+      setStatusLevel('ok')
     } catch (e) {
-      // ignore
+      setResponse(`Error fetching events: ${e}`)
+      setStatusLevel('error')
     }
   }
 

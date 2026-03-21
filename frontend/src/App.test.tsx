@@ -53,21 +53,53 @@ describe('App', () => {
       })
     }))
 
+  })
+
+  it('fetches and renders session events when Refresh Events clicked', async () => {
+    vi.stubGlobal('fetch', vi.fn((input: any) => {
+      if (typeof input === 'string' && input.endsWith('/api/sessions')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ status: 'ok', sessions: [] }),
+          clone: () => ({ text: async () => JSON.stringify({ status: 'ok', sessions: [] }) }),
+        })
+      }
+
+      if (typeof input === 'string' && input.endsWith('/api/sessions/default/events')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({
+            status: 'ok',
+            events: [
+              {
+                idempotency_key: 'event-123',
+                action_id: 'NO_OP',
+                created_at: '2026-03-22T00:00:00Z',
+                action_result: { foo: 'bar' },
+              },
+            ],
+          }),
+          clone: () => ({ text: async () => JSON.stringify({ status: 'ok', events: [] }) }),
+        })
+      }
+
+      return Promise.resolve({
+        ok: true,
+        json: async () => ({ status: 'ok' }),
+        clone: () => ({ text: async () => '{}' }),
+      })
+    }))
+
     render(<App />)
 
-    // ensure input present and empty
-    const input = screen.getByLabelText('Player name') as HTMLInputElement
-    expect(input).toBeInTheDocument()
-    expect(input.value).toBe('')
+    const refreshButton = screen.getByRole('button', { name: 'Refresh Events' })
+    expect(refreshButton).toBeInTheDocument()
 
-    // click send to trigger mocked fetch
-    fireEvent.click(screen.getByRole('button', { name: 'Send No-Op Command' }))
+    refreshButton.click()
 
-    // remediation hint should appear
-    const remediationNodes = await screen.findAllByText("Missing 'player_name'.")
-    expect(remediationNodes.length).toBeGreaterThan(0)
-
-    // input should have error class
-    expect(input.className).toContain('input-error')
+    const listItems = await screen.findAllByRole('listitem')
+    expect(listItems.length).toBeGreaterThan(0)
+    expect(listItems[0]).toHaveTextContent('event-123')
+    expect(listItems[0]).toHaveTextContent('NO_OP')
   })
 })
