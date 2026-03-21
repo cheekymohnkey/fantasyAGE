@@ -24,6 +24,7 @@ export default function App() {
   const [selector, setSelector] = useState({ loginId: 'default', campaignId: 'default', sessionId: 'default' })
   const [fieldErrors, setFieldErrors] = useState<Record<string,string>>({})
   const [lastCommand, setLastCommand] = useState<CommandPayload | null>(null)
+  const [events, setEvents] = useState<Array<any>>([])
   const nameRef = useRef<HTMLInputElement | null>(null)
 
   function buildIdempotencyKey() {
@@ -102,11 +103,30 @@ export default function App() {
     }
     setLastCommand(payload)
     await submitCommand(payload)
+    // Refresh events after successful send
+    await fetchEvents(payload.metadata.session_id, payload.metadata.login_id)
   }
 
   async function retryLastCommand() {
     if (!lastCommand) return
     await submitCommand(lastCommand)
+    await fetchEvents(lastCommand.metadata.session_id, lastCommand.metadata.login_id)
+  }
+
+  async function fetchEvents(sessionId: string, loginId?: string) {
+    const backendBase = (import.meta as any).env?.VITE_BACKEND_URL || ''
+    const base = backendBase ? `${backendBase.replace(/\/$/, '')}` : ''
+    const url = `${base}/api/sessions/${encodeURIComponent(sessionId)}/events`
+    const headers: Record<string,string> = { 'Content-Type': 'application/json' }
+    if (loginId) headers['X-Login-Id'] = loginId
+    try {
+      const res = await fetch(url, { headers })
+      if (!res.ok) return
+      const j = await res.json()
+      setEvents(j?.events || [])
+    } catch (e) {
+      // ignore
+    }
   }
 
   return (
@@ -131,6 +151,7 @@ export default function App() {
           </label>
           <button className="btn" onClick={sendNoOp}>Send No-Op Command</button>
           <button className="btn" onClick={retryLastCommand} disabled={!lastCommand}>Retry Last Command</button>
+          <button className="btn" onClick={() => fetchEvents(selector.sessionId, selector.loginId)}>Refresh Events</button>
           <button
             className="btn"
             onClick={() => {
@@ -157,6 +178,20 @@ export default function App() {
             }`} />
           )}
           <pre>{response ?? 'No response yet'}</pre>
+        </div>
+        <div className="events">
+          <h3>Session Events</h3>
+          {events.length === 0 && <div>No events</div>}
+          {events.length > 0 && (
+            <ul>
+              {events.map((e:any) => (
+                <li key={e.idempotency_key}>
+                  <strong>{e.action_id}</strong> — {e.idempotency_key} — {e.created_at}
+                  <pre style={{whiteSpace:'pre-wrap'}}>{JSON.stringify(e.action_result || {}, null, 2)}</pre>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
