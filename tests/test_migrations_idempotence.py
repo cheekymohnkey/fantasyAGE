@@ -20,7 +20,9 @@ def test_migrations_idempotence_runs_twice():
             capture_output=True,
             text=True,
         )
-        assert first.returncode == 0, f"First migration run failed:\nSTDOUT:\n{first.stdout}\nSTDERR:\n{first.stderr}"
+        assert first.returncode == 0, (
+            f"First migration run failed:\nSTDOUT:\n{first.stdout}\nSTDERR:\n{first.stderr}"
+        )
 
         # Second run should be a no-op and still succeed
         second = subprocess.run(
@@ -28,5 +30,11 @@ def test_migrations_idempotence_runs_twice():
             capture_output=True,
             text=True,
         )
-        assert second.returncode == 0, f"Second migration run failed:\nSTDOUT:\n{second.stdout}\nSTDERR:\n{second.stderr}"
-        assert "Skipping already applied" in second.stdout or "No migration files found." in second.stdout
+        assert second.returncode == 0, (
+            f"Second migration run failed:\nSTDOUT:\n{second.stdout}\nSTDERR:\n{second.stderr}"
+        )
+
+        assert (
+            "Skipping already applied" in second.stdout
+            or "No migration files found." in second.stdout
+        )
