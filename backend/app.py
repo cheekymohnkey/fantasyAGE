@@ -77,15 +77,41 @@ def _bootstrap() -> None:
             cur = conn.cursor()
             created_at = _utc_now()
             cur.execute(
-                "INSERT OR IGNORE INTO campaigns (login_id, campaign_id, name, status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
-                (runtime.default_login_id, runtime.default_campaign_id, 'Default Campaign', 'active', created_at, created_at),
+                (
+                    "INSERT OR IGNORE INTO campaigns (login_id, campaign_id, name, status, "
+                    "created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)"
+                ),
+                (
+                    runtime.default_login_id,
+                    runtime.default_campaign_id,
+                    "Default Campaign",
+                    "active",
+                    created_at,
+                    created_at,
+                ),
             )
             cur.execute(
-                "INSERT OR IGNORE INTO sessions (login_id, campaign_id, session_id, state_version, scene_mode, payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
-                (runtime.default_login_id, runtime.default_campaign_id, runtime.default_session_id, 0, 'default', '{}', created_at),
+                (
+                    "INSERT OR IGNORE INTO sessions (login_id, campaign_id, "
+                    "session_id, state_version, scene_mode, "
+                    "payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                ),
+                (
+                    runtime.default_login_id,
+                    runtime.default_campaign_id,
+                    runtime.default_session_id,
+                    0,
+                    "default",
+                    "{}",
+                    created_at,
+                ),
             )
             conn.commit()
-            logger.info("Seeded default session campaign=%s session=%s", runtime.default_campaign_id, runtime.default_session_id)
+            logger.info(
+                "Seeded default session campaign=%s session=%s",
+                runtime.default_campaign_id,
+                runtime.default_session_id,
+            )
         finally:
             if conn:
                 conn.close()
@@ -146,7 +172,10 @@ def list_sessions():
         conn = _connect(runtime.db_path)
         cur = conn.cursor()
         cur.execute(
-            "SELECT session_id, campaign_id, login_id, updated_at FROM sessions WHERE login_id=? ORDER BY updated_at DESC",
+            (
+                "SELECT session_id, campaign_id, login_id, updated_at "
+                "FROM sessions WHERE login_id=? ORDER BY updated_at DESC"
+            ),
             (runtime.default_login_id,),
         )
         rows = cur.fetchall()
