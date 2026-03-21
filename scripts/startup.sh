@@ -38,7 +38,7 @@ fi
 mkdir -p "$ROOT/run" "$ROOT/logs"
 
 echo "Starting backend..."
-nohup "$ROOT/.venv/bin/python" backend/app.py > "$ROOT/logs/backend.log" 2>&1 &
+nohup "$ROOT/.venv/bin/python" -m backend.app > "$ROOT/logs/backend.log" 2>&1 &
 echo $! > "$ROOT/run/backend.pid"
 
 if [ -d "$ROOT/frontend" ]; then

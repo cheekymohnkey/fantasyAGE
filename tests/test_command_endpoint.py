@@ -29,6 +29,7 @@ def _build_client(db_path):
         default_login_id=backend_app.runtime.default_login_id,
         default_campaign_id=backend_app.runtime.default_campaign_id,
         default_session_id=backend_app.runtime.default_session_id,
+        implicit_session_create=True,
     )
     return backend_app.app.test_client()
 
@@ -108,3 +109,41 @@ def test_invalid_payload_returns_reason_code(tmp_path):
     assert resp.status_code == 400
     data = resp.get_json()
     assert data.get("reason_code") == "validation.invalid_payload"
+
+
+def test_legacy_empty_receipt_is_upgraded_on_replay(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path)
+
+    conn = sqlite3.connect(db_path)
+    cur = conn.cursor()
+    created_at = "2026-03-21T00:00:00Z"
+    cur.execute(
+        "INSERT OR IGNORE INTO campaigns (login_id, campaign_id, name, status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+        ("default", "default", "Default Campaign", "active", created_at, created_at),
+    )
+    cur.execute(
+        "INSERT OR IGNORE INTO sessions (login_id, campaign_id, session_id, state_version, scene_mode, payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        ("default", "default", "default", 0, "default", "{}", created_at),
+    )
+    cur.execute(
+        """INSERT INTO command_receipts
+        (login_id, campaign_id, session_id, idempotency_key, action_id, action_result_json, correlation_id, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+        ("default", "default", "default", "test-noop-1", "NO_OP", "{}", "", created_at),
+    )
+    conn.commit()
+    conn.close()
+
+    payload = {
+        "action_id": "NO_OP",
+        "idempotency_key": "test-noop-1",
+        "payload": {"noop": True, "player_name": "Snuggz"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    resp = client.post("/api/command", json=payload)
+    assert resp.status_code == 200
+    body = resp.get_json()
+    assert body.get("status") == "ok"
+    assert body.get("action_id") == "NO_OP"
+    assert body.get("idempotency_key") == "test-noop-1"

@@ -1,21 +1,39 @@
 import React, { useState, useRef } from 'react'
 import './styles.css'
+import SessionSelector from './SessionSelector'
+
+type CommandPayload = {
+  idempotency_key: string
+  action_id: string
+  payload: {
+    noop: boolean
+    player_name: string
+  }
+  metadata: {
+    login_id: string
+    campaign_id: string
+    session_id: string
+  }
+}
 
 export default function App() {
   const [response, setResponse] = useState<string | null>(null)
   const [statusLevel, setStatusLevel] = useState<string | null>(null)
   const [errorMeta, setErrorMeta] = useState<any | null>(null)
   const [playerName, setPlayerName] = useState<string>('')
+  const [selector, setSelector] = useState({ loginId: 'default', campaignId: 'default', sessionId: 'default' })
   const [fieldErrors, setFieldErrors] = useState<Record<string,string>>({})
+  const [lastCommand, setLastCommand] = useState<CommandPayload | null>(null)
   const nameRef = useRef<HTMLInputElement | null>(null)
 
-  async function sendNoOp() {
-    const payload = {
-      idempotency_key: 'test-noop-1',
-      action_id: 'NO_OP',
-      payload: { noop: true, player_name: playerName }
+  function buildIdempotencyKey() {
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+      return crypto.randomUUID()
     }
+    return `idem-${Date.now()}-${Math.random().toString(16).slice(2)}`
+  }
 
+  async function submitCommand(payload: CommandPayload) {
     const backendBase = (import.meta as any).env?.VITE_BACKEND_URL || ''
     const url = backendBase ? `${backendBase.replace(/\/$/, '')}/api/command` : '/api/command'
 
@@ -71,12 +89,33 @@ export default function App() {
     setStatusLevel(status)
   }
 
+  async function sendNoOp() {
+    const payload: CommandPayload = {
+      idempotency_key: buildIdempotencyKey(),
+      action_id: 'NO_OP',
+      payload: { noop: true, player_name: playerName },
+      metadata: {
+        login_id: selector.loginId && selector.loginId.trim() ? selector.loginId.trim() : 'default',
+        campaign_id: selector.campaignId && selector.campaignId.trim() ? selector.campaignId.trim() : 'default',
+        session_id: selector.sessionId && selector.sessionId.trim() ? selector.sessionId.trim() : 'default',
+      },
+    }
+    setLastCommand(payload)
+    await submitCommand(payload)
+  }
+
+  async function retryLastCommand() {
+    if (!lastCommand) return
+    await submitCommand(lastCommand)
+  }
+
   return (
     <div className="app-container">
       <div className="card">
         <h1 className="title">FantasyAGE</h1>
         <p className="subtitle">Send a no-op command to test roundtrip</p>
         <div className="controls">
+          <SessionSelector onChange={(s) => setSelector(s)} />
           <label style={{display:'flex',flexDirection:'column',gap:6}}>
             Player name
             <input
@@ -91,6 +130,7 @@ export default function App() {
             )}
           </label>
           <button className="btn" onClick={sendNoOp}>Send No-Op Command</button>
+          <button className="btn" onClick={retryLastCommand} disabled={!lastCommand}>Retry Last Command</button>
           <button
             className="btn"
             onClick={() => {
@@ -98,6 +138,7 @@ export default function App() {
               setFieldErrors({})
               setErrorMeta(null)
               setResponse(null)
+              setLastCommand(null)
             }}
           >Reset</button>
         </div>

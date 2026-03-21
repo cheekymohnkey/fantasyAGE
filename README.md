@@ -21,13 +21,13 @@ python3 work-process/scripts/migrate.py
 - Run backend (uses `work-process/runtime/session.db` by default):
 
 ```bash
-python3 backend/app.py
+python3 -m backend.app
 ```
 
 - Override DB path with the `SESSION_DB` env var (useful in tests):
 
 ```bash
-SESSION_DB=/tmp/session.db python3 backend/app.py
+SESSION_DB=/tmp/session.db python3 -m backend.app
 ```
 
 - Run the Python test suite (requires `pytest`):

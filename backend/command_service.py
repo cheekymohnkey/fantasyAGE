@@ -1,15 +1,16 @@
 import json
 from dataclasses import asdict
-from datetime import UTC, datetime
 from typing import Any, cast
+
+from .timeutils import utc_now_z
 
 from .contracts import CommandContext, ParsedCommand
 from .db import connect, transaction
-from .errors import OwnerScopeError, PersistenceError
+from .errors import AppError, OwnerScopeError, PersistenceError, PreconditionError
 
 
 def _utc_now() -> str:
-    return datetime.now(UTC).isoformat().replace("+00:00", "Z")
+    return utc_now_z()
 
 
 def load_default_login_id(db_path: str, fallback: str = "default") -> str:
@@ -53,7 +54,7 @@ def enforce_owner_scope(header_login_id: str | None, command: ParsedCommand) -> 
         )
 
 
-def _ensure_owner_scoped_session(conn, command: ParsedCommand, created_at: str) -> None:
+def _ensure_owner_scoped_session(conn, command: ParsedCommand, created_at: str, implicit_session_create: bool) -> None:
     cur = conn.cursor()
     cur.execute(
         "SELECT login_id, campaign_id FROM sessions WHERE session_id=?",
@@ -69,44 +70,55 @@ def _ensure_owner_scoped_session(conn, command: ParsedCommand, created_at: str) 
                 message="session_id already exists under different owner scope",
                 remediation_hint="Use a session_id owned by the current login/campaign scope.",
             )
-
-    cur.execute(
-        "SELECT login_id FROM campaigns WHERE campaign_id=?", (command.context.campaign_id,)
-    )
-    existing_campaign = cur.fetchone()
-    if existing_campaign and existing_campaign[0] != command.context.login_id:
-        raise OwnerScopeError(
-            message="campaign_id already exists under different login scope",
-            remediation_hint="Use a campaign_id owned by the current login scope.",
+    # If session does not exist, decide between implicit create (dev/test) or strict enforcement
+    if not existing_session:
+        # check campaign ownership collision
+        cur.execute(
+            "SELECT login_id FROM campaigns WHERE campaign_id=?", (command.context.campaign_id,)
         )
+        existing_campaign = cur.fetchone()
+        if existing_campaign and existing_campaign[0] != command.context.login_id:
+            raise OwnerScopeError(
+                message="campaign_id already exists under different login scope",
+                remediation_hint="Use a campaign_id owned by the current login scope.",
+            )
 
-    cur.execute(
-        """INSERT OR IGNORE INTO campaigns
-        (login_id, campaign_id, name, status, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?)""",
-        (
-            command.context.login_id,
-            command.context.campaign_id,
-            "Default Campaign",
-            "active",
-            created_at,
-            created_at,
-        ),
-    )
-    cur.execute(
-        """INSERT OR IGNORE INTO sessions
-        (login_id, campaign_id, session_id, state_version, scene_mode, payload_json, updated_at)
-        VALUES (?, ?, ?, ?, ?, ?, ?)""",
-        (
-            command.context.login_id,
-            command.context.campaign_id,
-            command.context.session_id,
-            0,
-            "default",
-            "{}",
-            created_at,
-        ),
-    )
+        if not implicit_session_create:
+            # Strict mode: do not implicitly create sessions; require client to select/create session
+            raise PreconditionError(
+                message="session_id does not exist",
+                reason_code="precondition.campaign_session_mismatch",
+                remediation_hint="Select or create the session for the active campaign before retrying.",
+            )
+
+        # Implicit create path (idempotent)
+        cur.execute(
+            """INSERT OR IGNORE INTO campaigns
+            (login_id, campaign_id, name, status, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?)""",
+            (
+                command.context.login_id,
+                command.context.campaign_id,
+                "Default Campaign",
+                "active",
+                created_at,
+                created_at,
+            ),
+        )
+        cur.execute(
+            """INSERT OR IGNORE INTO sessions
+            (login_id, campaign_id, session_id, state_version, scene_mode, payload_json, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?)""",
+            (
+                command.context.login_id,
+                command.context.campaign_id,
+                command.context.session_id,
+                0,
+                "default",
+                "{}",
+                created_at,
+            ),
+        )
 
 
 def _response_payload(command: ParsedCommand) -> dict:
@@ -123,13 +135,18 @@ def _response_payload(command: ParsedCommand) -> dict:
     }
 
 
-def handle_command(db_path: str, command: ParsedCommand) -> dict:
+def _is_canonical_response(payload: dict[str, Any]) -> bool:
+    required = {"status", "action_id", "idempotency_key", "action_result"}
+    return required.issubset(set(payload.keys()))
+
+
+def handle_command(db_path: str, command: ParsedCommand, implicit_session_create: bool = True) -> dict:
     created_at = _utc_now()
 
     try:
         with transaction(db_path) as conn:
             cur = conn.cursor()
-            _ensure_owner_scoped_session(conn, command, created_at)
+            _ensure_owner_scoped_session(conn, command, created_at, implicit_session_create)
 
             cur.execute(
                 """SELECT action_result_json FROM command_receipts
@@ -145,7 +162,26 @@ def handle_command(db_path: str, command: ParsedCommand) -> dict:
             if existing:
                 try:
                     parsed_existing = cast(dict[str, Any], json.loads(existing[0]))
-                    return parsed_existing
+                    if _is_canonical_response(parsed_existing):
+                        return parsed_existing
+                    # Backward compatibility: older receipts stored '{}' only.
+                    response = _response_payload(command)
+                    response_json = json.dumps(response, separators=(",", ":"))
+                    cur.execute(
+                        """UPDATE command_receipts
+                        SET action_id=?, action_result_json=?, correlation_id=?
+                        WHERE login_id=? AND campaign_id=? AND session_id=? AND idempotency_key=?""",
+                        (
+                            command.action_id,
+                            response_json,
+                            command.context.correlation_id,
+                            command.context.login_id,
+                            command.context.campaign_id,
+                            command.context.session_id,
+                            command.idempotency_key,
+                        ),
+                    )
+                    return response
                 except Exception as err:
                     raise PersistenceError(
                         message="Stored idempotent result is unreadable",
@@ -175,7 +211,7 @@ def handle_command(db_path: str, command: ParsedCommand) -> dict:
                 ),
             )
             return response
-    except OwnerScopeError:
+    except AppError:
         raise
     except Exception as exc:
         raise PersistenceError(message=f"Failed to persist command receipt: {exc}") from exc

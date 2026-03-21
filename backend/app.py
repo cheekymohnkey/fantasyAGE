@@ -60,6 +60,38 @@ def _bootstrap() -> None:
         "Loaded runtime defaults login_id=%s db_path=%s", runtime.default_login_id, runtime.db_path
     )
 
+    # Seed the default session so strict mode has a selectable session in early testing
+    try:
+        from .command_service import (
+            connect as _db_connect,
+        )
+    except Exception:
+        _db_connect = None
+    try:
+        # idempotent create of default campaign/session
+        from .command_service import _utc_now
+        conn = None
+        try:
+            from .db import connect as _connect
+            conn = _connect(runtime.db_path)
+            cur = conn.cursor()
+            created_at = _utc_now()
+            cur.execute(
+                "INSERT OR IGNORE INTO campaigns (login_id, campaign_id, name, status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+                (runtime.default_login_id, runtime.default_campaign_id, 'Default Campaign', 'active', created_at, created_at),
+            )
+            cur.execute(
+                "INSERT OR IGNORE INTO sessions (login_id, campaign_id, session_id, state_version, scene_mode, payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (runtime.default_login_id, runtime.default_campaign_id, runtime.default_session_id, 0, 'default', '{}', created_at),
+            )
+            conn.commit()
+            logger.info("Seeded default session campaign=%s session=%s", runtime.default_campaign_id, runtime.default_session_id)
+        finally:
+            if conn:
+                conn.close()
+    except Exception:
+        logger.exception("Failed to seed default session during bootstrap")
+
 
 _bootstrap()
 
@@ -90,7 +122,7 @@ def command():
     parsed = parse_command_payload(data, fallback_context)
     enforce_owner_scope(request.headers.get("X-Login-Id"), parsed)
 
-    response = handle_command(runtime.db_path, parsed)
+    response = handle_command(runtime.db_path, parsed, runtime.implicit_session_create)
     log_template = (
         "event=command_handled correlation_id=%s action_id=%s "
         "session_id=%s command_type=%s outcome=%s"
@@ -104,6 +136,40 @@ def command():
         response.get("status", "ok"),
     )
     return jsonify(response)
+
+
+@app.get("/api/sessions")
+def list_sessions():
+    try:
+        from .db import connect as _connect
+
+        conn = _connect(runtime.db_path)
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT session_id, campaign_id, login_id, updated_at FROM sessions WHERE login_id=? ORDER BY updated_at DESC",
+            (runtime.default_login_id,),
+        )
+        rows = cur.fetchall()
+        sessions = [
+            {"session_id": r[0], "campaign_id": r[1], "login_id": r[2], "updated_at": r[3]}
+            for r in rows
+        ]
+        return jsonify({"status": "ok", "sessions": sessions})
+    except Exception:
+        logger.exception("Failed to list sessions")
+        payload = {
+            "status": "error",
+            "reason_code": "internal.unable_list_sessions",
+            "message": "Unable to list sessions",
+            "remediation_hint": "Check backend logs",
+        }
+        return jsonify(payload), 500
+    finally:
+        try:
+            if "conn" in locals() and conn:
+                conn.close()
+        except Exception:
+            pass
 
 
 @app.errorhandler(AppError)

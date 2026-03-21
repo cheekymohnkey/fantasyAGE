@@ -28,6 +28,7 @@ def _client_for_db(db_path):
         default_login_id="default",
         default_campaign_id="default",
         default_session_id="default",
+        implicit_session_create=True,
     )
     return backend_app.app.test_client()
 

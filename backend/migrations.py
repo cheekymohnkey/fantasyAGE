@@ -1,8 +1,8 @@
 import logging
 import os
-from datetime import datetime
-
 from .db import connect
+
+from .timeutils import utc_now_z
 
 logger = logging.getLogger("backend")
 
@@ -38,7 +38,7 @@ def _apply_migration(conn, migrations_dir: str, filename: str) -> None:
     cur = conn.cursor()
     cur.executescript(sql)
     version = filename
-    applied_at = datetime.utcnow().isoformat() + "Z"
+    applied_at = utc_now_z()
     cur.execute(
         "INSERT INTO schema_migrations (version, applied_at) VALUES (?, ?)", (version, applied_at)
     )

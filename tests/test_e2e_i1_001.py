@@ -41,6 +41,7 @@ def test_e2e_i1_001_command_roundtrip():
             default_login_id=backend.runtime.default_login_id,
             default_campaign_id=backend.runtime.default_campaign_id,
             default_session_id=backend.runtime.default_session_id,
+            implicit_session_create=True,
         )
 
         payload = {

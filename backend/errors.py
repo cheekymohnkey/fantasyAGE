@@ -55,3 +55,13 @@ class PersistenceError(AppError):
             remediation_hint=remediation_hint
             or "Retry the request and check backend logs for transaction failures.",
         )
+
+
+class PreconditionError(AppError):
+    def __init__(self, message: str, reason_code: str = "precondition.campaign_session_mismatch", remediation_hint: str = ""):
+        super().__init__(
+            reason_code=reason_code,
+            message=message,
+            status_code=412,
+            remediation_hint=remediation_hint or "Select or create a valid campaign/session before retrying.",
+        )

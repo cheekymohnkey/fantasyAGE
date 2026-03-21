@@ -6,7 +6,7 @@ Run locally:
 python -m venv .venv
 source .venv/bin/activate
 pip install -r backend/requirements.txt
-python backend/app.py
+python -m backend.app
 ```
 
 The server listens on port 8000 and exposes `POST /api/command`.
@@ -23,7 +23,7 @@ python3 work-process/scripts/migrate.py
 - The app reads a `SESSION_DB` environment variable to override the default DB path (useful for tests or alternate runtimes). Example:
 
 ```bash
-SESSION_DB=/tmp/session.db python3 backend/app.py
+SESSION_DB=/tmp/session.db python3 -m backend.app
 ```
 
 Response contract
