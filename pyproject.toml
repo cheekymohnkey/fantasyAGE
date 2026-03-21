@@ -15,4 +15,5 @@ show_error_codes = true
 pretty = true
 
 [tool.pytest.ini_options]
-addopts = "--cov=backend --cov-report=term-missing"
+# Keep default pytest options minimal to avoid requiring pytest plugins
+addopts = "-q"
