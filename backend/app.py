@@ -17,6 +17,7 @@ from .config import load_runtime_config
 from .contracts import parse_command_payload
 from .errors import AppError, ValidationError
 from .migrations import run_migrations
+from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
