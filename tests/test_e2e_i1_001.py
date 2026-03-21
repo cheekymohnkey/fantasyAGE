@@ -56,7 +56,9 @@ def test_e2e_i1_001_command_roundtrip():
             assert j.get("status") == "ok"
 
             # verify session events endpoint returns the persisted receipt
-            events_resp = client.get(f"/api/sessions/{payload['metadata']['session_id']}/events", headers={"X-Login-Id": payload['metadata']['login_id']})
+            endpoint = f"/api/sessions/{payload['metadata']['session_id']}/events"
+            headers = {"X-Login-Id": payload['metadata']['login_id']}
+            events_resp = client.get(endpoint, headers=headers)
             assert events_resp.status_code == 200
             ej = events_resp.get_json()
             assert ej.get("status") == "ok"
