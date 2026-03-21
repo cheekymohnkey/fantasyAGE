@@ -1,5 +1,7 @@
 import logging
 import os
+import sqlite3
+from collections.abc import Callable
 
 from flask import Flask, jsonify, request
 from flask_cors import CORS
@@ -61,10 +63,10 @@ def _bootstrap() -> None:
     )
 
     # Seed the default session so strict mode has a selectable session in early testing
+    # Optional typed DB connect helper (imported if available)
+    _db_connect: Callable[[str], sqlite3.Connection] | None = None
     try:
-        from .command_service import (
-            connect as _db_connect,
-        )
+        from .db import connect as _db_connect
     except Exception:
         _db_connect = None
     try:
