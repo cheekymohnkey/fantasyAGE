@@ -105,6 +105,39 @@ Definition of done for next session:
 5. Add and run `E2E-I1-001`.
 6. Record progress against Sprint 1 stories.
 
+
+## Selected Next Task
+
+Current selection for the next session work (picked by the team):
+
+- **SB-1-02 — SQLite migration runner and base schema bootstrap**: In Progress
+	- Reason: foundational persistence is required for command receipts, runtime seeds, and tests. Completing this enables the remainder of Sprint 1 stories and the E2E roundtrip.
+	- Owner: backend team
+	- Target: Ensure migrations run idempotently, record applied versions, and seed `runtime_config` with `default_login_id`.
+
+Status notes:
+- Migration runner exists and initial migrations are present; this task focuses on finalizing migration tests, ensuring idempotence, and verifying runtime seeding during bootstrap.
+
+
+
+## 12) Shared Utilities
+
+We maintain a short registry of shared utility functions to improve discoverability and encourage a stable public surface for helpers used across the codebase.
+
+- Registry doc: `work-process/design/shared_utils.md`
+- Current canonical helpers:
+	- `backend.timeutils.utc_now_z()` — timezone-aware UTC ISO8601 timestamps (also re-exported at `backend.utc_now_z`).
+
+Guidance:
+- Add entries to `work-process/design/shared_utils.md` when a utility is reused across multiple modules.
+- Re-export public helpers from `backend/__init__.py` to make imports simpler for callers and tests.
+
+Best practices
+- Prefer abstracting reusable components into shared utilities instead of copying similar code across modules. This reduces duplication, centralizes behavior, and makes testing easier.
+- Document the helper's intended audience and stability in `work-process/design/shared_utils.md` when adding to the registry.
+- Keep helpers small and focused; avoid adding broad, domain-specific logic into `backend/` utilities — those belong to feature modules.
+
+
 ## 10) Current Implementation Status
 
 Progress updates (working notes):
