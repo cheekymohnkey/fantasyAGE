@@ -35,6 +35,11 @@ export default function App() {
     return `idem-${Date.now()}-${Math.random().toString(16).slice(2)}`
   }
 
+  async function recordTelemetry(eventType: string, payload: Record<string, any>) {
+    // In future, send to a real analytics endpoint.
+    console.info('telemetry', { eventType, ...payload })
+  }
+
   async function submitCommand(payload: CommandPayload) {
     const backendBase = (import.meta as any).env?.VITE_BACKEND_URL || ''
     const url = backendBase ? `${backendBase.replace(/\/$/, '')}/api/command` : '/api/command'
@@ -73,6 +78,13 @@ export default function App() {
     const remediation = json?.remediation_hint || null
     if (reason) {
       setErrorMeta({ reason, remediation, message: json?.message || null })
+      await recordTelemetry('context_block', {
+        login_id: payload.metadata.login_id,
+        campaign_id: payload.metadata.campaign_id,
+        session_id: payload.metadata.session_id,
+        action_id: payload.action_id,
+        reason,
+      })
 
       const mismatchReasons = [
         'precondition.campaign_session_mismatch',
@@ -96,6 +108,12 @@ export default function App() {
       setErrorMeta(null)
       setFieldErrors({})
       setContextError(null)
+      await recordTelemetry('command_success', {
+        login_id: payload.metadata.login_id,
+        campaign_id: payload.metadata.campaign_id,
+        session_id: payload.metadata.session_id,
+        action_id: payload.action_id,
+      })
     }
 
     setResponse(JSON.stringify({ status, action, idempotency, data: dataField, event }, null, 2))

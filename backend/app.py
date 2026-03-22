@@ -157,6 +157,14 @@ def command():
         "event=command_handled correlation_id=%s action_id=%s "
         "session_id=%s command_type=%s outcome=%s"
     )
+    # Emit telemetry event for successful context usage
+    logger.info(
+        "event=telemetry event_type=command_success login_id=%s campaign_id=%s session_id=%s action_id=%s",
+        parsed.context.login_id,
+        parsed.context.campaign_id,
+        parsed.context.session_id,
+        parsed.action_id,
+    )
     logger.info(
         log_template,
         parsed.context.correlation_id,
@@ -271,6 +279,15 @@ def session_events(session_id: str):
 @app.errorhandler(AppError)
 def handle_app_error(err: AppError):
     logger.warning("event=app_error reason_code=%s message=%s", err.reason_code, err.message)
+
+    # Telemetry hook for guardrail events
+    if err.reason_code in ["precondition.owner_scope_mismatch", "precondition.campaign_session_mismatch"]:
+        logger.info(
+            "event=telemetry event_type=context_block reason=%s status=%s",
+            err.reason_code,
+            err.status_code,
+        )
+
     return jsonify(err.to_dict()), err.status_code
 
 

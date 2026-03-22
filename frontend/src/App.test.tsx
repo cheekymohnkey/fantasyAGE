@@ -81,7 +81,80 @@ describe('App', () => {
     expect(fetchMock).toHaveBeenCalledWith('/api/sessions?campaign_id=camp-x', expect.any(Object))
   })
 
-  it('shows context mismatch banner when precondition error is returned', async () => {
+  it('emits telemetry for context mismatch', async () => {
+    const fetchMock = vi.fn((input: any) => {
+      if (typeof input === 'string' && input.endsWith('/api/sessions')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ status: 'ok', sessions: [] }),
+          clone: () => ({ text: async () => JSON.stringify({ status: 'ok', sessions: [] }) }),
+        })
+      }
+      if (typeof input === 'string' && input.endsWith('/api/command')) {
+        return Promise.resolve({
+          ok: false,
+          status: 412,
+          json: async () => ({
+            status: 'error',
+            reason_code: 'precondition.campaign_session_mismatch',
+            message: 'Session/campaign mismatch',
+            remediation_hint: 'Select a valid session/campaign',
+          }),
+          clone: () => ({ text: async () => JSON.stringify({ status: 'error' }) }),
+        })
+      }
+      return Promise.resolve({ ok: true, json: async () => ({ status: 'ok' }), clone: () => ({ text: async () => '{}' }) })
+    })
+
+    const consoleSpy = vi.spyOn(console, 'info').mockImplementation(() => {})
+    vi.stubGlobal('fetch', fetchMock)
+
+    render(<App />)
+    const sendButton = screen.getByRole('button', { name: 'Send No-Op Command' })
+    sendButton.click()
+
+    const banner = await screen.findByText('Context mismatch:')
+    expect(banner).toBeInTheDocument()
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('telemetry'), expect.objectContaining({ eventType: 'context_block' }))
+    consoleSpy.mockRestore()
+  })
+
+  it('emits telemetry for successful command', async () => {
+    const fetchMock = vi.fn((input: any) => {
+      if (typeof input === 'string' && input.endsWith('/api/sessions')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ status: 'ok', sessions: [] }),
+          clone: () => ({ text: async () => JSON.stringify({ status: 'ok', sessions: [] }) }),
+        })
+      }
+      if (typeof input === 'string' && input.endsWith('/api/command')) {
+        return Promise.resolve({
+          ok: true,
+          status: 200,
+          json: async () => ({ status: 'ok', action_result: {}, action_id: 'NO_OP', idempotency_key: 'x' }),
+          clone: () => ({ text: async () => JSON.stringify({ status: 'ok' }) }),
+        })
+      }
+      return Promise.resolve({ ok: true, json: async () => ({ status: 'ok' }), clone: () => ({ text: async () => '{}' }) })
+    })
+
+    const consoleSpy = vi.spyOn(console, 'info').mockImplementation(() => {})
+    vi.stubGlobal('fetch', fetchMock)
+
+    render(<App />)
+    const playerInput = screen.getByLabelText('Player name')
+    fireEvent.change(playerInput, { target: { value: 'Snuggz' } })
+    const sendButton = screen.getByRole('button', { name: 'Send No-Op Command' })
+    sendButton.click()
+
+    await screen.findByText((content) => content.includes('"status": "ok"'))
+    // verify the telemetry call is emitted stream/fallback style
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('telemetry'), expect.objectContaining({ eventType: 'command_success' }))
+    consoleSpy.mockRestore()
+  })
+
+  it('renders no-op command control', async () => {
     vi.stubGlobal('fetch', vi.fn((input: any) => {
       if (typeof input === 'string' && input.endsWith('/api/sessions')) {
         return Promise.resolve({

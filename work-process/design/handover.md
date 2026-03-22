@@ -125,10 +125,15 @@ Current selection for the next session work (picked by the team):
 	- Owner: backend team
 	- Target: ensure precondition errors and ownership blockers on cross-scope data.
 
-- **SB-2-04 — Frontend Campaign and Session Selector with context banner recovery**: In progress
+- **SB-2-04 — Frontend Campaign and Session Selector with context banner recovery**: Completed
 	- Reason: required to complete ui/ux flow for campaign/session-scoped context and recovery instructions.
 	- Owner: frontend team
 	- Target: add context mismatch banner, reset path, and session selector behavior.
+
+- **SB-2-06 — Telemetry for context switch and mismatch block events**: In progress
+	- Reason: this closes telemetry verification in EP-02 and prepares analytics hooks.
+	- Owner: backend+frontend team
+	- Target: emit telemetry event on context switch, precondition mismatch, and owner scope blocks.
 
 
 ## 12) Shared Utilities
