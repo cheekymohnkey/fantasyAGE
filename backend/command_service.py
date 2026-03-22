@@ -366,6 +366,137 @@ def _handle_session_command(conn, command: ParsedCommand, created_at: str) -> di
     )
 
 
+def _resolve_entity_key(command: ParsedCommand) -> tuple[str, str]:
+    entity_type = command.payload.get("entity_type")
+    entity_id = command.payload.get("entity_id")
+    if not isinstance(entity_type, str) or not entity_type.strip():
+        raise ValidationError(
+            "entity_type must be a non-empty string",
+            remediation_hint="Provide 'entity_type' for entity commands.",
+            field="payload.entity_type",
+        )
+    if not isinstance(entity_id, str) or not entity_id.strip():
+        raise ValidationError(
+            "entity_id must be a non-empty string",
+            remediation_hint="Provide 'entity_id' for entity commands.",
+            field="payload.entity_id",
+        )
+    return entity_type.strip(), entity_id.strip()
+
+
+def _handle_entity_command(conn, command: ParsedCommand, created_at: str) -> dict[str, Any]:
+    action = command.action_id
+    login_id = command.context.login_id
+    campaign_id = command.context.campaign_id
+    session_id = command.context.session_id
+    cur = conn.cursor()
+
+    entity_type = None
+    entity_id = None
+    if action != "entity.list":
+        entity_type, entity_id = _resolve_entity_key(command)
+
+    if action == "entity.create":
+        payload_json = json.dumps(command.payload.get("payload", {}), separators=(",", ":"))
+        cur.execute(
+            "SELECT is_deleted FROM session_entities WHERE session_id=? AND entity_type=? AND entity_id=?",
+            (session_id, entity_type, entity_id),
+        )
+        existing = cur.fetchone()
+        if existing:
+            # idempotent: if already exists and not deleted, return current
+            if existing[0] == 0:
+                return {"entity_type": entity_type, "entity_id": entity_id, "payload": json.loads(payload_json)}
+            # resurrect soft-deleted entity
+            cur.execute(
+                "UPDATE session_entities SET is_deleted=0, payload_json=?, updated_at=? WHERE session_id=? AND entity_type=? AND entity_id=?",
+                (payload_json, created_at, session_id, entity_type, entity_id),
+            )
+            return {"entity_type": entity_type, "entity_id": entity_id, "payload": json.loads(payload_json), "status": "restored"}
+
+        cur.execute(
+            "INSERT INTO session_entities (login_id, campaign_id, session_id, entity_type, entity_id, provenance, is_deleted, payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            (login_id, campaign_id, session_id, entity_type, entity_id, "campaign", 0, payload_json, created_at),
+        )
+        return {"entity_type": entity_type, "entity_id": entity_id, "payload": json.loads(payload_json)}
+
+    if action == "entity.read":
+        cur.execute(
+            "SELECT is_deleted, payload_json FROM session_entities WHERE session_id=? AND entity_type=? AND entity_id=?",
+            (session_id, entity_type, entity_id),
+        )
+        row = cur.fetchone()
+        if not row or row[0] == 1:
+            raise PreconditionError(
+                message="Entity not found",
+                reason_code="precondition.campaign_session_mismatch",
+                remediation_hint="Ensure entity exists in the current session and campaign.",
+            )
+        return {"entity_type": entity_type, "entity_id": entity_id, "payload": json.loads(row[1])}
+
+    if action == "entity.list":
+        cur.execute(
+            "SELECT entity_type, entity_id, payload_json, updated_at FROM session_entities WHERE login_id=? AND campaign_id=? AND session_id=? AND is_deleted=0 ORDER BY updated_at DESC",
+            (login_id, campaign_id, session_id),
+        )
+        rows = cur.fetchall()
+        entities = [
+            {
+                "entity_type": r[0],
+                "entity_id": r[1],
+                "payload": json.loads(r[2]),
+                "updated_at": r[3],
+            }
+            for r in rows
+        ]
+        return {"entities": entities}
+
+    if action == "entity.update":
+        payload_json = json.dumps(command.payload.get("payload", {}), separators=(",", ":"))
+        cur.execute(
+            "SELECT is_deleted FROM session_entities WHERE session_id=? AND entity_type=? AND entity_id=?",
+            (session_id, entity_type, entity_id),
+        )
+        row = cur.fetchone()
+        if not row or row[0] == 1:
+            raise PreconditionError(
+                message="Entity not found or deleted",
+                reason_code="precondition.campaign_session_mismatch",
+                remediation_hint="Entity must exist and not be deleted to update.",
+            )
+        cur.execute(
+            "UPDATE session_entities SET payload_json=?, updated_at=? WHERE session_id=? AND entity_type=? AND entity_id=?",
+            (payload_json, created_at, session_id, entity_type, entity_id),
+        )
+        return {"entity_type": entity_type, "entity_id": entity_id, "payload": json.loads(payload_json)}
+
+    if action == "entity.delete":
+        cur.execute(
+            "SELECT is_deleted FROM session_entities WHERE session_id=? AND entity_type=? AND entity_id=?",
+            (session_id, entity_type, entity_id),
+        )
+        row = cur.fetchone()
+        if not row:
+            raise PreconditionError(
+                message="Entity not found",
+                reason_code="precondition.campaign_session_mismatch",
+                remediation_hint="Entity must exist to delete.",
+            )
+        if row[0] == 1:
+            return {"entity_type": entity_type, "entity_id": entity_id, "status": "already_deleted"}
+
+        cur.execute(
+            "UPDATE session_entities SET is_deleted=1, updated_at=? WHERE session_id=? AND entity_type=? AND entity_id=?",
+            (created_at, session_id, entity_type, entity_id),
+        )
+        return {"entity_type": entity_type, "entity_id": entity_id, "status": "deleted"}
+
+    raise ValidationError(
+        f"Unsupported entity action: {action}",
+        remediation_hint="Use entity.create, entity.read, entity.list, entity.update, or entity.delete.",
+    )
+
+
 def _response_payload(command: ParsedCommand, action_result: dict[str, Any] | None = None) -> dict:
     if action_result is None:
         action_result = {}
@@ -451,6 +582,8 @@ def handle_command(
                 action_result = _handle_campaign_command(conn, command, created_at)
             elif command.action_id.startswith("session."):
                 action_result = _handle_session_command(conn, command, created_at)
+            elif command.action_id.startswith("entity."):
+                action_result = _handle_entity_command(conn, command, created_at)
 
             response = _response_payload(command, action_result)
             response_json = json.dumps(response, separators=(",", ":"))

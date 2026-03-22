@@ -209,6 +209,85 @@ def test_session_commands_create_list_open(tmp_path):
     assert open_missing_resp.status_code == 412
 
 
+def test_entity_crud_lifecycle(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path)
+
+    # ensure session exists
+    session_payload = {
+        "action_id": "session.create",
+        "idempotency_key": "sess-create-entity",
+        "payload": {"campaign_id": "default", "session_id": "session-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    resp = client.post("/api/command", json=session_payload)
+    assert resp.status_code == 200
+
+    # create entity
+    create_entity = {
+        "action_id": "entity.create",
+        "idempotency_key": "entity-create-1",
+        "payload": {"entity_type": "character", "entity_id": "char-1", "payload": {"name": "Gus"}},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-1"},
+    }
+    create_resp = client.post("/api/command", json=create_entity)
+    assert create_resp.status_code == 200
+    assert create_resp.get_json().get("action_result", {}).get("entity_id") == "char-1"
+
+    # read entity
+    read_entity = {
+        "action_id": "entity.read",
+        "idempotency_key": "entity-read-1",
+        "payload": {"entity_type": "character", "entity_id": "char-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-1"},
+    }
+    read_resp = client.post("/api/command", json=read_entity)
+    assert read_resp.status_code == 200
+    assert read_resp.get_json().get("action_result", {}).get("payload", {}).get("name") == "Gus"
+
+    # update entity
+    update_entity = {
+        "action_id": "entity.update",
+        "idempotency_key": "entity-update-1",
+        "payload": {"entity_type": "character", "entity_id": "char-1", "payload": {"name": "Gus Updated"}},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-1"},
+    }
+    update_resp = client.post("/api/command", json=update_entity)
+    assert update_resp.status_code == 200
+    assert update_resp.get_json().get("action_result", {}).get("payload", {}).get("name") == "Gus Updated"
+
+    # list entities
+    list_entity = {
+        "action_id": "entity.list",
+        "idempotency_key": "entity-list-1",
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-1"},
+    }
+    list_resp = client.post("/api/command", json=list_entity)
+    assert list_resp.status_code == 200
+    entities = list_resp.get_json().get("action_result", {}).get("entities", [])
+    assert any(e.get("entity_id") == "char-1" for e in entities)
+
+    # delete entity
+    delete_entity = {
+        "action_id": "entity.delete",
+        "idempotency_key": "entity-delete-1",
+        "payload": {"entity_type": "character", "entity_id": "char-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-1"},
+    }
+    delete_resp = client.post("/api/command", json=delete_entity)
+    assert delete_resp.status_code == 200
+    assert delete_resp.get_json().get("action_result", {}).get("status") == "deleted"
+
+    # read deleted should fail 412
+    read_deleted = client.post("/api/command", json={
+        "action_id": "entity.read",
+        "idempotency_key": "entity-read-2",
+        "payload": {"entity_type": "character", "entity_id": "char-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-1"},
+    })
+    assert read_deleted.status_code == 412
+
+
 def test_owner_scope_mismatch_returns_403(tmp_path):
     db_path = _setup_temp_db(tmp_path)
     client = _build_client(db_path)

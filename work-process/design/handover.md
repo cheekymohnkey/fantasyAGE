@@ -130,10 +130,15 @@ Current selection for the next session work (picked by the team):
 	- Owner: frontend team
 	- Target: add context mismatch banner, reset path, and session selector behavior.
 
-- **SB-2-06 — Telemetry for context switch and mismatch block events**: In progress
+- **SB-2-06 — Telemetry for context switch and mismatch block events**: Completed
 	- Reason: this closes telemetry verification in EP-02 and prepares analytics hooks.
 	- Owner: backend+frontend team
 	- Target: emit telemetry event on context switch, precondition mismatch, and owner scope blocks.
+
+- **SB-3-01 — Implement entity.create/read/list/update/delete with soft delete canon safety**: In progress
+	- Reason: next EP-03 core entity CRUD vertical slice.
+	- Owner: backend team
+	- Target: session-scoped entity management with owner scope guards and audit compliance.
 
 
 ## 12) Shared Utilities
