@@ -269,6 +269,103 @@ def _handle_campaign_command(conn, command: ParsedCommand, created_at: str) -> d
     )
 
 
+def _resolve_session_id(command: ParsedCommand) -> str:
+    session_id = command.payload.get("session_id", command.context.session_id)
+    if not isinstance(session_id, str) or not session_id.strip():
+        raise ValidationError(
+            "session_id must be a non-empty string",
+            remediation_hint="Provide 'session_id' in payload or metadata for session commands.",
+            field="payload.session_id",
+        )
+    return session_id.strip()
+
+
+def _handle_session_command(conn, command: ParsedCommand, created_at: str) -> dict[str, Any]:
+    action = command.action_id
+    login_id = command.context.login_id
+    campaign_id = command.payload.get("campaign_id", command.context.campaign_id)
+    if not isinstance(campaign_id, str) or not campaign_id.strip():
+        raise ValidationError(
+            "campaign_id must be a non-empty string",
+            remediation_hint="Provide 'campaign_id' in payload or metadata for session commands.",
+            field="payload.campaign_id",
+        )
+    campaign_id = campaign_id.strip()
+
+    # Verify campaign exists and is owned by current login
+    cur = conn.cursor()
+    cur.execute("SELECT login_id FROM campaigns WHERE campaign_id=?", (campaign_id,))
+    row = cur.fetchone()
+    if not row:
+        raise PreconditionError(
+            message="campaign_id does not exist",
+            reason_code="precondition.campaign_session_mismatch",
+            remediation_hint="Create or select a valid campaign before creating/listing/opening sessions.",
+        )
+    if row[0] != login_id:
+        raise OwnerScopeError(
+            message="campaign_id exists under different login scope",
+            remediation_hint="Use a campaign_id owned by the current login scope.",
+        )
+
+    if action == "session.create":
+        session_id = _resolve_session_id(command)
+        cur.execute(
+            "SELECT login_id, campaign_id FROM sessions WHERE session_id=?",
+            (session_id,),
+        )
+        existing = cur.fetchone()
+        if existing:
+            if existing[0] != login_id or existing[1] != campaign_id:
+                raise OwnerScopeError(
+                    message="session_id already exists under different owner scope",
+                    remediation_hint="Use a session_id owned by the current login/campaign scope.",
+                )
+            return {"session_id": session_id, "campaign_id": campaign_id}
+
+        cur.execute(
+            "INSERT INTO sessions (login_id, campaign_id, session_id, state_version, scene_mode, payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (login_id, campaign_id, session_id, 0, "default", "{}", created_at),
+        )
+        return {"session_id": session_id, "campaign_id": campaign_id, "created_at": created_at}
+
+    if action == "session.list":
+        cur.execute(
+            "SELECT session_id, campaign_id, updated_at FROM sessions WHERE login_id=? AND campaign_id=? ORDER BY updated_at DESC",
+            (login_id, campaign_id),
+        )
+        rows = cur.fetchall()
+        sessions = [
+            {"session_id": r[0], "campaign_id": r[1], "updated_at": r[2]} for r in rows
+        ]
+        return {"sessions": sessions}
+
+    if action == "session.open":
+        session_id = _resolve_session_id(command)
+        cur.execute(
+            "SELECT login_id, campaign_id, session_id, updated_at FROM sessions WHERE session_id=?",
+            (session_id,),
+        )
+        row = cur.fetchone()
+        if not row:
+            raise PreconditionError(
+                message="session_id does not exist",
+                reason_code="precondition.campaign_session_mismatch",
+                remediation_hint="Create or select a valid session before opening.",
+            )
+        if row[0] != login_id or row[1] != campaign_id:
+            raise OwnerScopeError(
+                message="session_id exists under different owner scope",
+                remediation_hint="Use a session_id owned by the current login/campaign scope.",
+            )
+        return {"session_id": row[2], "campaign_id": row[1], "updated_at": row[3]}
+
+    raise ValidationError(
+        f"Unsupported session action: {action}",
+        remediation_hint="Use session.create, session.list, or session.open.",
+    )
+
+
 def _response_payload(command: ParsedCommand, action_result: dict[str, Any] | None = None) -> dict:
     if action_result is None:
         action_result = {}
@@ -352,6 +449,8 @@ def handle_command(
             action_result = {}
             if command.action_id.startswith("campaign."):
                 action_result = _handle_campaign_command(conn, command, created_at)
+            elif command.action_id.startswith("session."):
+                action_result = _handle_session_command(conn, command, created_at)
 
             response = _response_payload(command, action_result)
             response_json = json.dumps(response, separators=(",", ":"))

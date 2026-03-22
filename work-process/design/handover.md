@@ -110,10 +110,15 @@ Definition of done for next session:
 
 Current selection for the next session work (picked by the team):
 
-- **SB-2-01 — Implement campaign.create/list/open/archive commands**: In progress
+- **SB-2-01 — Implement campaign.create/list/open/archive commands**: Completed
 	- Reason: required Sprint 2 story to enable multi-campaign and owner-scoped session context flows.
 	- Owner: backend team
 	- Target: add Campaign command handlers and API end-to-end coverage for command and session context.
+
+- **SB-2-02 — Implement session.create/list/open commands**: In progress
+	- Reason: required to enable campaign-scoped session lifecycle and strict context validation.
+	- Owner: backend team
+	- Target: add Session command handlers and API end-to-end coverage for context switch and guard rails.
 
 
 ## 12) Shared Utilities

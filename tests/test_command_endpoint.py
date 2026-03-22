@@ -151,6 +151,64 @@ def test_campaign_commands_create_list_open_archive(tmp_path):
     assert open_archived.status_code == 412
 
 
+def test_session_commands_create_list_open(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path)
+
+    # Create campaign context
+    create_campaign_payload = {
+        "action_id": "campaign.create",
+        "idempotency_key": "camp-create-for-session",
+        "payload": {"campaign_id": "camp-x", "name": "Adventure X"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    create_campaign_resp = client.post("/api/command", json=create_campaign_payload)
+    assert create_campaign_resp.status_code == 200
+
+    # Create a session under the new campaign
+    create_session_payload = {
+        "action_id": "session.create",
+        "idempotency_key": "sess-create-1",
+        "payload": {"campaign_id": "camp-x", "session_id": "sess-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    create_session_resp = client.post("/api/command", json=create_session_payload)
+    assert create_session_resp.status_code == 200
+    assert create_session_resp.get_json().get("action_result", {}).get("session_id") == "sess-1"
+
+    # List sessions in campaign
+    list_session_payload = {
+        "action_id": "session.list",
+        "idempotency_key": "sess-list-1",
+        "payload": {"campaign_id": "camp-x"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    list_session_resp = client.post("/api/command", json=list_session_payload)
+    assert list_session_resp.status_code == 200
+    sessions = list_session_resp.get_json().get("action_result", {}).get("sessions", [])
+    assert any(s.get("session_id") == "sess-1" for s in sessions)
+
+    # Open session
+    open_session_payload = {
+        "action_id": "session.open",
+        "idempotency_key": "sess-open-1",
+        "payload": {"campaign_id": "camp-x", "session_id": "sess-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    open_session_resp = client.post("/api/command", json=open_session_payload)
+    assert open_session_resp.status_code == 200
+    assert open_session_resp.get_json().get("action_result", {}).get("session_id") == "sess-1"
+
+    # Open nonexistent session should fail
+    open_session_missing_payload = {
+        **open_session_payload,
+        "idempotency_key": "sess-open-2",
+        "payload": {"campaign_id": "camp-x", "session_id": "sess-missing"},
+    }
+    open_missing_resp = client.post("/api/command", json=open_session_missing_payload)
+    assert open_missing_resp.status_code == 412
+
+
 def test_owner_scope_mismatch_returns_403(tmp_path):
     db_path = _setup_temp_db(tmp_path)
     client = _build_client(db_path)
