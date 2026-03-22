@@ -120,10 +120,15 @@ Current selection for the next session work (picked by the team):
 	- Owner: backend team
 	- Target: add Session command handlers and API end-to-end coverage for context switch and guard rails.
 
-- **SB-2-03 — Owner scope and campaign/session mismatch guards**: In progress
+- **SB-2-03 — Owner scope and campaign/session mismatch guards**: Completed
 	- Reason: enforcement layer after session lifecycle commands, per EP-02 security expectations.
 	- Owner: backend team
 	- Target: ensure precondition errors and ownership blockers on cross-scope data.
+
+- **SB-2-04 — Frontend Campaign and Session Selector with context banner recovery**: In progress
+	- Reason: required to complete ui/ux flow for campaign/session-scoped context and recovery instructions.
+	- Owner: frontend team
+	- Target: add context mismatch banner, reset path, and session selector behavior.
 
 
 ## 12) Shared Utilities

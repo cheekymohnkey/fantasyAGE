@@ -55,6 +55,43 @@ describe('App', () => {
 
   })
 
+  it('shows context mismatch banner when precondition error is returned', async () => {
+    vi.stubGlobal('fetch', vi.fn((input: any) => {
+      if (typeof input === 'string' && input.endsWith('/api/sessions')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ status: 'ok', sessions: [] }),
+          clone: () => ({ text: async () => JSON.stringify({ status: 'ok', sessions: [] }) }),
+        })
+      }
+      if (typeof input === 'string' && input.endsWith('/api/command')) {
+        return Promise.resolve({
+          ok: false,
+          status: 412,
+          json: async () => ({
+            status: 'error',
+            reason_code: 'precondition.campaign_session_mismatch',
+            message: 'Session/campaign mismatch',
+            remediation_hint: 'Select a valid session/campaign',
+          }),
+          clone: () => ({ text: async () => JSON.stringify({ status: 'error' }) }),
+        })
+      }
+      return Promise.resolve({ ok: true, json: async () => ({ status: 'ok' }), clone: () => ({ text: async () => '{}' }) })
+    }))
+
+    render(<App />)
+
+    const sendButton = screen.getByRole('button', { name: 'Send No-Op Command' })
+    expect(sendButton).toBeInTheDocument()
+
+    sendButton.click()
+
+    const banner = await screen.findByText('Context mismatch:')
+    expect(banner).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Reset to default context' })).toBeInTheDocument()
+  })
+
   it('fetches and renders session events when Refresh Events clicked', async () => {
     vi.stubGlobal('fetch', vi.fn((input: any) => {
       if (typeof input === 'string' && input.endsWith('/api/sessions')) {

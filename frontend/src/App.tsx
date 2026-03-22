@@ -25,6 +25,7 @@ export default function App() {
   const [fieldErrors, setFieldErrors] = useState<Record<string,string>>({})
   const [lastCommand, setLastCommand] = useState<CommandPayload | null>(null)
   const [events, setEvents] = useState<Array<any>>([])
+  const [contextError, setContextError] = useState<string | null>(null)
   const nameRef = useRef<HTMLInputElement | null>(null)
 
   function buildIdempotencyKey() {
@@ -73,6 +74,16 @@ export default function App() {
     if (reason) {
       setErrorMeta({ reason, remediation, message: json?.message || null })
 
+      const mismatchReasons = [
+        'precondition.campaign_session_mismatch',
+        'precondition.owner_scope_mismatch',
+      ]
+      if (mismatchReasons.includes(reason)) {
+        setContextError(json?.message || remediation || 'Context mismatch detected')
+      } else {
+        setContextError(null)
+      }
+
       // If backend indicates a missing field, try to extract field name and mark inline
       if (reason === 'validation.missing_field') {
         const match = (remediation || json?.message || '').match(/'([^']+)'/) || []
@@ -84,6 +95,7 @@ export default function App() {
     } else {
       setErrorMeta(null)
       setFieldErrors({})
+      setContextError(null)
     }
 
     setResponse(JSON.stringify({ status, action, idempotency, data: dataField, event }, null, 2))
@@ -145,11 +157,32 @@ export default function App() {
     }
   }
 
+  const isContextMismatch = contextError !== null
+
   return (
     <div className="app-container">
       <div className="card">
         <h1 className="title">FantasyAGE</h1>
         <p className="subtitle">Send a no-op command to test roundtrip</p>
+        {isContextMismatch && (
+          <div className="toast toast-warning">
+            <strong>Context mismatch:</strong> {contextError}
+            <div>Check campaign/session selection, or use the selector to recover context.</div>
+            <button
+              className="btn"
+              onClick={() => {
+                setSelector({ loginId: 'default', campaignId: 'default', sessionId: 'default' })
+                setErrorMeta(null)
+                setFieldErrors({})
+                setContextError(null)
+                setResponse('Reset context to default, please retry command')
+                setStatusLevel('warning')
+              }}
+            >
+              Reset to default context
+            </button>
+          </div>
+        )}
         <div className="controls">
           <SessionSelector onChange={(s) => setSelector(s)} />
           <label style={{display:'flex',flexDirection:'column',gap:6}}>
