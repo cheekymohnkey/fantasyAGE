@@ -22,14 +22,14 @@ def _setup_temp_db(tmp_path):
     return db_path
 
 
-def _build_client(db_path):
+def _build_client(db_path, implicit_session_create=True):
     backend_app.runtime = backend_app.load_runtime_config(default_login_id="default")
     backend_app.runtime = backend_app.runtime.__class__(
         db_path=db_path,
         default_login_id=backend_app.runtime.default_login_id,
         default_campaign_id=backend_app.runtime.default_campaign_id,
         default_session_id=backend_app.runtime.default_session_id,
-        implicit_session_create=True,
+        implicit_session_create=implicit_session_create,
     )
     return backend_app.app.test_client()
 
@@ -222,6 +222,49 @@ def test_owner_scope_mismatch_returns_403(tmp_path):
     assert resp.status_code == 403
     data = resp.get_json()
     assert data.get("reason_code") == "precondition.owner_scope_mismatch"
+
+
+def test_precondition_campaign_session_mismatch_returns_412(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path, implicit_session_create=False)
+
+    # Attempt command with non-existent campaign/session in strict mode path
+    payload = {
+        "action_id": "NO_OP_TEST",
+        "idempotency_key": "mismatch-key",
+        "metadata": {"login_id": "default", "campaign_id": "missing-camp", "session_id": "missing-sess"},
+    }
+    resp = client.post("/api/command", json=payload)
+    assert resp.status_code == 412
+    data = resp.get_json()
+    assert data.get("reason_code") == "precondition.campaign_session_mismatch"
+
+
+def test_session_create_with_foreign_campaign_returns_403(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path)
+
+    # seed campaign for different user
+    conn = sqlite3.connect(db_path)
+    cur = conn.cursor()
+    cur.execute(
+        "INSERT OR IGNORE INTO campaigns (login_id, campaign_id, name, status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+        ("other", "camp-x", "Other campaign", "active", "now", "now"),
+    )
+    conn.commit()
+    conn.close()
+
+    payload = {
+        "action_id": "session.create",
+        "idempotency_key": "sess-create-foreign",
+        "payload": {"campaign_id": "camp-x", "session_id": "sess-fail"},
+        "metadata": {"login_id": "default", "campaign_id": "camp-x", "session_id": "default"},
+    }
+    resp = client.post("/api/command", json=payload)
+    assert resp.status_code == 403
+    data = resp.get_json()
+    assert data.get("reason_code") == "precondition.owner_scope_mismatch"
+
 
 def test_session_events_persists_after_command(tmp_path):
     db_path = _setup_temp_db(tmp_path)

@@ -115,10 +115,15 @@ Current selection for the next session work (picked by the team):
 	- Owner: backend team
 	- Target: add Campaign command handlers and API end-to-end coverage for command and session context.
 
-- **SB-2-02 — Implement session.create/list/open commands**: In progress
+- **SB-2-02 — Implement session.create/list/open commands**: Completed
 	- Reason: required to enable campaign-scoped session lifecycle and strict context validation.
 	- Owner: backend team
 	- Target: add Session command handlers and API end-to-end coverage for context switch and guard rails.
+
+- **SB-2-03 — Owner scope and campaign/session mismatch guards**: In progress
+	- Reason: enforcement layer after session lifecycle commands, per EP-02 security expectations.
+	- Owner: backend team
+	- Target: ensure precondition errors and ownership blockers on cross-scope data.
 
 
 ## 12) Shared Utilities
