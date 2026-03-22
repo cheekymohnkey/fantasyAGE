@@ -95,6 +95,12 @@ def test_load_default_login_id_returns_fallback(tmp_path):
     assert val == "fallback-id"
 
 
+def test_load_runtime_config_respects_default_login_id_env(tmp_path, monkeypatch):
+    monkeypatch.setenv("DEFAULT_LOGIN_ID", "env-default-login")
+    runtime = backend_app.load_runtime_config(default_login_id="default")
+    assert runtime.default_login_id == "env-default-login"
+
+
 def test_ensure_owner_scoped_session_existing_session_mismatch(tmp_path):
     db_path = str(tmp_path / "session.db")
     _run_migrate_script(db_path)

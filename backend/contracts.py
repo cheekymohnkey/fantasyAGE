@@ -1,5 +1,10 @@
+import json
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
+
+import jsonschema
+from jsonschema import Draft7Validator
 
 from .errors import ValidationError
 
@@ -30,9 +35,37 @@ def _require_non_empty_string(value: Any, field_name: str) -> str:
     return value.strip()
 
 
+def _load_api_command_schema() -> dict[str, Any]:
+    schema_path = Path(__file__).resolve().parents[1] / "work-process" / "schemas" / "api_command.schema.json"
+    try:
+        with open(schema_path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError as err:
+        raise ValidationError(
+            "API command schema not found",
+            remediation_hint="Ensure api_command.schema.json exists in work-process/schemas.",
+        ) from err
+
+
+def _validate_api_command(raw: dict[str, Any]) -> None:
+    schema = _load_api_command_schema()
+    validator = Draft7Validator(schema)
+    errors = sorted(validator.iter_errors(raw), key=lambda e: e.path)
+    if errors:
+        first_err = errors[0]
+        field_path = ".".join(str(p) for p in first_err.absolute_path) if first_err.absolute_path else "body"
+        raise ValidationError(
+            f"Invalid command payload: {first_err.message}",
+            remediation_hint="Fix request body to match API command schema.",
+            field=field_path,
+        )
+
+
 def parse_command_payload(raw: dict[str, Any], fallback_context: CommandContext) -> ParsedCommand:
     if not isinstance(raw, dict):
         raise ValidationError("Request body must be a JSON object")
+
+    _validate_api_command(raw)
 
     action_id = _require_non_empty_string(raw.get("action_id", "NO_OP"), "action_id")
     idempotency_key = _require_non_empty_string(raw.get("idempotency_key", ""), "idempotency_key")

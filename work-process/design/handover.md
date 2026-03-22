@@ -135,10 +135,16 @@ Current selection for the next session work (picked by the team):
 	- Owner: backend+frontend team
 	- Target: emit telemetry event on context switch, precondition mismatch, and owner scope blocks.
 
-- **SB-3-01 — Implement entity.create/read/list/update/delete with soft delete canon safety**: In progress
+- **SB-3-01 — Implement entity.create/read/list/update/delete with soft delete canon safety**: Completed
 	- Reason: next EP-03 core entity CRUD vertical slice.
 	- Owner: backend team
 	- Target: session-scoped entity management with owner scope guards and audit compliance.
+	- Verification: tests in `tests/test_command_endpoint.py` (`test_entity_crud_lifecycle`, `test_entity_canon_mutation_requires_confirmation`) passing.
+
+- **SB-3-02 — Soft-delete and restore semantics for runtime entities**: Completed
+	- Reason: now supports entity delete as soft delete and re-create restore path.
+	- Owner: backend team
+	- Target: restore path behavior verified in `tests/test_command_endpoint.py` (`test_entity_soft_delete_restore_semantics`).
 
 
 ## 12) Shared Utilities
