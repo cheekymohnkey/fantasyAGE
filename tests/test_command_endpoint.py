@@ -288,6 +288,65 @@ def test_entity_crud_lifecycle(tmp_path):
     assert read_deleted.status_code == 412
 
 
+def test_entity_canon_mutation_requires_confirmation(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path)
+
+    # Setup session and canon entity
+    client.post("/api/command", json={
+        "action_id": "session.create",
+        "idempotency_key": "sess-create-2",
+        "payload": {"campaign_id": "default", "session_id": "session-2"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    })
+    # create entity as canon provenance directly via API
+    client.post("/api/command", json={
+        "action_id": "entity.create",
+        "idempotency_key": "canon-entity-create",
+        "payload": {"entity_type": "character", "entity_id": "cant-1", "payload": {"name": "Queen"}, "provenance": "canon"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
+    })
+
+    # try update without confirm -> blocked
+    update_resp = client.post("/api/command", json={
+        "action_id": "entity.update",
+        "idempotency_key": "canon-entity-update-1",
+        "payload": {"entity_type": "character", "entity_id": "cant-1", "payload": {"name": "Queen II"}},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
+    })
+    assert update_resp.status_code == 412
+    assert update_resp.get_json().get("reason_code") == "precondition.canon_mutation_confirmation_required"
+
+    # confirm and retry update
+    update_confirm = client.post("/api/command", json={
+        "action_id": "entity.update",
+        "idempotency_key": "canon-entity-update-2",
+        "payload": {"entity_type": "character", "entity_id": "cant-1", "payload": {"name": "Queen II"}, "confirm": True},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
+    })
+    assert update_confirm.status_code == 200
+    assert update_confirm.get_json().get("action_result", {}).get("payload", {}).get("name") == "Queen II"
+
+    # delete without confirm blocked
+    delete_resp = client.post("/api/command", json={
+        "action_id": "entity.delete",
+        "idempotency_key": "canon-entity-delete-1",
+        "payload": {"entity_type": "character", "entity_id": "cant-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
+    })
+    assert delete_resp.status_code == 412
+
+    # delete with confirm passes
+    delete_confirm = client.post("/api/command", json={
+        "action_id": "entity.delete",
+        "idempotency_key": "canon-entity-delete-2",
+        "payload": {"entity_type": "character", "entity_id": "cant-1", "confirm": True},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
+    })
+    assert delete_confirm.status_code == 200
+    assert delete_confirm.get_json().get("action_result", {}).get("status") == "deleted"
+
+
 def test_owner_scope_mismatch_returns_403(tmp_path):
     db_path = _setup_temp_db(tmp_path)
     client = _build_client(db_path)

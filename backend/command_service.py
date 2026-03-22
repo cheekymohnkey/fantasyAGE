@@ -398,14 +398,29 @@ def _handle_entity_command(conn, command: ParsedCommand, created_at: str) -> dic
 
     if action == "entity.create":
         payload_json = json.dumps(command.payload.get("payload", {}), separators=(",", ":"))
+        provenance = command.payload.get("provenance", "campaign")
+        if provenance not in ["campaign", "canon"]:
+            raise ValidationError(
+                "provenance must be one of 'campaign' or 'canon'",
+                remediation_hint="Provide 'provenance' as 'campaign' or 'canon'.",
+                field="payload.provenance",
+            )
+
         cur.execute(
-            "SELECT is_deleted FROM session_entities WHERE session_id=? AND entity_type=? AND entity_id=?",
+            "SELECT is_deleted, provenance FROM session_entities WHERE session_id=? AND entity_type=? AND entity_id=?",
             (session_id, entity_type, entity_id),
         )
         existing = cur.fetchone()
         if existing:
+            existing_deleted, existing_provenance = existing
+            if existing_provenance != provenance:
+                raise PreconditionError(
+                    message="Entity provenance mismatch",
+                    reason_code="precondition.canon_provenance_mismatch",
+                    remediation_hint="Use same provenance when re-creating an existing entity.",
+                )
             # idempotent: if already exists and not deleted, return current
-            if existing[0] == 0:
+            if existing_deleted == 0:
                 return {"entity_type": entity_type, "entity_id": entity_id, "payload": json.loads(payload_json)}
             # resurrect soft-deleted entity
             cur.execute(
@@ -416,7 +431,7 @@ def _handle_entity_command(conn, command: ParsedCommand, created_at: str) -> dic
 
         cur.execute(
             "INSERT INTO session_entities (login_id, campaign_id, session_id, entity_type, entity_id, provenance, is_deleted, payload_json, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            (login_id, campaign_id, session_id, entity_type, entity_id, "campaign", 0, payload_json, created_at),
+            (login_id, campaign_id, session_id, entity_type, entity_id, provenance, 0, payload_json, created_at),
         )
         return {"entity_type": entity_type, "entity_id": entity_id, "payload": json.loads(payload_json)}
 
@@ -451,31 +466,69 @@ def _handle_entity_command(conn, command: ParsedCommand, created_at: str) -> dic
         ]
         return {"entities": entities}
 
-    if action == "entity.update":
-        payload_json = json.dumps(command.payload.get("payload", {}), separators=(",", ":"))
+    # entity.update and entity.delete are handled together below with canon safety.
+    if action in ["entity.update", "entity.delete"]:
+        # for canon provenance, require explicit confirmation payload flag
         cur.execute(
-            "SELECT is_deleted FROM session_entities WHERE session_id=? AND entity_type=? AND entity_id=?",
+            "SELECT provenance, is_deleted FROM session_entities WHERE session_id=? AND entity_type=? AND entity_id=?",
             (session_id, entity_type, entity_id),
         )
         row = cur.fetchone()
-        if not row or row[0] == 1:
+        if not row:
             raise PreconditionError(
-                message="Entity not found or deleted",
+                message="Entity not found",
                 reason_code="precondition.campaign_session_mismatch",
-                remediation_hint="Entity must exist and not be deleted to update.",
+                remediation_hint="Ensure entity exists in the current session and campaign.",
             )
-        cur.execute(
-            "UPDATE session_entities SET payload_json=?, updated_at=? WHERE session_id=? AND entity_type=? AND entity_id=?",
-            (payload_json, created_at, session_id, entity_type, entity_id),
-        )
-        return {"entity_type": entity_type, "entity_id": entity_id, "payload": json.loads(payload_json)}
+        provenance, is_deleted = row
+        if is_deleted == 1:
+            raise PreconditionError(
+                message="Entity is deleted",
+                reason_code="precondition.campaign_session_mismatch",
+                remediation_hint="Restore or recreate entity before mutation.",
+            )
 
-    if action == "entity.delete":
-        cur.execute(
-            "SELECT is_deleted FROM session_entities WHERE session_id=? AND entity_type=? AND entity_id=?",
-            (session_id, entity_type, entity_id),
-        )
-        row = cur.fetchone()
+        if provenance == "canon" and not command.payload.get("confirm", False):
+            # create warning entry as necessary
+            warning_id = f"warn-{entity_type}-{entity_id}-{command.context.session_id}-{command.context.login_id}"
+            cur.execute(
+                "INSERT OR IGNORE INTO entity_mutation_warnings (warning_id, login_id, campaign_id, session_id, entity_type, entity_id, provenance, operation, warning_message, acknowledged, acknowledged_by, acknowledged_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    warning_id,
+                    login_id,
+                    campaign_id,
+                    session_id,
+                    entity_type,
+                    entity_id,
+                    provenance,
+                    action,
+                    "Canon entity mutation requires explicit confirmation",
+                    0,
+                    None,
+                    None,
+                ),
+            )
+            raise PreconditionError(
+                message="Canon entity mutation requires confirmation",
+                reason_code="precondition.canon_mutation_confirmation_required",
+                remediation_hint="Retry with 'confirm': true after acknowledging the warning.",
+            )
+
+        if action == "entity.delete":
+            cur.execute(
+                "UPDATE session_entities SET is_deleted=1, updated_at=? WHERE session_id=? AND entity_type=? AND entity_id=?",
+                (created_at, session_id, entity_type, entity_id),
+            )
+            return {"entity_type": entity_type, "entity_id": entity_id, "status": "deleted"}
+
+        # otherwise allow update below
+        if action == "entity.update":
+            payload_json = json.dumps(command.payload.get("payload", {}), separators=(",", ":"))
+            cur.execute(
+                "UPDATE session_entities SET payload_json=?, updated_at=? WHERE session_id=? AND entity_type=? AND entity_id=?",
+                (payload_json, created_at, session_id, entity_type, entity_id),
+            )
+            return {"entity_type": entity_type, "entity_id": entity_id, "payload": json.loads(payload_json)}
         if not row:
             raise PreconditionError(
                 message="Entity not found",
