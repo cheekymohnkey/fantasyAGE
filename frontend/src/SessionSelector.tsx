@@ -27,27 +27,39 @@ export default function SessionSelector({ onChange }: { onChange?: (s: SelectorS
     }
   }, [])
 
-  // fetch known sessions from backend
+  // fetch known sessions from backend scoped by login/campaign
   useEffect(() => {
     let mounted = true
-    try {
-      fetch('/api/sessions')
-        .then((r) => r.json())
-        .then((j) => {
-          if (!mounted) return
-          const list = j?.sessions || []
-          setSessions(list)
+
+    const fetchSessions = async () => {
+      try {
+        const params = new URLSearchParams()
+        if (state.campaignId && state.campaignId.trim()) {
+          params.set('campaign_id', state.campaignId.trim())
+        }
+        const query = params.toString() ? `?${params.toString()}` : ''
+
+        const res = await fetch(`/api/sessions${query}`, {
+          headers: { 'X-Login-Id': state.loginId?.trim() || 'default' },
         })
-        .catch(() => {
-          if (mounted) setSessions([])
-        })
-    } catch (e) {
-      // ignore
+        if (!mounted) return
+        if (!res.ok) {
+          setSessions([])
+          return
+        }
+        const data = await res.json()
+        setSessions(data?.sessions || [])
+      } catch {
+        if (mounted) setSessions([])
+      }
     }
+
+    fetchSessions()
+
     return () => {
       mounted = false
     }
-  }, [])
+  }, [state.loginId, state.campaignId])
 
   useEffect(() => {
     try {
@@ -72,6 +84,11 @@ export default function SessionSelector({ onChange }: { onChange?: (s: SelectorS
         Session
         <input aria-label="Session id" value={state.sessionId} onChange={(e)=>setState({...state,sessionId:e.target.value})} />
       </label>
+      <button className="btn" onClick={() => {
+        // force refresh by updating state bounce
+        setState((prev) => ({...prev}))
+      }}
+      >Refresh sessions</button>
       {sessions.length > 0 && (
         <label style={{display:'flex',flexDirection:'column'}}>
           Known sessions

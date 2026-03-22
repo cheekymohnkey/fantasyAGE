@@ -55,6 +55,32 @@ describe('App', () => {
 
   })
 
+  it('fetches sessions filtered by campaign', async () => {
+    const fetchMock = vi.fn((input: any) => {
+      if (typeof input === 'string' && input.startsWith('/api/sessions?campaign_id=camp-x')) {
+        return Promise.resolve({
+          ok: true,
+          json: async () => ({ status: 'ok', sessions: [{ session_id: 'sess-1', campaign_id: 'camp-x', login_id: 'default' }] }),
+          clone: () => ({ text: async () => JSON.stringify({ status: 'ok', sessions: [] }) }),
+        })
+      }
+      return Promise.resolve({
+        ok: true,
+        json: async () => ({ status: 'ok', sessions: [] }),
+        clone: () => ({ text: async () => JSON.stringify({ status: 'ok', sessions: [] }) }),
+      })
+    })
+    vi.stubGlobal('fetch', fetchMock)
+
+    render(<App />)
+
+    const campaignInput = screen.getByLabelText('Campaign id')
+    fireEvent.change(campaignInput, { target: { value: 'camp-x' } })
+
+    await screen.findByText('sess-1 (camp-x)')
+    expect(fetchMock).toHaveBeenCalledWith('/api/sessions?campaign_id=camp-x', expect.any(Object))
+  })
+
   it('shows context mismatch banner when precondition error is returned', async () => {
     vi.stubGlobal('fetch', vi.fn((input: any) => {
       if (typeof input === 'string' && input.endsWith('/api/sessions')) {

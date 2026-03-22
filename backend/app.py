@@ -173,15 +173,29 @@ def list_sessions():
     try:
         from .db import connect as _connect
 
+        login_id = request.headers.get("X-Login-Id") or runtime.default_login_id
+        campaign_id = request.args.get("campaign_id")
+
         conn = _connect(runtime.db_path)
         cur = conn.cursor()
-        cur.execute(
-            (
-                "SELECT session_id, campaign_id, login_id, updated_at "
-                "FROM sessions WHERE login_id=? ORDER BY updated_at DESC"
-            ),
-            (runtime.default_login_id,),
-        )
+
+        if campaign_id:
+            cur.execute(
+                (
+                    "SELECT session_id, campaign_id, login_id, updated_at "
+                    "FROM sessions WHERE login_id=? AND campaign_id=? ORDER BY updated_at DESC"
+                ),
+                (login_id, campaign_id),
+            )
+        else:
+            cur.execute(
+                (
+                    "SELECT session_id, campaign_id, login_id, updated_at "
+                    "FROM sessions WHERE login_id=? ORDER BY updated_at DESC"
+                ),
+                (login_id,),
+            )
+
         rows = cur.fetchall()
         sessions = [
             {"session_id": r[0], "campaign_id": r[1], "login_id": r[2], "updated_at": r[3]}
