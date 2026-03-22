@@ -85,6 +85,72 @@ def test_command_endpoint_idempotent_replay(tmp_path):
     assert count == 1
 
 
+def test_campaign_commands_create_list_open_archive(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path)
+
+    create_payload = {
+        "action_id": "campaign.create",
+        "idempotency_key": "camp-create-1",
+        "payload": {"campaign_id": "camp-x", "name": "Adventure X"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    resp = client.post("/api/command", json=create_payload)
+    assert resp.status_code == 200
+    body = resp.get_json()
+    assert body.get("status") == "ok"
+    assert body.get("action_result", {}).get("campaign_id") == "camp-x"
+    assert body.get("action_result", {}).get("status") == "active"
+
+    conn = sqlite3.connect(db_path)
+    cur = conn.cursor()
+    cur.execute("SELECT campaign_id, name, status FROM campaigns WHERE campaign_id=?", ("camp-x",))
+    row = cur.fetchone()
+    conn.close()
+    assert row == ("camp-x", "Adventure X", "active")
+
+    # list campaigns for current login
+    list_payload = {
+        "action_id": "campaign.list",
+        "idempotency_key": "camp-list-1",
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    list_resp = client.post("/api/command", json=list_payload)
+    assert list_resp.status_code == 200
+    campaigns = list_resp.get_json().get("action_result", {}).get("campaigns", [])
+    assert any(c.get("campaign_id") == "camp-x" for c in campaigns)
+
+    # open campaign
+    open_payload = {
+        "action_id": "campaign.open",
+        "idempotency_key": "camp-open-1",
+        "payload": {"campaign_id": "camp-x"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    open_resp = client.post("/api/command", json=open_payload)
+    assert open_resp.status_code == 200
+    assert open_resp.get_json().get("action_result", {}).get("campaign_id") == "camp-x"
+
+    # archive campaign
+    archive_payload = {
+        "action_id": "campaign.archive",
+        "idempotency_key": "camp-archive-1",
+        "payload": {"campaign_id": "camp-x"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    archive_resp = client.post("/api/command", json=archive_payload)
+    assert archive_resp.status_code == 200
+    assert archive_resp.get_json().get("action_result", {}).get("status") == "archived"
+
+    # open archived campaign should fail
+    open_archived_payload = {
+        **open_payload,
+        "idempotency_key": "camp-open-2",
+    }
+    open_archived = client.post("/api/command", json=open_archived_payload)
+    assert open_archived.status_code == 412
+
+
 def test_owner_scope_mismatch_returns_403(tmp_path):
     db_path = _setup_temp_db(tmp_path)
     client = _build_client(db_path)

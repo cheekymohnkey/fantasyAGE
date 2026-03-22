@@ -5,7 +5,7 @@ from typing import Any, cast
 
 from .contracts import CommandContext, ParsedCommand
 from .db import connect, transaction
-from .errors import AppError, OwnerScopeError, PersistenceError, PreconditionError
+from .errors import AppError, OwnerScopeError, PersistenceError, PreconditionError, ValidationError
 from .timeutils import utc_now_z
 
 
@@ -129,15 +129,158 @@ def _ensure_owner_scoped_session(
         )
 
 
-def _response_payload(command: ParsedCommand) -> dict:
+def _resolve_campaign_id(command: ParsedCommand) -> str:
+    campaign_id = command.payload.get("campaign_id", command.context.campaign_id)
+    if not isinstance(campaign_id, str) or not campaign_id.strip():
+        raise ValidationError(
+            "campaign_id must be a non-empty string",
+            remediation_hint="Provide 'campaign_id' in payload or metadata for campaign commands.",
+            field="payload.campaign_id",
+        )
+    return campaign_id.strip()
+
+
+def _handle_campaign_command(conn, command: ParsedCommand, created_at: str) -> dict[str, Any]:
+    action = command.action_id
+    login_id = command.context.login_id
+
+    if action == "campaign.create":
+        campaign_id = _resolve_campaign_id(command)
+        name = command.payload.get("name", campaign_id)
+        if not isinstance(name, str) or not name.strip():
+            raise ValidationError(
+                "name must be a non-empty string",
+                remediation_hint="Provide 'name' for the campaign.",
+                field="payload.name",
+            )
+        name = name.strip()
+
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT login_id, status, name, created_at FROM campaigns WHERE campaign_id=?",
+            (campaign_id,),
+        )
+        existing = cur.fetchone()
+        if existing:
+            if existing[0] != login_id:
+                raise OwnerScopeError(
+                    message="campaign_id already exists under different login scope",
+                    remediation_hint="Use a campaign_id owned by the current login scope.",
+                )
+            return {
+                "campaign_id": campaign_id,
+                "name": existing[2],
+                "status": existing[1],
+                "created_at": existing[3],
+            }
+
+        status = "active"
+        cur.execute(
+            "INSERT INTO campaigns (login_id, campaign_id, name, status, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)",
+            (login_id, campaign_id, name, status, created_at, created_at),
+        )
+        return {
+            "campaign_id": campaign_id,
+            "name": name,
+            "status": status,
+            "created_at": created_at,
+        }
+
+    if action == "campaign.list":
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT campaign_id, name, status, created_at, updated_at FROM campaigns WHERE login_id=? ORDER BY updated_at DESC",
+            (login_id,),
+        )
+        rows = cur.fetchall()
+        campaigns = [
+            {
+                "campaign_id": r[0],
+                "name": r[1],
+                "status": r[2],
+                "created_at": r[3],
+                "updated_at": r[4],
+            }
+            for r in rows
+        ]
+        return {"campaigns": campaigns}
+
+    if action == "campaign.open":
+        campaign_id = _resolve_campaign_id(command)
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT campaign_id, name, status, created_at, updated_at, login_id FROM campaigns WHERE campaign_id=?",
+            (campaign_id,),
+        )
+        row = cur.fetchone()
+        if not row:
+            raise PreconditionError(
+                message="campaign_id does not exist",
+                reason_code="precondition.campaign_session_mismatch",
+                remediation_hint="Create or select a valid campaign_id before opening.",
+            )
+        if row[5] != login_id:
+            raise OwnerScopeError(
+                message="campaign_id exists under different login scope",
+                remediation_hint="Use a campaign_id owned by the current login scope.",
+            )
+        if row[2] != "active":
+            raise PreconditionError(
+                message="campaign is not active",
+                remediation_hint="Only active campaigns can be opened.",
+            )
+        return {
+            "campaign_id": row[0],
+            "name": row[1],
+            "status": row[2],
+            "created_at": row[3],
+            "updated_at": row[4],
+        }
+
+    if action == "campaign.archive":
+        campaign_id = _resolve_campaign_id(command)
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT login_id FROM campaigns WHERE campaign_id=?",
+            (campaign_id,),
+        )
+        row = cur.fetchone()
+        if not row:
+            raise PreconditionError(
+                message="campaign_id does not exist",
+                reason_code="precondition.campaign_session_mismatch",
+                remediation_hint="Create or select a valid campaign_id before archiving.",
+            )
+        if row[0] != login_id:
+            raise OwnerScopeError(
+                message="campaign_id exists under different login scope",
+                remediation_hint="Use a campaign_id owned by the current login scope.",
+            )
+
+        cur.execute(
+            "UPDATE campaigns SET status=?, updated_at=? WHERE campaign_id=?",
+            ("archived", created_at, campaign_id),
+        )
+        return {"campaign_id": campaign_id, "status": "archived", "updated_at": created_at}
+
+    raise ValidationError(
+        f"Unsupported campaign action: {action}",
+        remediation_hint="Use campaign.create, campaign.list, campaign.open, or campaign.archive.",
+    )
+
+
+def _response_payload(command: ParsedCommand, action_result: dict[str, Any] | None = None) -> dict:
+    if action_result is None:
+        action_result = {}
+    action_result_json = json.dumps(action_result, separators=(",", ":"))
     return {
         "status": "ok",
         "action_id": command.action_id,
         "action": command.action_id,
         "idempotency_key": command.idempotency_key,
         "idempotency": command.idempotency_key,
-        "action_result": {},
-        "action_result_json": "{}",
+        "action_result": action_result,
+        "action_result_json": action_result_json,
         "event": None,
         "context": asdict(command.context),
     }
@@ -206,7 +349,11 @@ def handle_command(
                         ),
                     ) from err
 
-            response = _response_payload(command)
+            action_result = {}
+            if command.action_id.startswith("campaign."):
+                action_result = _handle_campaign_command(conn, command, created_at)
+
+            response = _response_payload(command, action_result)
             response_json = json.dumps(response, separators=(",", ":"))
             try:
                 cur.execute(
