@@ -466,6 +466,29 @@ def _handle_entity_command(conn, command: ParsedCommand, created_at: str) -> dic
         ]
         return {"entities": entities}
 
+    if action == "entity.warning.acknowledge":
+        # Acknowledge a prior canon mutation warning before final commit.
+        cur.execute(
+            "SELECT warning_id, acknowledged FROM entity_mutation_warnings "
+            "WHERE login_id=? AND campaign_id=? AND session_id=? AND entity_type=? AND entity_id=? AND provenance='canon' AND acknowledged=0 "
+            "ORDER BY warning_id LIMIT 1",
+            (login_id, campaign_id, session_id, entity_type, entity_id),
+        )
+        warning_row = cur.fetchone()
+        if not warning_row:
+            raise PreconditionError(
+                message="No pending canon mutation warning found",
+                reason_code="precondition.canon_mutation_warning_missing",
+                remediation_hint="Trigger canon mutation to generate a warning before acknowledging.",
+            )
+
+        warning_id = warning_row[0]
+        cur.execute(
+            "UPDATE entity_mutation_warnings SET acknowledged=1, acknowledged_by=?, acknowledged_at=? WHERE warning_id=?",
+            (login_id, created_at, warning_id),
+        )
+        return {"warning_acknowledged": True}
+
     # entity.update and entity.delete are handled together below with canon safety.
     if action in ["entity.update", "entity.delete"]:
         # for canon provenance, require explicit confirmation payload flag
@@ -488,31 +511,47 @@ def _handle_entity_command(conn, command: ParsedCommand, created_at: str) -> dic
                 remediation_hint="Restore or recreate entity before mutation.",
             )
 
-        if provenance == "canon" and not command.payload.get("confirm", False):
-            # create warning entry as necessary
-            warning_id = f"warn-{entity_type}-{entity_id}-{command.context.session_id}-{command.context.login_id}"
+        if provenance == "canon":
+            warning_id = f"warn-{entity_type}-{entity_id}-{command.context.session_id}-{command.context.login_id}-{action}"
+            if not command.payload.get("confirm", False):
+                # create/reset warning entry as necessary for canonical gate.
+                cur.execute(
+                    "INSERT OR REPLACE INTO entity_mutation_warnings (warning_id, login_id, campaign_id, session_id, entity_type, entity_id, provenance, operation, warning_message, acknowledged, acknowledged_by, acknowledged_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                    (
+                        warning_id,
+                        login_id,
+                        campaign_id,
+                        session_id,
+                        entity_type,
+                        entity_id,
+                        provenance,
+                        action,
+                        "Canon entity mutation requires explicit confirmation",
+                        0,
+                        None,
+                        None,
+                    ),
+                )
+                conn.commit()
+                conn.execute("BEGIN IMMEDIATE")
+                raise PreconditionError(
+                    message="Canon entity mutation requires confirmation",
+                    reason_code="precondition.canon_mutation_confirmation_required",
+                    remediation_hint="Acknowledge warning via entity.warning.acknowledge, then retry with 'confirm': true.",
+                )
+
+            # Confirm requested: requires a prior acknowledged warning.
             cur.execute(
-                "INSERT OR IGNORE INTO entity_mutation_warnings (warning_id, login_id, campaign_id, session_id, entity_type, entity_id, provenance, operation, warning_message, acknowledged, acknowledged_by, acknowledged_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-                (
-                    warning_id,
-                    login_id,
-                    campaign_id,
-                    session_id,
-                    entity_type,
-                    entity_id,
-                    provenance,
-                    action,
-                    "Canon entity mutation requires explicit confirmation",
-                    0,
-                    None,
-                    None,
-                ),
+                "SELECT acknowledged FROM entity_mutation_warnings WHERE warning_id=?",
+                (warning_id,),
             )
-            raise PreconditionError(
-                message="Canon entity mutation requires confirmation",
-                reason_code="precondition.canon_mutation_confirmation_required",
-                remediation_hint="Retry with 'confirm': true after acknowledging the warning.",
-            )
+            warning_row = cur.fetchone()
+            if not warning_row or warning_row[0] != 1:
+                raise PreconditionError(
+                    message="Canon warning not acknowledged",
+                    reason_code="precondition.canon_mutation_warning_not_acknowledged",
+                    remediation_hint="Acknowledge warning via entity.warning.acknowledge before confirming mutation.",
+                )
 
         if action == "entity.delete":
             cur.execute(

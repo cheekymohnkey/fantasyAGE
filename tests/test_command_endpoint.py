@@ -62,6 +62,23 @@ def test_command_endpoint_records_receipt(tmp_path):
     assert row is not None and row[0] == "NO_OP_TEST"
 
 
+def test_command_endpoint_schema_validation_rejects_unexpected_field(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path)
+
+    payload = {
+        "action_id": "NO_OP_TEST",
+        "idempotency_key": "test-key-124",
+        "metadata": {"login_id": "default", "campaign_id": "camp-1", "session_id": "sess-1"},
+        "unexpected": "value"
+    }
+    resp = client.post("/api/command", json=payload)
+    assert resp.status_code == 400
+    data = resp.get_json()
+    assert data["reason_code"] == "validation.invalid_payload"
+    assert data.get("field") == "body"
+
+
 def test_command_endpoint_idempotent_replay(tmp_path):
     db_path = _setup_temp_db(tmp_path)
     client = _build_client(db_path)
@@ -288,6 +305,81 @@ def test_entity_crud_lifecycle(tmp_path):
     assert read_deleted.status_code == 412
 
 
+def test_entity_soft_delete_restore_semantics(tmp_path):
+    db_path = _setup_temp_db(tmp_path)
+    client = _build_client(db_path)
+
+    # ensure session exists
+    session_payload = {
+        "action_id": "session.create",
+        "idempotency_key": "sess-create-soft-delete",
+        "payload": {"campaign_id": "default", "session_id": "session-soft"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "default"},
+    }
+    resp = client.post("/api/command", json=session_payload)
+    assert resp.status_code == 200
+
+    # create entity
+    create_entity = {
+        "action_id": "entity.create",
+        "idempotency_key": "entity-soft-create-1",
+        "payload": {"entity_type": "item", "entity_id": "item-1", "payload": {"name": "Sword"}},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-soft"},
+    }
+    create_resp = client.post("/api/command", json=create_entity)
+    assert create_resp.status_code == 200
+    assert create_resp.get_json().get("action_result", {}).get("entity_id") == "item-1"
+
+    # delete entity
+    delete_entity = {
+        "action_id": "entity.delete",
+        "idempotency_key": "entity-soft-delete-1",
+        "payload": {"entity_type": "item", "entity_id": "item-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-soft"},
+    }
+    delete_resp = client.post("/api/command", json=delete_entity)
+    assert delete_resp.status_code == 200
+    assert delete_resp.get_json().get("action_result", {}).get("status") == "deleted"
+
+    # deleted entity shouldn't be listed or read
+    list_resp = client.post("/api/command", json={
+        "action_id": "entity.list",
+        "idempotency_key": "entity-soft-list-1",
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-soft"},
+    })
+    assert list_resp.status_code == 200
+    assert not any(e.get("entity_id") == "item-1" for e in list_resp.get_json().get("action_result", {}).get("entities", []))
+
+    read_deleted = client.post("/api/command", json={
+        "action_id": "entity.read",
+        "idempotency_key": "entity-soft-read-1",
+        "payload": {"entity_type": "item", "entity_id": "item-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-soft"},
+    })
+    assert read_deleted.status_code == 412
+
+    # recreate same entity should restore soft-deleted entity
+    restore_resp = client.post("/api/command", json={
+        "action_id": "entity.create",
+        "idempotency_key": "entity-soft-create-2",
+        "payload": {"entity_type": "item", "entity_id": "item-1", "payload": {"name": "Sword Restored"}},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-soft"},
+    })
+    assert restore_resp.status_code == 200
+    assert restore_resp.get_json().get("action_result", {}).get("status") == "restored"
+    assert restore_resp.get_json().get("action_result", {}).get("payload", {}).get("name") == "Sword Restored"
+
+    # restored entity is readable and in list
+    read_restored = client.post("/api/command", json={
+        "action_id": "entity.read",
+        "idempotency_key": "entity-soft-read-2",
+        "payload": {"entity_type": "item", "entity_id": "item-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-soft"},
+    })
+    assert read_restored.status_code == 200
+    assert read_restored.get_json().get("action_result", {}).get("payload", {}).get("name") == "Sword Restored"
+
+
 def test_entity_canon_mutation_requires_confirmation(tmp_path):
     db_path = _setup_temp_db(tmp_path)
     client = _build_client(db_path)
@@ -317,34 +409,82 @@ def test_entity_canon_mutation_requires_confirmation(tmp_path):
     assert update_resp.status_code == 412
     assert update_resp.get_json().get("reason_code") == "precondition.canon_mutation_confirmation_required"
 
-    # confirm and retry update
-    update_confirm = client.post("/api/command", json={
+    # confirm update without acknowledging warning -> blocked
+    update_confirm_no_ack = client.post("/api/command", json={
         "action_id": "entity.update",
         "idempotency_key": "canon-entity-update-2",
+        "payload": {"entity_type": "character", "entity_id": "cant-1", "payload": {"name": "Queen II"}, "confirm": True},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
+    })
+    assert update_confirm_no_ack.status_code == 412
+    assert update_confirm_no_ack.get_json().get("reason_code") == "precondition.canon_mutation_warning_not_acknowledged"
+
+    # acknowledge warning and retry update
+    ack_update = client.post("/api/command", json={
+        "action_id": "entity.warning.acknowledge",
+        "idempotency_key": "canon-entity-warning-ack-1",
+        "payload": {"entity_type": "character", "entity_id": "cant-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
+    })
+    assert ack_update.status_code == 200
+    assert ack_update.get_json().get("action_result", {}).get("warning_acknowledged") is True
+
+    update_confirm = client.post("/api/command", json={
+        "action_id": "entity.update",
+        "idempotency_key": "canon-entity-update-3",
         "payload": {"entity_type": "character", "entity_id": "cant-1", "payload": {"name": "Queen II"}, "confirm": True},
         "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
     })
     assert update_confirm.status_code == 200
     assert update_confirm.get_json().get("action_result", {}).get("payload", {}).get("name") == "Queen II"
 
-    # delete without confirm blocked
-    delete_resp = client.post("/api/command", json={
+    # delete without confirm -> blocked
+    delete_no_confirm = client.post("/api/command", json={
         "action_id": "entity.delete",
         "idempotency_key": "canon-entity-delete-1",
         "payload": {"entity_type": "character", "entity_id": "cant-1"},
         "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
     })
-    assert delete_resp.status_code == 412
+    assert delete_no_confirm.status_code == 412
+    assert delete_no_confirm.get_json().get("reason_code") == "precondition.canon_mutation_confirmation_required"
 
-    # delete with confirm passes
-    delete_confirm = client.post("/api/command", json={
+    # confirm delete without acknowledging delete warning -> blocked
+    delete_confirm_no_ack = client.post("/api/command", json={
         "action_id": "entity.delete",
         "idempotency_key": "canon-entity-delete-2",
         "payload": {"entity_type": "character", "entity_id": "cant-1", "confirm": True},
         "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
     })
-    assert delete_confirm.status_code == 200
-    assert delete_confirm.get_json().get("action_result", {}).get("status") == "deleted"
+    assert delete_confirm_no_ack.status_code == 412
+    assert delete_confirm_no_ack.get_json().get("reason_code") == "precondition.canon_mutation_warning_not_acknowledged"
+
+    # acknowledge delete warning and perform delete
+    ack_delete = client.post("/api/command", json={
+        "action_id": "entity.warning.acknowledge",
+        "idempotency_key": "canon-entity-warning-ack-2",
+        "payload": {"entity_type": "character", "entity_id": "cant-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
+    })
+    assert ack_delete.status_code == 200
+    assert ack_delete.get_json().get("action_result", {}).get("warning_acknowledged") is True
+
+    delete_confirmed = client.post("/api/command", json={
+        "action_id": "entity.delete",
+        "idempotency_key": "canon-entity-delete-3",
+        "payload": {"entity_type": "character", "entity_id": "cant-1", "confirm": True},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
+    })
+    assert delete_confirmed.status_code == 200
+    assert delete_confirmed.get_json().get("action_result", {}).get("status") == "deleted"
+
+    # read deleted should fail
+    read_deleted = client.post("/api/command", json={
+        "action_id": "entity.read",
+        "idempotency_key": "entity-read-3",
+        "payload": {"entity_type": "character", "entity_id": "cant-1"},
+        "metadata": {"login_id": "default", "campaign_id": "default", "session_id": "session-2"},
+    })
+    assert read_deleted.status_code == 412
 
 
 def test_owner_scope_mismatch_returns_403(tmp_path):
